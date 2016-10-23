@@ -29,7 +29,7 @@ public class MyUI extends UI {
 	
     /**
 	 * 
-	 */
+	 */  
 	private static final long serialVersionUID = 1L;
 	private List<String> facultyNames = new ArrayList<String>();
     private List<String> degreeNames = new ArrayList<String>();
@@ -122,25 +122,30 @@ public class MyUI extends UI {
     	VerticalLayout l2 = new VerticalLayout();
         VerticalLayout selectedCoursesLayout = new VerticalLayout();
         VerticalLayout coursesLayout = new VerticalLayout();     
-        final Table scheduleTable = new Table();
+        Table scheduleTable = new Table("Schedule");
+        scheduleTable.addStyleName("Schedule");
         final Accordion courseAccordion = new Accordion();
         Button buttonBack;
         
         // setup the table:
-        String[] days = new String[] {"", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-        String[] hours = new String[] {"", "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
-       //scheduleTable.setSizeFull();
+        String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+        String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
+        scheduleTable.setSizeFull();
         scheduleTable.setColumnHeaders();
-        for (int i = 0; i < 6; i++) {		// set the headers
+        scheduleTable.setPageLength(0);
+        scheduleTable.setHeight("100%");
+        
+        scheduleTable.addContainerProperty("0", String.class, null,"", null, null);
+        
+        for (int i = 0; i < 5; i++) {		// set the headers
         	scheduleTable.addContainerProperty(days[i], String.class, null);
         	scheduleTable.setColumnAlignment(i, Align.CENTER);
         }
-        for (int i = 0; i < 7; i++) {
-        	
-        }
-        scheduleTable.addItem(new Object[]{"8-10", "asd"}, 0);	// not working????
-        scheduleTable.addItem(new Object[]{"10-12", "dsf"}, 2);
-        
+       
+        for (int i=0; i<6; i++)
+        		 scheduleTable.addItem(new Object[]{hours[i],
+        	                 " ", " ", " ", " ", " "}, new Integer(i));
+                
         // setup the accordion:
         courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
         courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
