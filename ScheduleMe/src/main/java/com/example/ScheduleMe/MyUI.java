@@ -1,7 +1,9 @@
 package com.example.ScheduleMe;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.jar.Attributes.Name;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -24,13 +26,11 @@ import com.vaadin.ui.themes.ValoTheme;
  * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be 
  * overridden to add component to the user interface and initialize non-component functionality.
  */
+
+@SuppressWarnings("serial")
 @Theme("mytheme")
 public class MyUI extends UI {
 	
-    /**
-	 * 
-	 */  
-	private static final long serialVersionUID = 1L;
 	private List<String> facultyNames = new ArrayList<String>();
     private List<String> degreeNames = new ArrayList<String>();
     private int facultySize = 3;		// static implementation, TODO: change when/if we have database
@@ -71,9 +71,6 @@ public class MyUI extends UI {
         // so that the blank option cannot be chosen
         facultySelection.setNullSelectionAllowed(false);
         degreeSelection.setNullSelectionAllowed(false);
-        
-        //degreeSelection.setWidth("360");
-        //degreeSelection.
         
         // event listener for when we select a faculty to show only the appropriate degrees
         facultySelection.addValueChangeListener(e -> {
@@ -121,7 +118,10 @@ public class MyUI extends UI {
     	VerticalLayout l1 = new VerticalLayout();
     	VerticalLayout l2 = new VerticalLayout();
         VerticalLayout selectedCoursesLayout = new VerticalLayout();
-        VerticalLayout coursesLayout = new VerticalLayout();     
+        VerticalLayout coursesLayout = new VerticalLayout(); 
+        VerticalLayout addCourse = new VerticalLayout();
+        FormLayout addForm = new FormLayout();
+        
         Table scheduleTable = new Table("Schedule");
         scheduleTable.addStyleName("Schedule");
         final Accordion courseAccordion = new Accordion();
@@ -145,14 +145,119 @@ public class MyUI extends UI {
         for (int i=0; i<6; i++)
         		 scheduleTable.addItem(new Object[]{hours[i],
         	                 " ", " ", " ", " ", " "}, new Integer(i));
+        scheduleTable.setColumnReorderingAllowed(false);
+        scheduleTable.setColumnCollapsingAllowed(false);
+        //scheduleTable.setCol
                 
         // setup the accordion:
         courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
         courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
         courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
+        courseAccordion.addTab(addForm, "Add another course!");
         
-        //layout.addComponent(MainLayout());
+        ///////////////////////////////////////////////////////////////////
+        // setup the "add course" FormLayout:
+        // i'd like this to be in a different method but i couldn't do it
+        Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
+        TextField addCourseNameField = new TextField("Course Name: ");
 
+        Window courseDaySelect = new Window();
+        Window courseHourSelect = new Window();
+        FormLayout daySelect = new FormLayout();
+        FormLayout hourSelect = new FormLayout();
+        ArrayList<String> selDays = new ArrayList<String>();	// selected days for a course
+        
+        // window preferences "hour"
+        courseHourSelect.setImmediate(true);
+        courseHourSelect.setModal(true);
+        courseHourSelect.center();
+        courseHourSelect.setContent(hourSelect);
+        
+        // form layout "hour"
+        hourSelect.setMargin(true);
+        hourSelect.setWidth(300, Unit.PIXELS);
+        hourSelect.addComponent(new Label("\n" + "Tick the hours for each day:"));
+        
+        // window preferences "day"
+        courseDaySelect.setImmediate(true);
+        courseDaySelect.setModal(true);
+        courseDaySelect.center();
+        courseDaySelect.setContent(daySelect);
+        
+        // form layout "day"
+        daySelect.setMargin(true);
+        daySelect.setWidth(300, Unit.PIXELS);
+        daySelect.addComponent(new Label("\n" + "Tick the days of the course:"));
+        
+        // FOR WINDOW "SELECT DAYS":
+        // add the checkbox days in the window
+        for (int i = 0; i < 5; i++) {	
+        	CheckBox checkbox = new CheckBox (days[i], false);
+        	daySelect.addComponent(checkbox);
+        	checkbox.addValueChangeListener(e -> {
+        		if (checkbox.getValue() == true) {
+        			if (!selDays.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
+        				selDays.add(checkbox.getCaption());
+        				daySelect.addComponent(new Label("" + checkbox.getCaption()));  // code to verify if they are all added
+        			}
+        		}
+        	});
+        }
+        // setup the button to open the hour selection
+        Button button = new Button("Next", new Button.ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				if (courseHourSelect.isAttached()) {
+					courseHourSelect.focus();
+				} else {
+					if (courseDaySelect.isAttached())
+						courseDaySelect.close();
+					UI.getCurrent().addWindow(courseHourSelect);
+				}
+				
+			}
+		});
+        
+        daySelect.addComponent(button);
+        
+        // FOR WINDOW "SELECT HOURS":
+        for (String aDay : selDays) {
+        	Panel panel = new Panel("" + aDay);
+        	hourSelect.addComponent(panel);
+		}
+
+        // setup the add button to open the day selection window
+        Button buttonAdd = new Button("+", new Button.ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				//courseDaySelect.focus();
+				if (courseDaySelect.isAttached()) {
+					courseDaySelect.focus();
+				} else {
+					UI.getCurrent().addWindow(courseDaySelect);
+				}
+			}
+		});
+        
+        addCourse.setMargin(true);
+        addCourse.setSpacing(true);
+   
+        //addCourse.addComponents(addCourseIntro, addCourseName);
+        
+        // setup the form layout "add course"
+        
+        addCourseNameField.setInputPrompt("Add course name...");
+        //add
+        
+        addForm.setMargin(true);
+        addForm.setSpacing(true);     
+        
+        addForm.addComponents(addCourseIntro, addCourseNameField, buttonAdd);
+        
+        // setup the addDayAndTime
+        
         
         // setup the back button:
         buttonBack = new Button("Back", new Button.ClickListener() {
@@ -169,6 +274,15 @@ public class MyUI extends UI {
         l2.setSpacing(true);
         l2.addComponents(l1, buttonBack);
         return l2;
+    }
+   
+    private VerticalLayout addHoursCheckbox() {
+    	VerticalLayout l = new VerticalLayout();
+    	
+    	//for (int i = 0; i < hour)
+    	
+    	return l;
+    	
     }
     
     private VerticalLayout MainLayout() {	//==== UTU logo + app name ====\\
