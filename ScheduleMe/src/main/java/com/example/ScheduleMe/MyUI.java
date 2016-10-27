@@ -30,15 +30,18 @@ import com.vaadin.ui.themes.ValoTheme;
 
 @SuppressWarnings("serial")
 @Theme("mytheme")
-public class MyUI extends UI {
+final public class MyUI extends UI {
 	
-	private List<String> facultyNames = new ArrayList<String>();
+	final List<String> facultyNames = new ArrayList<String>();
     private List<String> degreeNames = new ArrayList<String>();
     private int facultySize = 3;		// static implementation, TODO: change when/if we have database
     final VerticalLayout layout = new VerticalLayout();
 	private VerticalLayout main = MainLayout();
 	private VerticalLayout selection = SelectionLayout();
 	private VerticalLayout courseSelect = CourseSelectLayout();
+
+	 static String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+     static String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
 
 	
     @Override
@@ -52,7 +55,7 @@ public class MyUI extends UI {
         
     }
     
-    private VerticalLayout SelectionLayout() {	//---- page1 ----\\
+    public VerticalLayout SelectionLayout() {	//---- page1 ----\\
     	
     	VerticalLayout l1 = new VerticalLayout();
     	VerticalLayout l2 = new VerticalLayout();
@@ -113,7 +116,8 @@ public class MyUI extends UI {
     	return l2;
     }
     
-    private VerticalLayout CourseSelectLayout() {	//---- page2 ----\\
+    @SuppressWarnings("unchecked")
+	public VerticalLayout CourseSelectLayout() {	//---- page2 ----\\
     	VerticalLayout l1 = new VerticalLayout();
     	VerticalLayout l2 = new VerticalLayout();
         VerticalLayout selectedCoursesLayout = new VerticalLayout();
@@ -129,10 +133,7 @@ public class MyUI extends UI {
         final Accordion courseAccordion = new Accordion();
         Button buttonBack;
         
-        // setup the table:
-        String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-        String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
-        scheduleTable.setSizeFull();
+         scheduleTable.setSizeFull();
         scheduleTable.setColumnHeaders();
         scheduleTable.setPageLength(0);
         scheduleTable.setHeight("100%");
@@ -147,13 +148,21 @@ public class MyUI extends UI {
         for (int i=0; i<6; i++)
         		 scheduleTable.addItem(new Object[]{hours[i],
         	                 " ", " ", " ", " ", " "}, new Integer(i));
-                
+
+
+       
+        
         // setup the accordion:
         courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
         courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
         courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
         courseAccordion.addTab(addForm, "Add another course!");
-
+        FormLayout addingACourse = new FormLayout();
+        Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
+        final TextField addCourseNameField = new TextField("Course Name: ");
+        
+        addCourseNameField.setInputPrompt("Add course name...");
+      
         // setup the back button:
         buttonBack = new Button("Back", new Button.ClickListener() {
 			@Override
@@ -180,6 +189,7 @@ public class MyUI extends UI {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
+				
 				FormLayout hoursForm = new FormLayout();
 				AddWindow hoursWindow = new AddWindow();
 				hoursWindow.setCaption("Course Hours");
@@ -192,7 +202,34 @@ public class MyUI extends UI {
 					@Override
 					public void buttonClick(ClickEvent event) {
 						hoursWindow.close();
-						
+						String course = addCourseNameField.getValue();
+						//for (String temp0 :  hoursWindow.selDays) {
+								for(String temp :  hoursWindow.moHo ){
+									for (int j=0; j<6;j++)
+										if (temp== hours[j])
+											scheduleTable.getItem(j).getItemProperty("Monday").setValue(course);									
+								}
+								for(String temp :  hoursWindow.tuHo ){
+									for (int j=0; j<6;j++)
+										if (temp== hours[j])
+											scheduleTable.getItem(j).getItemProperty("Tuesday").setValue(course);									
+								}
+								for(String temp :  hoursWindow.weHo ){
+									for (int j=0; j<6;j++)
+										if (temp== hours[j])
+											scheduleTable.getItem(j).getItemProperty("Wednesday").setValue(course);									
+								}
+								for(String temp :  hoursWindow.thHo ){
+									for (int j=0; j<6;j++)
+										if (temp== hours[j])
+											scheduleTable.getItem(j).getItemProperty("Thursday").setValue(course);									
+								}
+								for(String temp :  hoursWindow.frHo ){
+									for (int j=0; j<6;j++)
+										if (temp== hours[j])
+											scheduleTable.getItem(j).getItemProperty("Friday").setValue(course);									
+								}
+						//}
 					}
 				});
 		        hoursForm.addComponent(buttonDoneSelecting);
@@ -219,12 +256,7 @@ public class MyUI extends UI {
         ////////////////////////////////////////////////////////////////////////////////////////////
         ///// ADD NEW COURSE FORM LAYOUT ///////
         
-        FormLayout addingACourse = new FormLayout();
-        Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
-        TextField addCourseNameField = new TextField("Course Name: ");
-        
-        addCourseNameField.setInputPrompt("Add course name...");
-        
+         
         Button buttonAddNewCourse = new Button("+", new Button.ClickListener() {		// button to add a course
 			
 			@Override
@@ -249,7 +281,7 @@ public class MyUI extends UI {
         return l2;
     }
    
-    private VerticalLayout MainLayout() {	//==== UTU logo + app name ====\\
+    public VerticalLayout MainLayout() {	//==== UTU logo + app name ====\\
     	final VerticalLayout main = new VerticalLayout();
     	final HorizontalLayout header = new HorizontalLayout();
     	final VerticalLayout middle = new VerticalLayout();
