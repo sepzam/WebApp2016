@@ -16,6 +16,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.themes.ValoTheme;
@@ -157,30 +158,29 @@ final public class MyUI extends UI {
         courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
         courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
         courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
- 
         
-        CheckBox sample = new CheckBox("CheckBox", true);
-        sample.addValueChangeListener(e -> {
-                temp=String.valueOf(e.getProperty().getValue());
-                });
-        sample.setCaption("cccc");
-        
+         Database.main();
+         HorizontalLayout courseT = Database.courseTable;
+         courseT.setSizeFull();
+         
+         
         Button buttonAdd = new Button("Add", new Button.ClickListener() {
 			//@Override
 			public void buttonClick(ClickEvent event) {			// add the course	
-				if (temp=="True"){
-					scheduleTable.getItem(0).getItemProperty("Thursday").setValue("test");									
-				}
+			//	if (temp=="True"){
+			//		scheduleTable.getItem(0).getItemProperty("Thursday").setValue("test");									
+			//	}
 			}
 		});
-        coursesLayout.addComponents(sample,buttonAdd);
+        
+        
         courseAccordion.addTab(addForm, "Add another course!");
         FormLayout addingACourse = new FormLayout();
         Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
         final TextField addCourseNameField = new TextField("Course Name: ");
         
         addCourseNameField.setInputPrompt("Add course name...");
-      
+         
         // setup the back button:
         buttonBack = new Button("Back", new Button.ClickListener() {
 			@Override
@@ -191,7 +191,7 @@ final public class MyUI extends UI {
 				layout.setSpacing(true);
 				setContent(layout);
 			}
-		});
+		}); 
         
         /////// ADD DAY AND HOURS OF A COURSE ////////
         AddWindow selectDaysWind = new AddWindow();		// new window for the day of the course selection
@@ -296,6 +296,9 @@ final public class MyUI extends UI {
 			}
 		});
         
+        courseT.addComponent(Database.grid);
+
+        coursesLayout.addComponents(courseT,buttonAdd);
         addingACourse.addComponents(addCourseIntro, addCourseNameField, buttonAddNewCourse);
         
         addForm.addComponents(addingACourse);
