@@ -16,6 +16,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -43,7 +44,7 @@ final public class MyUI extends UI {
 	 static String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
      static String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
 
-	
+    static String temp="True";
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         
@@ -156,6 +157,23 @@ final public class MyUI extends UI {
         courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
         courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
         courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
+ 
+        
+        CheckBox sample = new CheckBox("CheckBox", true);
+        sample.addValueChangeListener(e -> {
+                temp=String.valueOf(e.getProperty().getValue());
+                });
+        sample.setCaption("cccc");
+        
+        Button buttonAdd = new Button("Add", new Button.ClickListener() {
+			//@Override
+			public void buttonClick(ClickEvent event) {			// add the course	
+				if (temp=="True"){
+					scheduleTable.getItem(0).getItemProperty("Thursday").setValue("test");									
+				}
+			}
+		});
+        coursesLayout.addComponents(sample,buttonAdd);
         courseAccordion.addTab(addForm, "Add another course!");
         FormLayout addingACourse = new FormLayout();
         Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
@@ -185,7 +203,7 @@ final public class MyUI extends UI {
         
         // TODO: Validation checking before enabling the "Next" button
         // setup the button to open the hour selection
-        Button buttonToHourSelection = new Button("Next", new Button.ClickListener() {
+        Button buttonToHourSelection = new Button("Next", new Button.ClickListener(){
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
@@ -230,6 +248,14 @@ final public class MyUI extends UI {
 											scheduleTable.getItem(j).getItemProperty("Friday").setValue(course);									
 								}
 						//}
+								AddWindow.selDays.removeAll(AddWindow.selDays);
+								AddWindow.moHo.removeAll(AddWindow.moHo);
+								AddWindow.tuHo.removeAll(AddWindow.tuHo);
+								AddWindow.weHo.removeAll(AddWindow.weHo);
+								AddWindow.thHo.removeAll(AddWindow.thHo);
+								AddWindow.frHo.removeAll(AddWindow.frHo);
+								
+								
 					}
 				});
 		        hoursForm.addComponent(buttonDoneSelecting);

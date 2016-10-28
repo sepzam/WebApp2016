@@ -32,8 +32,8 @@ public class AddWindow extends Window {
     static ArrayList<String> moHo = new ArrayList<String>();	// selected hours in Monday
     static ArrayList<String> tuHo = new ArrayList<String>();	// selected hours in Tuesday
     static ArrayList<String> weHo = new ArrayList<String>();	// selected hours in Wednesday
-    final ArrayList<String> thHo = new ArrayList<String>();	// selected hours in Thursday
-    final ArrayList<String> frHo = new ArrayList<String>();	// selected hours in Friday
+    static ArrayList<String> thHo = new ArrayList<String>();	// selected hours in Thursday
+    static ArrayList<String> frHo = new ArrayList<String>();	// selected hours in Friday
 
     FormLayout daysForm = new FormLayout();
     //HoursWindow hoursWin = new HoursWindow();
@@ -183,6 +183,7 @@ public class AddWindow extends Window {
 	        
 	        hor.addComponent(layout);
 		}
+		//selDays.removeAll(selDays);
 		form.addComponent(hor);
 		showArrayList();
 		return form;
