@@ -172,14 +172,10 @@ final public class MyUI extends UI {
 		});
         
         
-        courseAccordion.addTab(addForm, "Add another course!");
-        FormLayout addingACourse = new FormLayout();
-        Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
-        final TextField addCourseNameField = new TextField("Course Name: ");
+
         
-        addCourseNameField.setInputPrompt("Add course name...");
-         
-        // setup the back button:
+        
+        courseAccordion.addTab(addForm, "Add another course!");
         buttonBack = new Button("Back", new Button.ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {			// go back to previous "page", page1		
@@ -190,6 +186,16 @@ final public class MyUI extends UI {
 				setContent(layout);
 			}
 		}); 
+       
+        FormLayout addingACourse = new FormLayout();
+        Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
+        TextField addCourseNameField = new TextField("Course Name: ");
+        
+         
+        // setup the back button:
+       
+        
+        addCourseNameField.setInputPrompt("Add course name...");
         
       Button buttonAddNewCourse = new Button("+", new Button.ClickListener() {		// button to add a course
 			
@@ -269,9 +275,12 @@ final public class MyUI extends UI {
   										AddWindow.weHo.removeAll(AddWindow.weHo);
   										AddWindow.thHo.removeAll(AddWindow.thHo);
   										AddWindow.frHo.removeAll(AddWindow.frHo);
-  										
+  										addCourseNameField.setValue("");
+  										     										
   										
   							}
+    
+  							
   						});
   				        hoursForm.addComponent(buttonDoneSelecting);
   						hoursWindow.setContent(hoursForm);
