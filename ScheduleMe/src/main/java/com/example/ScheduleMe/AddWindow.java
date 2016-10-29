@@ -1,25 +1,8 @@
 package com.example.ScheduleMe;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.jar.Attributes.Name;
-
-import javax.servlet.annotation.WebServlet;
-
 import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.event.ShortcutAction;
-import com.vaadin.server.ExternalResource;
-import com.vaadin.server.ThemeResource;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.*;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Table.Align;
-import com.vaadin.ui.themes.ValoTheme;
-
 
 @SuppressWarnings("serial")
 @Theme("mytheme")
@@ -48,8 +31,9 @@ public class AddWindow extends Window {
 	public FormLayout addDaysForm() {
 		selDays.removeAll(selDays);
 		
+		HorizontalLayout daysForm = new HorizontalLayout();
 		
-		FormLayout layout = new FormLayout();
+		final FormLayout layout = new FormLayout();
 		
 		layout.setSizeUndefined();
 		layout.setMargin(true);
@@ -59,8 +43,12 @@ public class AddWindow extends Window {
 	    //	final int i;
 		  for (int i = 0; i < 5; i++) {	
 	        	CheckBox checkbox = new CheckBox (days[i], false);
+	        	checkbox.setValue(false);
+	        	checkbox.setImmediate(false);
 	        	layout.addComponent(checkbox);
-	        	checkbox.addValueChangeListener(e -> {	 //TODO: Error! If we uncheck a day it will not be unchecked now !
+	        	
+	        	checkbox.setValue(false);
+	        	checkbox.addValueChangeListener(e -> {	
 	        		if (checkbox.getValue() == true) {
 
 	            				if (!selDays.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
@@ -70,9 +58,12 @@ public class AddWindow extends Window {
 	    	        				//hourSelect.addComponent(new Label(selDays.toString()));			
 	    	        			}
 	            				System.out.println(selDays);
+	            				
 	        		}
 	        	});
+	        	checkbox.setValue(false);
 		  }
+		  daysForm.addComponent(layout);
         		
         return layout;
         }

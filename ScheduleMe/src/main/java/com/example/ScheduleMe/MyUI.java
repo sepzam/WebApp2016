@@ -1,23 +1,18 @@
 package com.example.ScheduleMe;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.jar.Attributes.Name;
-
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.ExternalResource;
-import com.vaadin.server.ThemeResource;
+
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Grid.SelectionMode;
-import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -126,6 +121,7 @@ final public class MyUI extends UI {
         VerticalLayout coursesLayout = new VerticalLayout(); 
         //VerticalLayout addCourse = new VerticalLayout();
         FormLayout addForm = new FormLayout();
+         final Button buttonAdd;
         
 
         
@@ -164,7 +160,9 @@ final public class MyUI extends UI {
          courseT.setSizeFull();
          
          
-        Button buttonAdd = new Button("Add", new Button.ClickListener() {
+      // button to add a course
+
+        buttonAdd = new Button("Add", new Button.ClickListener() {
 			//@Override
 			public void buttonClick(ClickEvent event) {			// add the course	
 			//	if (temp=="True"){
@@ -193,109 +191,119 @@ final public class MyUI extends UI {
 			}
 		}); 
         
-        /////// ADD DAY AND HOURS OF A COURSE ////////
-        AddWindow selectDaysWind = new AddWindow();		// new window for the day of the course selection
-        selectDaysWind.setCaption("Course Days");
-        FormLayout daysForm = new FormLayout();  		// new formlayout for the content of DAYS window
-        
-        
-        daysForm = selectDaysWind.addDaysForm();		// build up the days form
-        
-        // TODO: Validation checking before enabling the "Next" button
-        // setup the button to open the hour selection
-        Button buttonToHourSelection = new Button("Next", new Button.ClickListener(){
+      Button buttonAddNewCourse = new Button("+", new Button.ClickListener() {		// button to add a course
 			
-			@Override
-			public void buttonClick(ClickEvent event) {
-				
-				FormLayout hoursForm = new FormLayout();
-				AddWindow hoursWindow = new AddWindow();
-				hoursWindow.setCaption("Course Hours");
-				hoursWindow.setSizeUndefined();
-				hoursForm = hoursWindow.addHoursForm();
+  			@Override
+  			public void buttonClick(ClickEvent event) {
+  				//courseDaySelect.focus();
+  			  /////// ADD DAY AND HOURS OF A COURSE ////////
+  		        FormLayout daysForm = new FormLayout(); 
+  		        AddWindow selectDaysWind = new AddWindow();		// new window for the day of the course selection
+  		        selectDaysWind.setCaption("Course Days");
+  		        selectDaysWind.setSizeUndefined();
+  		        		// new formlayout for the content of DAYS window
+  		        
+  		        
+  		        daysForm = selectDaysWind.addDaysForm();		// build up the days form
+  		        
+  		        // TODO: Validation checking before enabling the "Next" button
+  		        // setup the button to open the hour selection
+  		        
+  		       
+  				if (selectDaysWind.isAttached()) {
+  					selectDaysWind.focus();
+  				} else {
+  					UI.getCurrent().addWindow(selectDaysWind);
+  				}
+  				
+  				////
+  				Button buttonToHourSelection = new Button("Next", new Button.ClickListener(){
+  					
+  					@Override
+  					public void buttonClick(ClickEvent event) {
+  						
+  						FormLayout hoursForm = new FormLayout();
+  						AddWindow hoursWindow = new AddWindow();
+  						hoursWindow.setCaption("Course Hours");
+  						hoursWindow.setSizeUndefined();
+  						hoursForm = hoursWindow.addHoursForm();
 
-				// very very messy!! TODO: improveeeeeeeee
-		        Button buttonDoneSelecting = new Button("Done", new Button.ClickListener() {
-					
-					@Override
-					public void buttonClick(ClickEvent event) {
-						hoursWindow.close();
-						String course = addCourseNameField.getValue();
-						//for (String temp0 :  hoursWindow.selDays) {
-								for(String temp :  hoursWindow.moHo ){
-									for (int j=0; j<6;j++)
-										if (temp== hours[j])
-											scheduleTable.getItem(j).getItemProperty("Monday").setValue(course);									
-								}
-								for(String temp :  hoursWindow.tuHo ){
-									for (int j=0; j<6;j++)
-										if (temp== hours[j])
-											scheduleTable.getItem(j).getItemProperty("Tuesday").setValue(course);									
-								}
-								for(String temp :  hoursWindow.weHo ){
-									for (int j=0; j<6;j++)
-										if (temp== hours[j])
-											scheduleTable.getItem(j).getItemProperty("Wednesday").setValue(course);									
-								}
-								for(String temp :  hoursWindow.thHo ){
-									for (int j=0; j<6;j++)
-										if (temp== hours[j])
-											scheduleTable.getItem(j).getItemProperty("Thursday").setValue(course);									
-								}
-								for(String temp :  hoursWindow.frHo ){
-									for (int j=0; j<6;j++)
-										if (temp== hours[j])
-											scheduleTable.getItem(j).getItemProperty("Friday").setValue(course);									
-								}
-						//}
-								AddWindow.selDays.removeAll(AddWindow.selDays);
-								AddWindow.moHo.removeAll(AddWindow.moHo);
-								AddWindow.tuHo.removeAll(AddWindow.tuHo);
-								AddWindow.weHo.removeAll(AddWindow.weHo);
-								AddWindow.thHo.removeAll(AddWindow.thHo);
-								AddWindow.frHo.removeAll(AddWindow.frHo);
-								
-								
-					}
-				});
-		        hoursForm.addComponent(buttonDoneSelecting);
-				hoursWindow.setContent(hoursForm);
-				
-				if (hoursWindow.isAttached()) {
-					hoursWindow.focus();
-				} else {
-					if (selectDaysWind.isAttached()) {
-						selectDaysWind.close();
-					}
-					UI.getCurrent().addWindow(hoursWindow);
-				}		
-			}
-		});
-       
+  						// very very messy!! TODO: improveeeeeeeee
+  				        Button buttonDoneSelecting = new Button("Done", new Button.ClickListener() {
+  							
+  							@Override
+  							public void buttonClick(ClickEvent event) {
+  								hoursWindow.close();
+  								String course = addCourseNameField.getValue();
+  								//for (String temp0 :  hoursWindow.selDays) {
+  										for(String temp :  AddWindow.moHo ){
+  											for (int j=0; j<6;j++)
+  												if (temp== hours[j])
+  													scheduleTable.getItem(j).getItemProperty("Monday").setValue(course);									
+  										}
+  										for(String temp :  AddWindow.tuHo ){
+  											for (int j=0; j<6;j++)
+  												if (temp== hours[j])
+  													scheduleTable.getItem(j).getItemProperty("Tuesday").setValue(course);									
+  										}
+  										for(String temp :  AddWindow.weHo ){
+  											for (int j=0; j<6;j++)
+  												if (temp== hours[j])
+  													scheduleTable.getItem(j).getItemProperty("Wednesday").setValue(course);									
+  										}
+  										for(String temp :  AddWindow.thHo ){
+  											for (int j=0; j<6;j++)
+  												if (temp== hours[j])
+  													scheduleTable.getItem(j).getItemProperty("Thursday").setValue(course);									
+  										}
+  										for(String temp :  AddWindow.frHo ){
+  											for (int j=0; j<6;j++)
+  												if (temp== hours[j])
+  													scheduleTable.getItem(j).getItemProperty("Friday").setValue(course);									
+  										}
+  								//}
+  										
+  										AddWindow.selDays.removeAll(AddWindow.selDays);
+  										AddWindow.moHo.removeAll(AddWindow.moHo);
+  										AddWindow.tuHo.removeAll(AddWindow.tuHo);
+  										AddWindow.weHo.removeAll(AddWindow.weHo);
+  										AddWindow.thHo.removeAll(AddWindow.thHo);
+  										AddWindow.frHo.removeAll(AddWindow.frHo);
+  										
+  										
+  							}
+  						});
+  				        hoursForm.addComponent(buttonDoneSelecting);
+  						hoursWindow.setContent(hoursForm);
+  						
+  						if (hoursWindow.isAttached()) {
+  							hoursWindow.focus();
+  						} else {
+  							if (selectDaysWind.isAttached()) {
+  								selectDaysWind.close();
+  							}
+  							UI.getCurrent().addWindow(hoursWindow);
+  						}		
+  					}
+  				});
+  			  daysForm.addComponent(buttonToHourSelection);				// add the button for the hour selection
+  	        selectDaysWind.setContent(daysForm);						// put the form to show in DAYS window
+
+  			}
+  		});
+          
+        
 
         
-        daysForm.addComponent(buttonToHourSelection);				// add the button for the hour selection
-        selectDaysWind.setContent(daysForm);						// put the form to show in DAYS window
-        //// END OF DAYS WINDOW /////
+              //// END OF DAYS WINDOW /////
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////////////////////////////////////////////////////////////////////
         ///// ADD NEW COURSE FORM LAYOUT ///////
         
-         
-        Button buttonAddNewCourse = new Button("+", new Button.ClickListener() {		// button to add a course
-			
-			@Override
-			public void buttonClick(ClickEvent event) {
-				//courseDaySelect.focus();
-				if (selectDaysWind.isAttached()) {
-					selectDaysWind.focus();
-				} else {
-					UI.getCurrent().addWindow(selectDaysWind);
-				}
-			}
-		});
         
+         
+  
         courseT.addComponent(Database.grid);
 
         coursesLayout.addComponents(courseT,buttonAdd);
