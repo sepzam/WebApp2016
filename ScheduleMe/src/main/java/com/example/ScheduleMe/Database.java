@@ -214,18 +214,10 @@ t.printStackTrace ();
 						System.out.println(lecHours.get(i).getClass());
 						if (!lecHours.get(i).equals("Empty")) {
 							if (lecHours.get(i).equals(hours[j])) {
-								System.out.println("hour: " + lecHours.get(i));
-								System.out.println("BINGO");
-								//System.out.println(hours[j] + " " + hour);
-								//int pos = lecHours.indexOf(lecHours.get(i));
-								System.out.println("BINGO2");
 								MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
-								System.out.println("BINGO3");
 							}
 						}
-						System.out.println("BINGO4");
 					}
-					System.out.println("---------------------------------------------------------");
 				}
 				
 				
