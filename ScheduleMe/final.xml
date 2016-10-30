@@ -1,218 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Course xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>452501.0</CourseCode>
-		<CourseName>Development of Web Applications and Web Services</CourseName>
-		<Lecturer>Dragos Truscan</Lecturer>
-		<Credit>5</Credit>
-		<Period>1</Period>
-		<DaySlot1>Wednesday</DaySlot1>
-		<DaySlot2>Thursday</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>13-15</TimeSlot1>
-		<TimeSlot2>10-12</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>XX, Agora</ClassroomSlot1>
-		<ClassroomSlot2>K126A&amp;B, Agora</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>7.9.–27.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/developmentOfWebApplications.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>452502.0</CourseCode>
-		<CourseName>Software Testing</CourseName>
-		<Lecturer>Dragos Truscan</Lecturer>
-		<Credit>5</Credit>
-		<Period>2</Period>
-		<DaySlot1>Tuesday</DaySlot1>
-		<DaySlot2>Wednesday</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>13-15</TimeSlot1>
-		<TimeSlot2>15-17</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>XX, Agora</ClassroomSlot1>
-		<ClassroomSlot2>K126A&amp;B, Agora</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>1.11.–21.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/course54.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>453506.0</CourseCode>
-		<CourseName>Design Methods for Energy Efficient Embedded Systems</CourseName>
-		<Lecturer>Sébastien Lafond</Lecturer>
-		<Credit>5</Credit>
-		<Period>1</Period>
-		<DaySlot1>Monday</DaySlot1>
-		<DaySlot2>Wednesday</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>13-15</TimeSlot1>
-		<TimeSlot2>13-15</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>115A, Agora</ClassroomSlot1>
-		<ClassroomSlot2>115A, Agora</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>5.9.–26.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/designmethodsforenergyefficientembeddedsystems.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>453600.0</CourseCode>
-		<CourseName>Introduction to Many-Core Programming</CourseName>
-		<Lecturer> Johan Lilius</Lecturer>
-		<Credit>5</Credit>
-		<Period>2</Period>
-		<DaySlot1>Wednesday</DaySlot1>
-		<DaySlot2>Thursday</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>13-15</TimeSlot1>
-		<TimeSlot2>10-12</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>115A, Agora</ClassroomSlot1>
-		<ClassroomSlot2>115A, Agora</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>2.11.–22.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/introToManycoreProgramming.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>455303.0</CourseCode>
-		<CourseName>Parallel Programming</CourseName>
-		<Lecturer>Mats Aspnäs</Lecturer>
-		<Credit>5</Credit>
-		<Period>2</Period>
-		<DaySlot1>Tuesday</DaySlot1>
-		<DaySlot2>Thursday</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>15-17</TimeSlot1>
-		<TimeSlot2>15-17</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>XX, Agora</ClassroomSlot1>
-		<ClassroomSlot2>XX, Agora</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>1.11.–22.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/parallelprogramming.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>456401.0</CourseCode>
-		<CourseName>Special course in Computer Science: Advanced Text Algorithms</CourseName>
-		<Lecturer>Vladimir Rogojin</Lecturer>
-		<Credit>5</Credit>
-		<Period>1</Period>
-		<DaySlot1>Monday</DaySlot1>
-		<DaySlot2>Wednesday</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>13-15</TimeSlot1>
-		<TimeSlot2>15-17</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>332A, Agora</ClassroomSlot1>
-		<ClassroomSlot2>332A, Agora</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>5.9.–26.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/advancedtextalgorithms.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>456502.0</CourseCode>
-		<CourseName>Software Architectures</CourseName>
-		<Lecturer>Luigia Petre</Lecturer>
-		<Credit>5</Credit>
-		<Period>1</Period>
-		<DaySlot1>Monday</DaySlot1>
-		<DaySlot2>Empty</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>10-12</TimeSlot1>
-		<TimeSlot2>Empty</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>115A, Agora</ClassroomSlot1>
-		<ClassroomSlot2>Empty</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>5.9.–25.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/softwareArchitectures.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>456505.0</CourseCode>
-		<CourseName>Program Derivation</CourseName>
-		<Lecturer>Marina Waldén</Lecturer>
-		<Credit>5</Credit>
-		<Period>1</Period>
-		<DaySlot1>Self-Study</DaySlot1>
-		<DaySlot2>Empty</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>Self-Study</TimeSlot1>
-		<TimeSlot2>Empty</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>Self-Study</ClassroomSlot1>
-		<ClassroomSlot2>Empty</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>Empty</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/course39.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>456505.0</CourseCode>
-		<CourseName>Program Derivation</CourseName>
-		<Lecturer>Marina Waldén</Lecturer>
-		<Credit>5</Credit>
-		<Period>2</Period>
-		<DaySlot1>Self-Study</DaySlot1>
-		<DaySlot2>Empty</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>Self-Study</TimeSlot1>
-		<TimeSlot2>Empty</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>Self-Study</ClassroomSlot1>
-		<ClassroomSlot2>Empty</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>Empty</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/course39.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>ÅAU/CE</Organization>
-		<Department>ABO</Department>
-		<CourseCode>456516.0</CourseCode>
-		<CourseName>Experimentation in Software Engineering</CourseName>
-		<Lecturer>Ivan Porres</Lecturer>
-		<Credit>5</Credit>
-		<Period>1</Period>
-		<DaySlot1>Tuesday</DaySlot1>
-		<DaySlot2>Thursday</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>8-10</TimeSlot1>
-		<TimeSlot2>8-10</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>115A, Agora</ClassroomSlot1>
-		<ClassroomSlot2>115A, Agora</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>6.9.–27.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/experimentationInEngineering.php</Website>
-		<TUCS>YES</TUCS>
-	</record>
-	<record>
-		<Organization>TUCS</Organization>
-		<Department>ABO</Department>
+		<Department>NSS</Department>
 		<CourseCode>Empty</CourseCode>
 		<CourseName>Development of Modern Web Applications (with Vaadin)</CourseName>
 		<Lecturer>Mikolaj Olszewski</Lecturer>
@@ -227,12 +16,9 @@
 		<ClassroomSlot1>110A/B, Agora</ClassroomSlot1>
 		<ClassroomSlot2>XX, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>12.9.-31.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/developmentOfModernWebApplications.php#schedule</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>BIO</Department>
 		<CourseCode>BIOI2250</CourseCode>
 		<CourseName>Introduction to Programming</CourseName>
@@ -243,17 +29,14 @@
 		<DaySlot2>Thursday</DaySlot2>
 		<DaySlot3>Friday</DaySlot3>
 		<TimeSlot1>14-16</TimeSlot1>
-		<TimeSlot2>10-16</TimeSlot2>
+		<TimeSlot2>10-12</TimeSlot2>
 		<TimeSlot3>10-12</TimeSlot3>
 		<ClassroomSlot1> XIV, Natura</ClassroomSlot1>
 		<ClassroomSlot2>453, Agora</ClassroomSlot2>
 		<ClassroomSlot3>A252, Arcanum</ClassroomSlot3>
-		<CourseInterval>9.9.–13.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/introProgramming.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>BIO</Department>
 		<CourseCode>BIOI2250</CourseCode>
 		<CourseName>Introduction to Programming</CourseName>
@@ -264,17 +47,14 @@
 		<DaySlot2>Thursday</DaySlot2>
 		<DaySlot3>Friday</DaySlot3>
 		<TimeSlot1>14-16</TimeSlot1>
-		<TimeSlot2>10-16</TimeSlot2>
+		<TimeSlot2>10-12</TimeSlot2>
 		<TimeSlot3>10-12</TimeSlot3>
 		<ClassroomSlot1>XXII, Agora</ClassroomSlot1>
 		<ClassroomSlot2>453, Agora</ClassroomSlot2>
 		<ClassroomSlot3>A252, Arcanum</ClassroomSlot3>
-		<CourseInterval>9.9.–13.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/introProgramming.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>BIO</Department>
 		<CourseCode>BIOI2260</CourseCode>
 		<CourseName>Introduction to Computer Science</CourseName>
@@ -285,17 +65,14 @@
 		<DaySlot2>Wednesday</DaySlot2>
 		<DaySlot3>Empty</DaySlot3>
 		<TimeSlot1>12-14</TimeSlot1>
-		<TimeSlot2>10-13</TimeSlot2>
+		<TimeSlot2>10-12</TimeSlot2>
 		<TimeSlot3>Empty</TimeSlot3>
 		<ClassroomSlot1>453, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>14.9.–26.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/introComputerScience.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>BIO</Department>
 		<CourseCode>BIOI2291</CourseCode>
 		<CourseName>Introduction to Biosciences</CourseName>
@@ -311,12 +88,9 @@
 		<ClassroomSlot1>110C, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>9.9.–25.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/introBiosciences.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>BIO</Department>
 		<CourseCode>BIOI4280</CourseCode>
 		<CourseName>Algorithms in Bioinformatics</CourseName>
@@ -332,12 +106,9 @@
 		<ClassroomSlot1>110C, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>1.11.–15.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/course60.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>BIO</Department>
 		<CourseCode>BIOI4463</CourseCode>
 		<CourseName>Introduction to Genomics</CourseName>
@@ -353,12 +124,9 @@
 		<ClassroomSlot1>K127, Agora</ClassroomSlot1>
 		<ClassroomSlot2>K127, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>1.11.–16.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/introGenomics.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>BIO</Department>
 		<CourseCode>TKO_3103</CourseCode>
 		<CourseName>Data Analysis and Knowledge Discovery</CourseName>
@@ -374,12 +142,9 @@
 		<ClassroomSlot1>XXI, Agora</ClassroomSlot1>
 		<ClassroomSlot2>XXI, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>1.11.–22.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/dataAnalysis.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/MATH</Organization>
 		<Department>CDS</Department>
 		<CourseCode>MATE5225</CourseCode>
 		<CourseName>Automata and Formal Languages</CourseName>
@@ -395,12 +160,9 @@
 		<ClassroomSlot1>M3, Quantum</ClassroomSlot1>
 		<ClassroomSlot2>M3, Quantum</ClassroomSlot2>
 		<ClassroomSlot3>M3, Quantum</ClassroomSlot3>
-		<CourseInterval>7.9.–16.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/automataAndFormalLanguages.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/MATH</Organization>
 		<Department>CDS</Department>
 		<CourseCode>MATE5225</CourseCode>
 		<CourseName>Automata and Formal Languages</CourseName>
@@ -416,12 +178,9 @@
 		<ClassroomSlot1>M3, Quantum</ClassroomSlot1>
 		<ClassroomSlot2>M1, Quantum</ClassroomSlot2>
 		<ClassroomSlot3>M3, Quantum</ClassroomSlot3>
-		<CourseInterval>7.9.–16.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/automataAndFormalLanguages.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/MATH</Organization>
 		<Department>CDS</Department>
 		<CourseCode>MATE5341</CourseCode>
 		<CourseName>Foundations of Cryptography</CourseName>
@@ -433,16 +192,13 @@
 		<DaySlot3>Friday</DaySlot3>
 		<TimeSlot1>10-12</TimeSlot1>
 		<TimeSlot2>10-12</TimeSlot2>
-		<TimeSlot3>8-12</TimeSlot3>
+		<TimeSlot3>8-10</TimeSlot3>
 		<ClassroomSlot1>XVIII, Quantum</ClassroomSlot1>
 		<ClassroomSlot2>XVIII, Quantum</ClassroomSlot2>
 		<ClassroomSlot3>XVIII, Quantum</ClassroomSlot3>
-		<CourseInterval>9.9.-21.10.2016</CourseInterval>
-		<Website>https://nettiopsu.utu.fi/opas/teaching/course.htm?id=12516</Website>
 		<TUCS>NO</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/MATH</Organization>
 		<Department>CDS</Department>
 		<CourseCode>MATE5344</CourseCode>
 		<CourseName>Algebraic Structures in Cryptography</CourseName>
@@ -458,33 +214,9 @@
 		<ClassroomSlot1>M3, Quantum</ClassroomSlot1>
 		<ClassroomSlot2>M1, Quantum</ClassroomSlot2>
 		<ClassroomSlot3>M1, Quantum</ClassroomSlot3>
-		<CourseInterval>6.9.–21.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/algebraicStructuresInCryptography.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/MATH</Organization>
-		<Department>CDS</Department>
-		<CourseCode>MATE5345</CourseCode>
-		<CourseName>Selected Topics in Cryptography</CourseName>
-		<Lecturer>Tommi Meskanen</Lecturer>
-		<Credit>5</Credit>
-		<Period>2</Period>
-		<DaySlot1>Self-Study</DaySlot1>
-		<DaySlot2>Empty</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>Self-Study</TimeSlot1>
-		<TimeSlot2>Empty</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
-		<ClassroomSlot1>Self-Study</ClassroomSlot1>
-		<ClassroomSlot2>Empty</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>1.11.-05.12.2016</CourseInterval>
-		<Website>https://nettiopsu.utu.fi/opas/teaching/course.htm?id=13948</Website>
-		<TUCS>NO</TUCS>
-	</record>
-	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>EC</Department>
 		<CourseCode>DTEK1057</CourseCode>
 		<CourseName>Energy Efficient Embedded Electronics</CourseName>
@@ -500,12 +232,9 @@
 		<ClassroomSlot1>K127, Agora</ClassroomSlot1>
 		<ClassroomSlot2>K127, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>12.9.-25.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/energyEfficientEmbedded.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>EC</Department>
 		<CourseCode>DTEK2011</CourseCode>
 		<CourseName>Sensor Network Systems</CourseName>
@@ -521,12 +250,9 @@
 		<ClassroomSlot1>K127, Agora</ClassroomSlot1>
 		<ClassroomSlot2>K127, Agora</ClassroomSlot2>
 		<ClassroomSlot3>K127, Agora</ClassroomSlot3>
-		<CourseInterval>13.9.–28.10.2015</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/sensorNetworkSystems.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>EC</Department>
 		<CourseCode>DTEK8067</CourseCode>
 		<CourseName>HDL Based Design</CourseName>
@@ -538,16 +264,13 @@
 		<DaySlot3>Friday</DaySlot3>
 		<TimeSlot1>8-10</TimeSlot1>
 		<TimeSlot2>10-12</TimeSlot2>
-		<TimeSlot3>8-16</TimeSlot3>
+		<TimeSlot3>8-10</TimeSlot3>
 		<ClassroomSlot1>110C, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>453, Agora</ClassroomSlot3>
-		<CourseInterval>21.9.–16.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/hdlBasedDesign.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>EC</Department>
 		<CourseCode>DTEK8067</CourseCode>
 		<CourseName>HDL Based Design</CourseName>
@@ -563,12 +286,9 @@
 		<ClassroomSlot1>110C, Agora</ClassroomSlot1>
 		<ClassroomSlot2>453, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>21.9.–16.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/hdlBasedDesign.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>EC</Department>
 		<CourseCode>ETT_2062</CourseCode>
 		<CourseName>Multiprocessor Architectures</CourseName>
@@ -584,12 +304,9 @@
 		<ClassroomSlot1>K127, Agora</ClassroomSlot1>
 		<ClassroomSlot2>K127, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>8.9.–27.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/course80.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>GD</Department>
 		<CourseCode>TKO_2029</CourseCode>
 		<CourseName>Interactive Storytelling</CourseName>
@@ -605,12 +322,9 @@
 		<ClassroomSlot1>XXI, Agora</ClassroomSlot1>
 		<ClassroomSlot2>XXI, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>2.11.–2.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/course64.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>GD</Department>
 		<CourseCode>TKO_2081</CourseCode>
 		<CourseName>Introduction to Game Development Tools</CourseName>
@@ -618,20 +332,17 @@
 		<Credit>5</Credit>
 		<Period>1</Period>
 		<DaySlot1>Thursday</DaySlot1>
-		<DaySlot2>Empty</DaySlot2>
+		<DaySlot2>Thursday</DaySlot2>
 		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>9-11</TimeSlot1>
-		<TimeSlot2>Empty</TimeSlot2>
+		<TimeSlot1>8-10</TimeSlot1>
+		<TimeSlot2>10-12</TimeSlot2>
 		<TimeSlot3>Empty</TimeSlot3>
 		<ClassroomSlot1>Sigma, ICT City</ClassroomSlot1>
-		<ClassroomSlot2>Empty</ClassroomSlot2>
+		<ClassroomSlot2>Sigma, ICT City</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>8.9.–22.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/introGameDevTools.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>GD</Department>
 		<CourseCode>TKO_2081</CourseCode>
 		<CourseName>Introduction to Game Development Tools</CourseName>
@@ -639,20 +350,17 @@
 		<Credit>5</Credit>
 		<Period>2</Period>
 		<DaySlot1>Thursday</DaySlot1>
-		<DaySlot2>Empty</DaySlot2>
+		<DaySlot2>Thursday</DaySlot2>
 		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>9-11</TimeSlot1>
-		<TimeSlot2>Empty</TimeSlot2>
+		<TimeSlot1>8-10</TimeSlot1>
+		<TimeSlot2>10-12</TimeSlot2>
 		<TimeSlot3>Empty</TimeSlot3>
 		<ClassroomSlot1>Sigma, ICT City</ClassroomSlot1>
-		<ClassroomSlot2>Empty</ClassroomSlot2>
+		<ClassroomSlot2>Sigma, ICT City</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>8.9.–22.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/introGameDevTools.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>GD</Department>
 		<CourseCode>TKO_3111</CourseCode>
 		<CourseName>Gamifications </CourseName>
@@ -662,18 +370,15 @@
 		<DaySlot1>Monday</DaySlot1>
 		<DaySlot2>Empty</DaySlot2>
 		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>9-12</TimeSlot1>
+		<TimeSlot1>10-12</TimeSlot1>
 		<TimeSlot2>Empty</TimeSlot2>
 		<TimeSlot3>Empty</TimeSlot3>
 		<ClassroomSlot1>Omega, ICT City</ClassroomSlot1>
 		<ClassroomSlot2>Empty</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>31.10.–12.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/gamification.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/TSE</Organization>
 		<Department>ISS</Department>
 		<CourseCode> TJS13</CourseCode>
 		<CourseName>Management of Information Security and IT Service Continuity</CourseName>
@@ -689,12 +394,9 @@
 		<ClassroomSlot1>LS07, TSE</ClassroomSlot1>
 		<ClassroomSlot2>LS13,TSE</ClassroomSlot2>
 		<ClassroomSlot3>LS13, TSE</ClassroomSlot3>
-		<CourseInterval>Empty</CourseInterval>
-		<Website>https://nettiopsu.utu.fi/opas/opintojakso.htm?rid=26058&amp;idx=0&amp;uiLang=en&amp;lang=en&amp;lvv=2016</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/LANG</Organization>
 		<Department>L</Department>
 		<CourseCode>KIFF0003</CourseCode>
 		<CourseName>Finnish for Foreigners: Intensive Beginners' Course (Section 1)</CourseName>
@@ -710,12 +412,9 @@
 		<ClassroomSlot1>246, Agora</ClassroomSlot1>
 		<ClassroomSlot2>251C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>251C, Agora</ClassroomSlot3>
-		<CourseInterval>12.9.-24.11.2016</CourseInterval>
-		<Website>https://nettiopsu.utu.fi/opas/teaching/course.htm?id=12761</Website>
 		<TUCS>NO</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/LANG</Organization>
 		<Department>L</Department>
 		<CourseCode>KIFF0003</CourseCode>
 		<CourseName>Finnish for Foreigners: Intensive Beginners' Course (Section 1)</CourseName>
@@ -731,12 +430,9 @@
 		<ClassroomSlot1>246, Agora</ClassroomSlot1>
 		<ClassroomSlot2>251C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>251C, Agora</ClassroomSlot3>
-		<CourseInterval>12.9.-24.11.2016</CourseInterval>
-		<Website>https://nettiopsu.utu.fi/opas/teaching/course.htm?id=12761</Website>
 		<TUCS>NO</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/LANG</Organization>
 		<Department>L</Department>
 		<CourseCode>KIFF0003</CourseCode>
 		<CourseName>Finnish for Foreigners: Intensive Beginners' Course (Section 2)</CourseName>
@@ -752,12 +448,9 @@
 		<ClassroomSlot1>243, Agora</ClassroomSlot1>
 		<ClassroomSlot2>251C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>251C, Agora</ClassroomSlot3>
-		<CourseInterval>12.9.-24.11.2016</CourseInterval>
-		<Website>https://nettiopsu.utu.fi/opas/teaching/course.htm?id=12761</Website>
 		<TUCS>NO</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/LANG</Organization>
 		<Department>L</Department>
 		<CourseCode>KIFF0003</CourseCode>
 		<CourseName>Finnish for Foreigners: Intensive Beginners' Course (Section 2)</CourseName>
@@ -773,12 +466,9 @@
 		<ClassroomSlot1>243, Agora</ClassroomSlot1>
 		<ClassroomSlot2>251C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>245, Agora</ClassroomSlot3>
-		<CourseInterval>12.9.-24.11.2016</CourseInterval>
-		<Website>https://nettiopsu.utu.fi/opas/teaching/course.htm?id=12761</Website>
 		<TUCS>NO</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>NSS</Department>
 		<CourseCode>DTEK2011</CourseCode>
 		<CourseName>Sensor Network Systems</CourseName>
@@ -794,12 +484,9 @@
 		<ClassroomSlot1>K127, Agora</ClassroomSlot1>
 		<ClassroomSlot2>K127, Agora</ClassroomSlot2>
 		<ClassroomSlot3>K127, Agora</ClassroomSlot3>
-		<CourseInterval>13.9.–28.10.2015</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/sensorNetworkSystems.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>NSS</Department>
 		<CourseCode>DTEK8025</CourseCode>
 		<CourseName>System and Application Security</CourseName>
@@ -815,12 +502,9 @@
 		<ClassroomSlot1>XXI, Agora</ClassroomSlot1>
 		<ClassroomSlot2>Empty</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>7.9.–26.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/sysAppSecurity.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>NSS</Department>
 		<CourseCode>ETT_3057</CourseCode>
 		<CourseName>Multimedia Networks</CourseName>
@@ -836,12 +520,9 @@
 		<ClassroomSlot1>110C, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>31.10.–13.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/course79.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>NSS</Department>
 		<CourseCode>ETT_3072</CourseCode>
 		<CourseName>Human Element in Information Security</CourseName>
@@ -850,19 +531,16 @@
 		<Period>2</Period>
 		<DaySlot1>Tuesday</DaySlot1>
 		<DaySlot2>Thursday</DaySlot2>
-		<DaySlot3>Empty</DaySlot3>
+		<DaySlot3>Thursday</DaySlot3>
 		<TimeSlot1>12-14</TimeSlot1>
-		<TimeSlot2>8-12</TimeSlot2>
-		<TimeSlot3>Empty</TimeSlot3>
+		<TimeSlot2>8-10</TimeSlot2>
+		<TimeSlot3>10-12</TimeSlot3>
 		<ClassroomSlot1>126A/B, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110A/B, Agora</ClassroomSlot2>
-		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>3.11.–15.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/humanElementInSecurity.php</Website>
+		<ClassroomSlot3>110A/B, Agora</ClassroomSlot3>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>DTEK1054</CourseCode>
 		<CourseName>Advanced Course on Software Engineering</CourseName>
@@ -878,12 +556,9 @@
 		<ClassroomSlot1>110A/B, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110A/B, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>1.11.–21.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/advancedSoftwareEngineering.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>DTEK8077</CourseCode>
 		<CourseName>Research Seminar on Software Engineering</CourseName>
@@ -899,12 +574,9 @@
 		<ClassroomSlot1>110C, Agora</ClassroomSlot1>
 		<ClassroomSlot2>Empty</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>13.9.–16.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/researchSeminarSE.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>DTEK8077</CourseCode>
 		<CourseName>Research Seminar on Software Engineering</CourseName>
@@ -920,12 +592,9 @@
 		<ClassroomSlot1>K127, Agora</ClassroomSlot1>
 		<ClassroomSlot2>Empty</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>13.9.–16.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/researchSeminarSE.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>ETT_3005</CourseCode>
 		<CourseName>Digital Communication Systems</CourseName>
@@ -937,16 +606,13 @@
 		<DaySlot3>Monday</DaySlot3>
 		<TimeSlot1>10-12</TimeSlot1>
 		<TimeSlot2>12-14</TimeSlot2>
-		<TimeSlot3>12-16</TimeSlot3>
+		<TimeSlot3>12-14</TimeSlot3>
 		<ClassroomSlot1>110A/B, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110A/B, Agora</ClassroomSlot2>
 		<ClassroomSlot3>K127, Agora</ClassroomSlot3>
-		<CourseInterval>13.9.–26.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/digitaalisetTJ.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/MATH</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>SMAT5219</CourseCode>
 		<CourseName>Heuristics </CourseName>
@@ -962,12 +628,9 @@
 		<ClassroomSlot1>M1, Quantum</ClassroomSlot1>
 		<ClassroomSlot2>M1, Quantum</ClassroomSlot2>
 		<ClassroomSlot3>M1, Quantum</ClassroomSlot3>
-		<CourseInterval>7.9.–21.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/course91.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/TSE</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>TJS16</CourseCode>
 		<CourseName>Information Technology and Ethics</CourseName>
@@ -977,18 +640,15 @@
 		<DaySlot1>Tuesday</DaySlot1>
 		<DaySlot2>Empty</DaySlot2>
 		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>16-19</TimeSlot1>
+		<TimeSlot1>16-18</TimeSlot1>
 		<TimeSlot2>Empty</TimeSlot2>
 		<TimeSlot3>Empty</TimeSlot3>
 		<ClassroomSlot1>LS12, TSE</ClassroomSlot1>
 		<ClassroomSlot2>Empty</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>Empty</CourseInterval>
-		<Website>Empty</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/TSE</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>TJS16</CourseCode>
 		<CourseName>Information Technology and Ethics</CourseName>
@@ -998,18 +658,15 @@
 		<DaySlot1>Tuesday</DaySlot1>
 		<DaySlot2>Empty</DaySlot2>
 		<DaySlot3>Empty</DaySlot3>
-		<TimeSlot1>16-19</TimeSlot1>
+		<TimeSlot1>16-18</TimeSlot1>
 		<TimeSlot2>Empty</TimeSlot2>
 		<TimeSlot3>Empty</TimeSlot3>
 		<ClassroomSlot1>LS12, TSE</ClassroomSlot1>
 		<ClassroomSlot2>Empty</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>Empty</CourseInterval>
-		<Website>Empty</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>TKO_3108</CourseCode>
 		<CourseName>Algorithm Design</CourseName>
@@ -1025,12 +682,9 @@
 		<ClassroomSlot1>110A/B, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110A/B, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>5.9.–28.10.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/algorithmDesign.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>TKO_3109</CourseCode>
 		<CourseName>Advanced Algorithm Design</CourseName>
@@ -1046,12 +700,9 @@
 		<ClassroomSlot1>110C, Agora</ClassroomSlot1>
 		<ClassroomSlot2>110C, Agora</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>2.11.–22.12.2016</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/advancedAlgorithmDesign.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>TKO_3118</CourseCode>
 		<CourseName>IxD Seminar</CourseName>
@@ -1067,12 +718,9 @@
 		<ClassroomSlot1>Agora 4th floor</ClassroomSlot1>
 		<ClassroomSlot2>Empty</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>9.9.2016–9.6.2017</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/ixdSeminar.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 	<record>
-		<Organization>UTU/IT</Organization>
 		<Department>TUCS</Department>
 		<CourseCode>TKO_3118</CourseCode>
 		<CourseName>IxD Seminar</CourseName>
@@ -1088,8 +736,6 @@
 		<ClassroomSlot1>Agora 4th floor</ClassroomSlot1>
 		<ClassroomSlot2>Empty</ClassroomSlot2>
 		<ClassroomSlot3>Empty</ClassroomSlot3>
-		<CourseInterval>Empty</CourseInterval>
-		<Website>http://tucs.fi/education/courses/details/ixdSeminar.php</Website>
 		<TUCS>YES</TUCS>
 	</record>
 </Course>
