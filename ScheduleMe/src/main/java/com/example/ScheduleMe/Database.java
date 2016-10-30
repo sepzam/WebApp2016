@@ -25,7 +25,6 @@ public class Database extends Window {
 	final static HorizontalLayout courseTable = new HorizontalLayout();
 	final static Grid grid = new Grid();
 	public static ArrayList<Course> courses = new ArrayList<Course>();
-    static String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
 	
 	public Database() {
 
@@ -70,95 +69,96 @@ public class Database extends Window {
 
 					
 					Element CourseElement = (Element)CourseNode; 
-			        
+			        /*
 			        NodeList organizationList = CourseElement.getElementsByTagName("Organization");
 			        Element organizationElement = (Element)organizationList.item(0);
 			        NodeList textORGList = organizationElement.getChildNodes();
 			        System.out.println("Organization : " + ((Node)textORGList.item(0)).getNodeValue().trim());
-			        
+			        */
 			        
 			        NodeList departmentList = CourseElement.getElementsByTagName("Department");
 			        Element departmentElement = (Element)departmentList.item(0);
 			        NodeList textDEPList = departmentElement.getChildNodes();
-			        System.out.println("Department : " + ((Node)textDEPList.item(0)).getNodeValue().trim());
+			        //System.out.println("Department : " + ((Node)textDEPList.item(0)).getNodeValue().trim());
 			        
 			        NodeList courseCodeList = CourseElement.getElementsByTagName("CourseCode");
 			        Element courseCodeElement = (Element)courseCodeList.item(0);
 			        NodeList textCCList = courseCodeElement.getChildNodes();
-			        System.out.println("Course Code : " + ((Node)textCCList.item(0)).getNodeValue().trim());
+			        //System.out.println("Course Code : " + ((Node)textCCList.item(0)).getNodeValue().trim());
 			         
 			        NodeList courseNameList = CourseElement.getElementsByTagName("CourseName");
 			        Element courseNameElement = (Element)courseNameList.item(0);
 			        NodeList textCNList = courseNameElement.getChildNodes();
-			        System.out.println("Course Name : " + ((Node)textCNList.item(0)).getNodeValue().trim());
+			        //System.out.println("Course Name : " + ((Node)textCNList.item(0)).getNodeValue().trim());
 			        
 			        NodeList lecturerList = CourseElement.getElementsByTagName("Lecturer");
 			        Element lecturerElement = (Element)lecturerList.item(0);
 			        NodeList textLECList = lecturerElement.getChildNodes();
-			        System.out.println("Lecturer : " + ((Node)textLECList.item(0)).getNodeValue().trim());
+			        //System.out.println("Lecturer : " + ((Node)textLECList.item(0)).getNodeValue().trim());
 			
 			        NodeList creditList = CourseElement.getElementsByTagName("Credit");
 			        Element creditElement = (Element)creditList.item(0);
 			        NodeList textCREList = creditElement.getChildNodes();
-			        System.out.println("Credit : " + ((Node)textCREList.item(0)).getNodeValue().trim());
+			        //System.out.println("Credit : " + ((Node)textCREList.item(0)).getNodeValue().trim());
 			        
 			        NodeList periodList = CourseElement.getElementsByTagName("Period");
 			        Element periodElement = (Element)periodList.item(0);
 			        NodeList textPERList = periodElement.getChildNodes();
-			        System.out.println("Period : " + ((Node)textPERList.item(0)).getNodeValue().trim());
+			        //System.out.println("Period : " + ((Node)textPERList.item(0)).getNodeValue().trim());
 			         
 			   
 			        NodeList daySlot1List = CourseElement.getElementsByTagName("DaySlot1");
 			        Element daySlot1Element = (Element)daySlot1List.item(0);
 			        NodeList textSD1List = daySlot1Element.getChildNodes();
-			        System.out.println("Slot1-Day : " +	((Node)textSD1List.item(0)).getNodeValue().trim());
+			        //System.out.println("Slot1-Day : " +	((Node)textSD1List.item(0)).getNodeValue().trim());
 
 			        
 			        NodeList timeSlot1List = CourseElement.getElementsByTagName("TimeSlot1");
 			        Element timeSlot1Element = (Element)timeSlot1List.item(0);
 			        NodeList textST1List = timeSlot1Element.getChildNodes();
-			        System.out.println("Slot1-Time : " + ((Node)textST1List.item(0)).getNodeValue().trim());
+			       // System.out.println("Slot1-Time : " + ((Node)textST1List.item(0)).getNodeValue().trim());
 			
 			        NodeList classroomSlot1List = CourseElement.getElementsByTagName("ClassroomSlot1");
 			        Element classroomSlot1Element = (Element)classroomSlot1List.item(0);
 			        NodeList textSC1List = classroomSlot1Element.getChildNodes();
-			        System.out.println("Slot1-Class : " + ((Node)textSC1List.item(0)).getNodeValue().trim());
+			        //System.out.println("Slot1-Class : " + ((Node)textSC1List.item(0)).getNodeValue().trim());
 			        
 			        NodeList daySlot2List = CourseElement.getElementsByTagName("DaySlot2");
 			        Element daySlot2Element = (Element)daySlot2List.item(0);
 			        NodeList textSD2List = daySlot2Element.getChildNodes();
-			        System.out.println("Slot2-Day : " + ((Node)textSD2List.item(0)).getNodeValue().trim());
+			        //System.out.println("Slot2-Day : " + ((Node)textSD2List.item(0)).getNodeValue().trim());
 			         
 			        NodeList timeSlot2List = CourseElement.getElementsByTagName("TimeSlot2");
 			        Element timeSlot2Element = (Element)timeSlot2List.item(0);
 			        NodeList textST2List = timeSlot2Element.getChildNodes();
-			        System.out.println("Slot2-Time : " + ((Node)textST2List.item(0)).getNodeValue().trim());
+			        //System.out.println("Slot2-Time : " + ((Node)textST2List.item(0)).getNodeValue().trim());
 			
 			        NodeList classroomSlot2List = CourseElement.getElementsByTagName("ClassroomSlot2");
 			        Element classroomSlot2Element = (Element)classroomSlot2List.item(0);
 			        NodeList textSC2List = classroomSlot2Element.getChildNodes();
-			        System.out.println("Slot2-Class : " + ((Node)textSC2List.item(0)).getNodeValue().trim());
+			       // System.out.println("Slot2-Class : " + ((Node)textSC2List.item(0)).getNodeValue().trim());
 			        
 			        NodeList daySlot3List = CourseElement.getElementsByTagName("DaySlot3");
 			        Element daySlot3Element = (Element)daySlot3List.item(0);
 			        NodeList textSD3List = daySlot3Element.getChildNodes();
-			        System.out.println("Slot3-Day : " + ((Node)textSD3List.item(0)).getNodeValue().trim());
+			        //System.out.println("Slot3-Day : " + ((Node)textSD3List.item(0)).getNodeValue().trim());
 			         
 			        NodeList timeSlot3List = CourseElement.getElementsByTagName("TimeSlot3");
 			        Element timeSlot3Element = (Element)timeSlot3List.item(0);
 			        NodeList textST3List = timeSlot3Element.getChildNodes();
-			        System.out.println("Slot3-Time : " + ((Node)textST3List.item(0)).getNodeValue().trim());
+			        //System.out.println("Slot3-Time : " + ((Node)textST3List.item(0)).getNodeValue().trim());
 			
 			        NodeList classroomSlot3List = CourseElement.getElementsByTagName("ClassroomSlot3");
 			        Element classroomSlot3Element = (Element)classroomSlot3List.item(0);
 			        NodeList textSC3List = classroomSlot3Element.getChildNodes();
-			        System.out.println("Slot3-Class : " + ((Node)textSC3List.item(0)).getNodeValue().trim());
-			                
+			        //System.out.println("Slot3-Class : " + ((Node)textSC3List.item(0)).getNodeValue().trim());
+			         
+			        /*
 			        NodeList websiteList = CourseElement.getElementsByTagName("Website");
 			        Element websiteElement = (Element)websiteList.item(0);
 			        NodeList textWSList = websiteElement.getChildNodes();
 			        System.out.println("Website : " + ((Node)textWSList.item(0)).getNodeValue().trim());
-			       
+			        */
 					grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textDEPList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
 							       
 					// add the days to lectureDays arraylist
@@ -210,10 +210,10 @@ t.printStackTrace ();
 
 				for (int i = 0; i < lecHours.size(); i++) {
 					for (int j = 0; j < 6; j++) {
-						System.out.println(hours[j] + " " + lecHours.get(i));
+						System.out.println(MyUI.hours[j] + " " + lecHours.get(i));
 						System.out.println(lecHours.get(i).getClass());
 						if (!lecHours.get(i).equals("Empty")) {
-							if (lecHours.get(i).equals(hours[j])) {
+							if (lecHours.get(i).equals(MyUI.hours[j])) {
 								MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
 							}
 						}
