@@ -162,6 +162,27 @@ final public class MyUI extends UI {
         // setup the accordion:
         courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
         courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
+        
+						
+				Table selectedCourses = new Table();
+				selectedCourses.setSelectable(true);
+				//   selectedCourses.setMultiSelect(true);
+				selectedCourses.setImmediate(true);
+				selectedCourses.setColumnHeaders();
+				selectedCourses.setPageLength(0);
+				selectedCourses.setHeight("100%");
+				
+				
+				//scheduleTable.addContainerProperty("0", String.class, null,"", null, null);
+				
+				selectedCourses.addContainerProperty("Course Name", String.class, null);
+				selectedCourses.setColumnAlignment(0, Align.CENTER);
+				selectedCourses.addContainerProperty("Teacher", String.class, null);
+				selectedCourses.setColumnAlignment(1, Align.CENTER);
+				
+								
+				selectedCoursesLayout.addComponent(selectedCourses);
+
         courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
         
          new Database();
@@ -286,7 +307,8 @@ final public class MyUI extends UI {
   										AddWindow.frHo.removeAll(AddWindow.frHo);
   										addCourseNameField.setValue("");
   										     										
-  										
+  										selectedCourses.addItem(new Object[]{course,"---"}, new Integer(0));       
+  									  	
   							}
     
   							
