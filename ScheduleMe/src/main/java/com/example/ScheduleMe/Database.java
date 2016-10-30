@@ -208,16 +208,24 @@ t.printStackTrace ();
 				
 				System.out.println(name + lecDays + lecHours);
 
-				for (String hour : lecHours) {
+				for (int i = 0; i < lecHours.size(); i++) {
 					for (int j = 0; j < 6; j++) {
-						System.out.println(hours[j] + " " + hour);
-						if (hours[j].toString() == hour.toString()) {
-							System.out.println("BINGO");
-							System.out.println(hours[j] + " " + hour);
-							int pos = lecHours.indexOf(hour);
-							MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(pos)).setValue(name);
+						System.out.println(hours[j] + " " + lecHours.get(i));
+						System.out.println(lecHours.get(i).getClass());
+						if (!lecHours.get(i).equals("Empty")) {
+							if (lecHours.get(i).equals(hours[j])) {
+								System.out.println("hour: " + lecHours.get(i));
+								System.out.println("BINGO");
+								//System.out.println(hours[j] + " " + hour);
+								//int pos = lecHours.indexOf(lecHours.get(i));
+								System.out.println("BINGO2");
+								MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
+								System.out.println("BINGO3");
+							}
 						}
+						System.out.println("BINGO4");
 					}
+					System.out.println("---------------------------------------------------------");
 				}
 				
 				
