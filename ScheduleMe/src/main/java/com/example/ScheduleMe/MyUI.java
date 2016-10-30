@@ -36,6 +36,7 @@ final public class MyUI extends UI {
 	private VerticalLayout main = MainLayout();
 	private VerticalLayout selection = SelectionLayout();
 	private VerticalLayout courseSelect = CourseSelectLayout();
+	 int count = 0;
 
 	 static String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
      static String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
@@ -206,16 +207,7 @@ final public class MyUI extends UI {
         
         
         courseAccordion.addTab(addForm, "Add another course!");
-        buttonBack = new Button("Back", new Button.ClickListener() {
-			@Override
-			public void buttonClick(ClickEvent event) {			// go back to previous "page", page1		
-				layout.removeAllComponents();
-				layout.addComponents(main, selection);
-				layout.setMargin(true);
-				layout.setSpacing(true);
-				setContent(layout);
-			}
-		}); 
+        
        
         FormLayout addingACourse = new FormLayout();
         Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
@@ -224,7 +216,7 @@ final public class MyUI extends UI {
          
         // setup the back button:
        
-        
+       
         addCourseNameField.setInputPrompt("Add course name...");
         
       Button buttonAddNewCourse = new Button("+", new Button.ClickListener() {		// button to add a course
@@ -306,9 +298,10 @@ final public class MyUI extends UI {
   										AddWindow.thHo.removeAll(AddWindow.thHo);
   										AddWindow.frHo.removeAll(AddWindow.frHo);
   										addCourseNameField.setValue("");
-  										     										
-  										selectedCourses.addItem(new Object[]{course,"---"}, new Integer(0));       
-  									  	
+  										     		System.out.println(course);		
+  										selectedCourses.addItem(new Object[]{course,"---"}, new Integer(count));    
+  										
+  									  	count++;
   							}
     
   							
@@ -341,7 +334,16 @@ final public class MyUI extends UI {
         ////////////////////////////////////////////////////////////////////////////////////////////
         ///// ADD NEW COURSE FORM LAYOUT ///////
         
-        
+      buttonBack = new Button("Back", new Button.ClickListener() {
+			@Override
+			public void buttonClick(ClickEvent event) {			// go back to previous "page", page1		
+				layout.removeAllComponents();
+				layout.addComponents(main, selection);
+				layout.setMargin(true);
+				layout.setSpacing(true);
+				setContent(layout);
+			}
+		});
          
   
         courseT.addComponent(Database.grid);
