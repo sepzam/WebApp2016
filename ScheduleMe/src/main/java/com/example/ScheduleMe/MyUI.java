@@ -46,8 +46,8 @@ final public class MyUI extends UI {
     public static Table scheduleTable = new Table("Schedule");
 
 	static int count = 0; 
-	private static int degree;
-	Object per;
+	public static int degree;
+	public static int per;
 
 	 static String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
      static String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
@@ -78,26 +78,27 @@ final public class MyUI extends UI {
         for (int i = 0; i < 5; i++) {
         	degreeSelection.addItem(i);
         	degreeSelection.setItemCaption(i, degreeNames.get(i));
+        	
+        	
         }  
+        degreeSelection.addValueChangeListener(e -> {
+              	degree=(int)e.getProperty().getValue();
+         });
        
-    //    degreeSelection.setNullSelectionAllowed(false);   // so that the blank option cannot be chosen
-        
-        
-        // event listener for when we select a faculty to show only the appropriate degrees
-       
-
+   
     	// setup the period selection:
         for (int j = 0; j < 2; j++) {
         	periodOption.addItem(j);
         	int x=j+1;		// don't ask, lol :/
         	periodOption.setItemCaption(j, "Period " + x);
-        	periodOption.addValueChangeListener(l -> {
-              	
-        		per=l.getProperty().getValue();
-              });
+        	
         }
-        periodOption.setValue(0);		// pre-assigned: period 1
+        periodOption.setValue(0);    	// pre-assigned: period 1	
         
+        periodOption.addValueChangeListener(l -> {
+          	
+    		per=(int)l.getProperty().getValue();
+          });
         // setup the button:
         buttonNext = new Button("Next", new Button.ClickListener() {
         	// button listener that loads next page
@@ -107,12 +108,7 @@ final public class MyUI extends UI {
 					layout.removeAllComponents();
 					layout.addComponents(main, courseSelect);
 					setContent(layout);	
-					 degreeSelection.addValueChangeListener(e -> {
-				         	//degreeSelection.removeAllItems();			// clean the default value
-				         	//degreeNames.removeAll(degreeNames);			// clean all the degree name drop down options
-				         	setDegree((int)e.getProperty().getValue());		// which degree are we talking about? its the itemID of the choice.
-				           
-				         });
+						
 					//}																		// TODO: Uncomment+ for field checking
 			}
 		});          
@@ -128,30 +124,26 @@ final public class MyUI extends UI {
      
     @SuppressWarnings("unchecked")
 	private VerticalLayout CourseSelectLayout() {	//---- page2 ----\\
-     //	System.out.println("Period: "+per);    	
-    	
+  	
     	VerticalLayout l1 = new VerticalLayout();
     	VerticalLayout l2 = new VerticalLayout();
         VerticalLayout selectedCoursesLayout = new VerticalLayout();
         VerticalLayout coursesLayout = new VerticalLayout(); 
-        //VerticalLayout addCourse = new VerticalLayout();
         FormLayout addForm = new FormLayout();
-         final Button buttonAdd;
         
-
-        
-        ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
         scheduleTable.addStyleName("Schedule");
         final Accordion courseAccordion = new Accordion();
         Button buttonBack;
         
         scheduleTable.setSizeFull();
-        scheduleTable.setColumnHeaders();
         scheduleTable.setPageLength(0);
+     //   scheduleTable.setColumnHeaders();
         scheduleTable.setHeight("100%");
         scheduleTable.setColumnCollapsingAllowed(false);
-        scheduleTable.addContainerProperty("0", String.class, null,"", null, null);
-        
+        scheduleTable.addContainerProperty("", String.class, null);
+    	scheduleTable.getContainerDataSource().removeAllItems();
+		
         for (int i = 0; i < 5; i++) {		// set the headers
         	scheduleTable.addContainerProperty(days[i], String.class, null);
         	scheduleTable.setColumnAlignment(i, Align.CENTER);
@@ -188,47 +180,33 @@ final public class MyUI extends UI {
 				selectedCoursesLayout.addComponent(selectedCourses);
 
         courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
-
-        courseAccordion.addSelectedTabChangeListener(
-                new Accordion.SelectedTabChangeListener() {
-            private static final long serialVersionUID = -2358653511430014752L;
-
-            public void selectedTabChange(SelectedTabChangeEvent event){
-                // Find the accordion (as a TabSheet)
-                TabSheet accordion = event.getTabSheet();
-                
-                // Find the tab (here we know it's a layout)
-                Layout tab = (Layout) accordion.getSelectedTab();
-
-                // Get the tab caption from the tab object
-               String caption = accordion.getTab(tab).getCaption();
-               // String tabId = accordion.getTab(tab).getId();
-                
-              System.out.println(caption);  
-              
-              new Database();
-              HorizontalLayout courseT = Database.courseTable;
-              courseT.setSizeFull();
-              courseT.addComponent(Database.grid);
-              coursesLayout.addComponents(courseT);
-            }
-        });
-			
-        /*        
-       
-        
- */        
-         buttonAdd = new Button("Add", new Button.ClickListener() {
- 			//@Override
- 			public void buttonClick(ClickEvent event) {			// add the course	
- 			//	if (temp=="True"){
- 			//		scheduleTable.getItem(0).getItemProperty("Thursday").setValue("test");									
- 			//	}
- 			}
- 		});
          
          
-       
+         courseAccordion.addSelectedTabChangeListener(
+                 new Accordion.SelectedTabChangeListener() {
+             private static final long serialVersionUID = -2358653511430014752L;
+
+             public void selectedTabChange(SelectedTabChangeEvent event){
+                 // Find the accordion (as a TabSheet)
+                 TabSheet accordion = event.getTabSheet();
+                 
+                 // Find the tab (here we know it's a layout)
+                 Layout tab = (Layout) accordion.getSelectedTab();
+
+                 // Get the tab caption from the tab object
+                String caption = accordion.getTab(tab).getCaption();
+                // String tabId = accordion.getTab(tab).getId();
+                 
+               System.out.println(caption);  
+               
+               new Database();
+               HorizontalLayout courseT = Database.courseTable;
+               courseT.setSizeFull();
+               courseT.addComponent(Database.grid);
+               coursesLayout.addComponents(courseT);
+             }
+         });
+ 			
          
       // button to add a course
 
@@ -468,7 +446,7 @@ final public class MyUI extends UI {
     }*/		
 
     
-    public static int getDegree() {
+    public  static int getDegree() {
 		return degree;
 	}
 
