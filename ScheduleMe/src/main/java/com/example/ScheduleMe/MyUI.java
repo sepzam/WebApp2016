@@ -29,9 +29,9 @@ import com.vaadin.ui.themes.ValoTheme;
 @Theme("mytheme")
 final public class MyUI extends UI {
 	
-	final List<String> facultyNames = new ArrayList<String>();
+	//final List<String> facultyNames = new ArrayList<String>();
     private List<String> degreeNames = new ArrayList<String>();
-    private int facultySize = 3;		// static implementation, TODO: change when/if we have database
+    private int degreeSize = 5;		// static implementation, TODO: change when/if we have database
     final VerticalLayout layout = new VerticalLayout();
 	private VerticalLayout main = MainLayout();
 	private VerticalLayout selection = SelectionLayout();
@@ -56,23 +56,23 @@ final public class MyUI extends UI {
     	
     	VerticalLayout l1 = new VerticalLayout();
     	VerticalLayout l2 = new VerticalLayout();
-        NativeSelect facultySelection = new NativeSelect("Select your faculty:");  
+        //NativeSelect facultySelection = new NativeSelect("Select the organization :");  
         NativeSelect degreeSelection = new NativeSelect("Select your degree:");
         OptionGroup periodOption = new OptionGroup("Select period:");
     	Button buttonNext;
     	
-        addFacultyNames();      
+ //       addFacultyNames();      
         
-        for (int i = 0; i < facultySize; i++) {
+/*        for (int i = 0; i < facultySize; i++) {
         	facultySelection.addItem(i);
         	facultySelection.setItemCaption(i, facultyNames.get(i));
-        }  
+        } */ 
         // so that the blank option cannot be chosen
-        facultySelection.setNullSelectionAllowed(false);
+//        facultySelection.setNullSelectionAllowed(false);
         degreeSelection.setNullSelectionAllowed(false);
         
         // event listener for when we select a faculty to show only the appropriate degrees
-        facultySelection.addValueChangeListener(e -> {
+ /*       facultySelection.addValueChangeListener(e -> {
         	degreeSelection.removeAllItems();			// clean the default value
         	degreeNames.removeAll(degreeNames);			// clean all the degree name drop down options
         	addDegreeNames((int)e.getProperty().getValue());		// which degree are we talking about? its the itemID of the choice.
@@ -81,7 +81,16 @@ final public class MyUI extends UI {
         		degreeSelection.setItemCaption(i, degreeNames.get(i));
         	}
         	
-        });
+        });*/
+    	degreeNames.add("Master's Degree Programme in Bioinformatics");
+    	degreeNames.add("Master's Degree Programme in Embedded Computing");
+		degreeNames.add("Master's Degree Programme in Information Security and Cryptography");
+		degreeNames.add("Show only the TUCS courses");
+		degreeNames.add("Show all courses");
+	
+        for (int i = 0; i < degreeSize; i++) {
+        	degreeSelection.addItem(i);
+        	degreeSelection.setItemCaption(i, degreeNames.get(i));}
 
     	// setup the period selection:
         for (int i = 0; i < 2; i++) {
@@ -106,7 +115,7 @@ final public class MyUI extends UI {
         //buttonNext.setEnabled(false);													// TODO: Uncomment+ for field checking  
         //degreeSelection.addValueChangeListener(e -> buttonNext.setEnabled(true));      // TODO: Uncomment+ for field checking  
         buttonNext.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-        l1.addComponents(facultySelection, degreeSelection, periodOption);
+        l1.addComponents(degreeSelection, periodOption);
         l1.setSpacing(true);
         l1.setMargin(true);
         l2.addComponents(l1, buttonNext);
@@ -131,11 +140,11 @@ final public class MyUI extends UI {
         final Accordion courseAccordion = new Accordion();
         Button buttonBack;
         
-         scheduleTable.setSizeFull();
+        scheduleTable.setSizeFull();
         scheduleTable.setColumnHeaders();
         scheduleTable.setPageLength(0);
         scheduleTable.setHeight("100%");
-        
+        scheduleTable.setColumnCollapsingAllowed(false);
         scheduleTable.addContainerProperty("0", String.class, null,"", null, null);
         
         for (int i = 0; i < 5; i++) {		// set the headers
@@ -172,14 +181,10 @@ final public class MyUI extends UI {
 		});
         
         
-        courseAccordion.addTab(addForm, "Add another course!");
-        FormLayout addingACourse = new FormLayout();
-        Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
-        final TextField addCourseNameField = new TextField("Course Name: ");
+
         
-        addCourseNameField.setInputPrompt("Add course name...");
-         
-        // setup the back button:
+        
+        courseAccordion.addTab(addForm, "Add another course!");
         buttonBack = new Button("Back", new Button.ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {			// go back to previous "page", page1		
@@ -190,6 +195,16 @@ final public class MyUI extends UI {
 				setContent(layout);
 			}
 		}); 
+       
+        FormLayout addingACourse = new FormLayout();
+        Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
+        TextField addCourseNameField = new TextField("Course Name: ");
+        
+         
+        // setup the back button:
+       
+        
+        addCourseNameField.setInputPrompt("Add course name...");
         
       Button buttonAddNewCourse = new Button("+", new Button.ClickListener() {		// button to add a course
 			
@@ -269,9 +284,12 @@ final public class MyUI extends UI {
   										AddWindow.weHo.removeAll(AddWindow.weHo);
   										AddWindow.thHo.removeAll(AddWindow.thHo);
   										AddWindow.frHo.removeAll(AddWindow.frHo);
-  										
+  										addCourseNameField.setValue("");
+  										     										
   										
   							}
+    
+  							
   						});
   				        hoursForm.addComponent(buttonDoneSelecting);
   						hoursWindow.setContent(hoursForm);
@@ -365,14 +383,14 @@ final public class MyUI extends UI {
     }
     
     // For static implementation of faculty names
-    private void addFacultyNames() {
+   /* private void addFacultyNames() {
         facultyNames.add("Faculty of Mathematics and Natural Sciences");
         facultyNames.add("Faculty of Medicine");
         facultyNames.add("Faculty of Education");
-    }
+    }*/
     
     /// For static implementation: degree == 0 corresponds to (some) of the degrees of Mathematics faculty, 1 is Medicine and 2 is education.
-    private void addDegreeNames(int degree) {
+   /* private void addDegreeNames(int degree) {
     	switch (degree) {
     	case 0:		// math
     		degreeNames.add("Master's Degree Programme in Information Security and Cryptography ");
@@ -391,8 +409,8 @@ final public class MyUI extends UI {
     	default:		// otherwise
     		degreeNames.add("error! :(");
     		break;
-    	}		
-    }
+    	}
+    }*/		
 
     
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
