@@ -35,4 +35,27 @@
   @include valo;
 
   // Insert your own theme rules here
+  
+.v-table-header {
+    color: #fff;
+    background: #4360a9;
+    font-weight: bold;
+    text-align: center;
+ 
+   
+  }
+  
+ .v-table {
+    background: #fff;
+    text-align: center;
+   
+  }
+  
+ .v-table-row:hover, .v-table-row-odd:hover {
+    color: #fff;
+    background: #fff;
+    text-align: center;
+    
+    
+  }
 }
