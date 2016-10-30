@@ -26,8 +26,8 @@ import com.vaadin.ui.themes.ValoTheme;
 public class Course {
 	
 	private String courseName;
-	private ArrayList lecDays;
-	private ArrayList lecHours;
+	private ArrayList<String> lecDays;
+	private ArrayList<String> lecHours;
 	
 	public Course(String courseName, ArrayList lecDays, ArrayList lecHours) {
 		this.courseName = courseName;
@@ -48,19 +48,19 @@ public class Course {
 		return courseName;
 	}
 	
-	public void  setLecturingDays(ArrayList lecDays) {
+	public void  setLecturingDays(ArrayList<String> lecDays) {
 		this.lecDays = lecDays;
 	}
 	
-	public ArrayList  getLecturingDays() {
+	public ArrayList<String> getLecturingDays() {
 		return lecDays;
 	}
 	
-	public void setLecturingHours(ArrayList lecHours) {
+	public void setLecturingHours(ArrayList<String> lecHours) {
 		this.lecHours = lecHours;
 	}
 	
-	public ArrayList getLecturingHours() {
+	public ArrayList<String> getLecturingHours() {
 		return lecHours;
 	}
 	
