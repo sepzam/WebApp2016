@@ -13,9 +13,7 @@ import org.xml.sax.SAXParseException;
 
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Window;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Grid.SelectionMode;
 
 @SuppressWarnings("serial")
@@ -54,7 +52,7 @@ public class Database extends Window {
 		     grid.addColumn("ID").setSortable(true);
 		     grid.addColumn("Course Name").setSortable(true);
 		     grid.addColumn("Teacher");
-		     grid.addColumn("Location");
+		     grid.addColumn("Credits");
  
 
 		     for(int s=0; s<totalCourse ; s++) {
@@ -159,7 +157,7 @@ public class Database extends Window {
 			        NodeList textWSList = websiteElement.getChildNodes();
 			        System.out.println("Website : " + ((Node)textWSList.item(0)).getNodeValue().trim());
 			        */
-					grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textDEPList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
+					grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
 							       
 					// add the days to lectureDays arraylist
 					lectureDays.add(((Node)textSD1List.item(0)).getNodeValue().trim());
@@ -198,6 +196,8 @@ t.printStackTrace ();
 
 		@Override
 		public void select(SelectionEvent event) {
+			AddWindow notifWindow = new AddWindow();
+			
 			boolean empty = event.getSelected().isEmpty();
 			if (!empty) {
 				int courseIndex = (int) grid.getSelectedRow() - 1;
@@ -207,24 +207,47 @@ t.printStackTrace ();
 				ArrayList<String> lecHours = courses.get(courseIndex).getLecturingHours();
 				
 				System.out.println(name + lecDays + lecHours);
-
+				
 				for (int i = 0; i < lecHours.size(); i++) {
 					for (int j = 0; j < 6; j++) {
-						System.out.println(MyUI.hours[j] + " " + lecHours.get(i));
-						System.out.println(lecHours.get(i).getClass());
 						if (!lecHours.get(i).equals("Empty")) {
 							if (lecHours.get(i).equals(MyUI.hours[j])) {
-								MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
+								System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
+								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
+									System.out.println("Cell is empty");
+									MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
+								}
+								else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
+									System.out.println("cell is taken!");
+									// popup notification
+									
+									Label label = new Label("You have another course at the same time.");
+									FormLayout formL = new FormLayout();
+									
+									formL.addComponent(label);
+													
+									notifWindow.setCaption("Course conflict");
+									notifWindow.setContent(formL);
+									
+					  				if (notifWindow.isAttached()) {
+					  					notifWindow.close();
+					  				} else {
+					  					UI.getCurrent().addWindow(notifWindow);
+					  				}
+								}
+								//if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)))
+								
 							}
 						}
 					}
 				}
-				
-				
 			}
-			
+				
+				
 		}
+			
+	}
     	
-    }
 }
+
 
