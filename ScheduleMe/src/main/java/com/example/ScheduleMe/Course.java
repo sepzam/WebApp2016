@@ -26,17 +26,17 @@ import com.vaadin.ui.themes.ValoTheme;
 public class Course {
 	
 	private String courseName;
-	private ArrayList teachingSchedule;
 	private ArrayList lecDays;
 	private ArrayList lecHours;
 	
+	public Course(String courseName, ArrayList lecDays, ArrayList lecHours) {
+		this.courseName = courseName;
+		this.lecDays = lecDays;
+		this.lecHours = lecHours;
+	}
 	public Course(String courseName) {
 		this.courseName = courseName;
-	}
-	
-	public Course(String courseName, ArrayList teachingSchedule) {
-		this.courseName = courseName;
-		this.teachingSchedule = teachingSchedule;
+
 	}
 	
 ///////////////////////////////////////////////////////////////

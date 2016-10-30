@@ -155,7 +155,7 @@ final public class MyUI extends UI {
         courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
         courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
         
-         Database.main();
+         new Database();
          HorizontalLayout courseT = Database.courseTable;
          courseT.setSizeFull();
          
