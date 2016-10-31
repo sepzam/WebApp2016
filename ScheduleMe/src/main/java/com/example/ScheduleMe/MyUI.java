@@ -193,6 +193,7 @@ final public class MyUI extends UI {
                  
                System.out.println(caption);  
           //     ((class) Database.grid).checkColumnIsAttached();
+               if(caption.equals("Tap to see the list of courses")){
                new Database();
          //      Database.grid.removeAllColumns();
                
@@ -200,6 +201,7 @@ final public class MyUI extends UI {
                courseT.setSizeFull();
                courseT.addComponent(Database.grid);
                coursesLayout.addComponents(courseT);
+               }
              }
          });
  			
