@@ -322,7 +322,6 @@ t.printStackTrace ();
 										|| MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
 									System.out.println("Cell is empty");
 									MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
-									MyUI.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyUI.count)); 
 									MyUI.count++;
 								
 								}
@@ -333,6 +332,8 @@ t.printStackTrace ();
 						}
 					}
 				  }
+				MyUI.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyUI.count)); 
+
 				}
 				else if (tempo==1){	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
 					System.out.println("cell is taken!");
