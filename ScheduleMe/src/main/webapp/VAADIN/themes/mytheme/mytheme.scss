@@ -41,6 +41,8 @@
     background: #4360a9;
     font-weight: bold;
     text-align: center;
+    font-size: 15px;
+    line-height: normal;
  
    
   }
@@ -48,14 +50,21 @@
  .v-table {
     background: #fff;
     text-align: center;
+    font-size: 10px;
+    line-height: normal;
    
   }
   
  .v-table-row:hover, .v-table-row-odd:hover {
     color: #fff;
-    background: #fff;
-    text-align: center;
-    
+    background: #eaebef;
     
   }
+  
+  .v-table-cell-content .v-table-cell-break-word{
+	word-wrap: break-word; 
+	line-height: normal;
+	font-size: auto;
+}
+  
 }
