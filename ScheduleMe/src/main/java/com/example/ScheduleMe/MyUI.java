@@ -15,13 +15,7 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.themes.ValoTheme;
-import com.vaadin.ui.Accordion;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Layout;
-import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
-import com.vaadin.ui.VerticalLayout;
 
 
 /**
@@ -198,9 +192,11 @@ final public class MyUI extends UI {
                 // String tabId = accordion.getTab(tab).getId();
                  
                System.out.println(caption);  
-               
+          //     ((class) Database.grid).checkColumnIsAttached();
                new Database();
-               HorizontalLayout courseT = Database.courseTable;
+         //      Database.grid.removeAllColumns();
+               
+               HorizontalLayout courseT = new HorizontalLayout();
                courseT.setSizeFull();
                courseT.addComponent(Database.grid);
                coursesLayout.addComponents(courseT);
