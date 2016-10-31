@@ -147,7 +147,7 @@ final public class MyUI extends UI {
        
         for (int i=0; i<6; i++)
         		 scheduleTable.addItem(new Object[]{hours[i],
-        	                 " ", " ", " ", " ", " "}, new Integer(i));
+        	                 "", "", "", "", ""}, new Integer(i));
 
 
        

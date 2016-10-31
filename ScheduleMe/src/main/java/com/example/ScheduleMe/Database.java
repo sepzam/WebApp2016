@@ -23,6 +23,7 @@ final class Database extends Window {
 	final static Grid grid = new Grid();
 	public static ArrayList<Course> courses = new ArrayList<Course>();
 	static int intPer=0;
+	static Integer tempo=1;
 	
 	
 	public Database() {
@@ -64,8 +65,7 @@ final class Database extends Window {
  
 		     
 		     for(int s=0; s<totalCourse ; s++) {
-        
-				Node CourseNode = listOfCourses.item(s);
+		    	 Node CourseNode = listOfCourses.item(s);
 				
 				if(CourseNode.getNodeType() == Node.ELEMENT_NODE){
 					//lectureDays.removeAll(lectureDays);
@@ -75,20 +75,13 @@ final class Database extends Window {
 
 					
 					Element CourseElement = (Element)CourseNode; 
-			        /*
-			        NodeList organizationList = CourseElement.getElementsByTagName("Organization");
-			        Element organizationElement = (Element)organizationList.item(0);
-			        NodeList textORGList = organizationElement.getChildNodes();
-			        System.out.println("Organization : " + ((Node)textORGList.item(0)).getNodeValue().trim());
-			        */
-					
-					  NodeList tucsList = CourseElement.getElementsByTagName("TUCS");
-				        Element tucsElement = (Element)tucsList.item(0);
-				        NodeList textORGList = tucsElement.getChildNodes();
-				        //System.out.println("Organization : " + ((Node)textORGList.item(0)).getNodeValue().trim());
-				        
-				 
-			        
+			    		
+					NodeList tucsList = CourseElement.getElementsByTagName("TUCS");
+				    Element tucsElement = (Element)tucsList.item(0);
+				    NodeList textORGList = tucsElement.getChildNodes();
+				    //System.out.println("Organization : " + ((Node)textORGList.item(0)).getNodeValue().trim());
+				      
+				    
 			        NodeList departmentList = CourseElement.getElementsByTagName("Department");
 			        Element departmentElement = (Element)departmentList.item(0);
 			        NodeList textDEPList = departmentElement.getChildNodes();
@@ -301,14 +294,17 @@ t.printStackTrace ();
 				
 				System.out.println(name + lecDays + lecHours);
 				
-				Integer tempo=0;
+				
 				for (int i = 0; i < lecHours.size(); i++){
 					for (int j = 0; j < 6; j++) {
 						if (!lecHours.get(i).equals("Empty")) {
 							if (lecHours.get(i).equals(MyUI.hours[j])) {
 								System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
-								if (!MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
-									tempo=1;   // Conflict found
+								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals("")
+										|| MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(null) 
+										|| MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
+									tempo=0;   // No Conflict found
+									System.out.println("No Conflict found");
 									
 								}
 								}
@@ -321,7 +317,9 @@ t.printStackTrace ();
 						if (!lecHours.get(i).equals("Empty")) {
 							if (lecHours.get(i).equals(MyUI.hours[j])) {
 								System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
-								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
+								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals("")
+										|| MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(null) 
+										|| MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
 									System.out.println("Cell is empty");
 									MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
 									MyUI.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyUI.count)); 
@@ -334,9 +332,9 @@ t.printStackTrace ();
 							}
 						}
 					}
+				  }
 				}
-			}
-			else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
+				else if (tempo==1){	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
 					System.out.println("cell is taken!");
 					
 					// popup notification
@@ -351,7 +349,7 @@ t.printStackTrace ();
 					
 	  				if (notifWindow.isAttached()) {
 	  					notifWindow.close();
-	  				} else {
+	  				} else {  
 	  					UI.getCurrent().addWindow(notifWindow);
 	  				}
 				}
