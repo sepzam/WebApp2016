@@ -28,11 +28,13 @@ public class Course {
 	private String courseName;
 	private ArrayList<String> lecDays;
 	private ArrayList<String> lecHours;
+	private String teacher;
 	
-	public Course(String courseName, ArrayList lecDays, ArrayList lecHours) {
+	public Course(String courseName, ArrayList lecDays, ArrayList lecHours, String teacher) {
 		this.courseName = courseName;
 		this.lecDays = lecDays;
 		this.lecHours = lecHours;
+		this.teacher =teacher;
 	}
 	public Course(String courseName) {
 		this.courseName = courseName;
@@ -66,6 +68,12 @@ public class Course {
 	
 	public void addCourseTime(String name, String day, String time) {
 		
+	}
+	public String getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
 	}
 
 }

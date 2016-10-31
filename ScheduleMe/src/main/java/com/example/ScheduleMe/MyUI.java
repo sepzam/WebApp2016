@@ -38,8 +38,9 @@ final public class MyUI extends UI {
 	private VerticalLayout selection = SelectionLayout();
 	private VerticalLayout courseSelect = CourseSelectLayout();
     public static Table scheduleTable = new Table("Schedule");
+	public static Table selectedCourses = new Table();
 
-	static int count = 0; 
+	public static int count = 0; 
 	public static int degree;
 	public static int per;
 
@@ -154,7 +155,7 @@ final public class MyUI extends UI {
         courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
         courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
         
-        	Table selectedCourses = new Table();
+        
 				selectedCourses.setSelectable(true);
 				//   selectedCourses.setMultiSelect(true);
 				selectedCourses.setImmediate(true);

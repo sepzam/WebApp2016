@@ -188,7 +188,7 @@ final class Database extends Window {
 							lectureHours.add(((Node)textST2List.item(0)).getNodeValue().trim().toString());
 							lectureHours.add(((Node)textST3List.item(0)).getNodeValue().trim().toString());    
 						   	
-					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours));
+					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
 
 						} else if(MyUI.degree==0){
 
@@ -204,7 +204,7 @@ final class Database extends Window {
 							lectureHours.add(((Node)textST2List.item(0)).getNodeValue().trim().toString());
 							lectureHours.add(((Node)textST3List.item(0)).getNodeValue().trim().toString());    
 						   	
-					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours));
+					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
 							}
 						} else if(MyUI.degree==1){
 							if(d.equals("NSS") || d.equals("CDS") || d.equals("ISS") || d.equals("L") || d.equals("GD"))
@@ -219,7 +219,7 @@ final class Database extends Window {
 							lectureHours.add(((Node)textST2List.item(0)).getNodeValue().trim().toString());
 							lectureHours.add(((Node)textST3List.item(0)).getNodeValue().trim().toString());    
 						   	
-					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours));
+					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
 							}
 						} else if(MyUI.degree==2){
 							if(d.equals("EC") || d.equals("L"))
@@ -234,12 +234,13 @@ final class Database extends Window {
 							lectureHours.add(((Node)textST2List.item(0)).getNodeValue().trim().toString());
 							lectureHours.add(((Node)textST3List.item(0)).getNodeValue().trim().toString());    
 						   	
-					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours));
+					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
 							}
 						} else if(MyUI.degree==3){
 							if(((Node)textORGList.item(0)).getNodeValue().trim().equals("YES"))
 							{
 							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
+							
 							lectureDays.add(((Node)textSD1List.item(0)).getNodeValue().trim());
 					    	lectureDays.add(((Node)textSD2List.item(0)).getNodeValue().trim().toString());
 					    	lectureDays.add(((Node)textSD3List.item(0)).getNodeValue().trim().toString());
@@ -249,7 +250,7 @@ final class Database extends Window {
 							lectureHours.add(((Node)textST2List.item(0)).getNodeValue().trim().toString());
 							lectureHours.add(((Node)textST3List.item(0)).getNodeValue().trim().toString());    
 						   	
-					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours));
+					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
 							}
 						} 
 						
@@ -290,6 +291,7 @@ t.printStackTrace ();
 				int courseIndex = (int) grid.getSelectedRow() - 1;
 				
 				String name = courses.get(courseIndex).getCourseName();
+				String teacher= courses.get(courseIndex).getTeacher();
 				ArrayList<String> lecDays = courses.get(courseIndex).getLecturingDays();
 				ArrayList<String> lecHours = courses.get(courseIndex).getLecturingHours();
 				
@@ -303,6 +305,9 @@ t.printStackTrace ();
 								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
 									System.out.println("Cell is empty");
 									MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
+									MyUI.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyUI.count)); 
+									MyUI.count++;
+								
 								}
 								else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
 									System.out.println("cell is taken!");
