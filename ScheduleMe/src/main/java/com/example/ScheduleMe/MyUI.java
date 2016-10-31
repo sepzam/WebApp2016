@@ -40,7 +40,7 @@ final public class MyUI extends UI {
     public static Table scheduleTable = new Table("Schedule");
 	public static Table selectedCourses = new Table();
 
-	public static int count = 0; 
+	static int count = 0; 
 	public static int degree;
 	public static int per;
 
@@ -159,7 +159,7 @@ final public class MyUI extends UI {
 				selectedCourses.setSelectable(true);
 				//   selectedCourses.setMultiSelect(true);
 				selectedCourses.setImmediate(true);
-				selectedCourses.setColumnHeaders();
+			//	selectedCourses.setColumnHeaders();
 				selectedCourses.setPageLength(0);
 				selectedCourses.setHeight("100%");
 				

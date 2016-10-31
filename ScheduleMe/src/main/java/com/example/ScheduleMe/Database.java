@@ -297,6 +297,21 @@ t.printStackTrace ();
 				
 				System.out.println(name + lecDays + lecHours);
 				
+				int temp=0;
+				for (int i = 0; i < lecHours.size(); i++){
+					for (int j = 0; j < 6; j++) {
+						if (!lecHours.get(i).equals("Empty")) {
+							if (lecHours.get(i).equals(MyUI.hours[j])) {
+								System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
+								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
+									
+									
+								}
+								}
+						}
+					}
+				}
+				
 				for (int i = 0; i < lecHours.size(); i++){
 					for (int j = 0; j < 6; j++) {
 						if (!lecHours.get(i).equals("Empty")) {
@@ -305,12 +320,13 @@ t.printStackTrace ();
 								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
 									System.out.println("Cell is empty");
 									MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
-									MyUI.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyUI.count)); 
+						//			MyUI.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyUI.count)); 
 									MyUI.count++;
 								
 								}
 								else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
 									System.out.println("cell is taken!");
+									
 									// popup notification
 									
 									Label label = new Label("You have another course at the same time."+"");
