@@ -303,15 +303,15 @@ t.printStackTrace ();
 						if (!lecHours.get(i).equals("Empty")) {
 							if (lecHours.get(i).equals(MyUI.hours[j])) {
 								System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
-								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
-									
+								if (!MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
+									temp=1;   // Conflict found
 									
 								}
 								}
 						}
 					}
 				}
-				
+				if(temp==0){
 				for (int i = 0; i < lecHours.size(); i++){
 					for (int j = 0; j < 6; j++) {
 						if (!lecHours.get(i).equals("Empty")) {
@@ -324,30 +324,31 @@ t.printStackTrace ();
 									MyUI.count++;
 								
 								}
-								else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
-									System.out.println("cell is taken!");
-									
-									// popup notification
-									
-									Label label = new Label("You have another course at the same time."+"");
-									FormLayout formL = new FormLayout();
-									
-									formL.addComponent(label);
-													
-									notifWindow.setCaption("Course conflict");
-									notifWindow.setContent(formL);
-									
-					  				if (notifWindow.isAttached()) {
-					  					notifWindow.close();
-					  				} else {
-					  					UI.getCurrent().addWindow(notifWindow);
-					  				}
-								}
+								
 								//if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)))
 								
 							}
 						}
 					}
+				}}
+				else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
+					System.out.println("cell is taken!");
+					
+					// popup notification
+					
+					Label label = new Label("You have another course at the same time."+"");
+					FormLayout formL = new FormLayout();
+					
+					formL.addComponent(label);
+									
+					notifWindow.setCaption("Course conflict");
+					notifWindow.setContent(formL);
+					
+	  				if (notifWindow.isAttached()) {
+	  					notifWindow.close();
+	  				} else {
+	  					UI.getCurrent().addWindow(notifWindow);
+	  				}
 				}
 			}
 				
