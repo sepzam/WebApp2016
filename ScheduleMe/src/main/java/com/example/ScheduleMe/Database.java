@@ -169,8 +169,39 @@ final class Database extends Window {
 			        NodeList textWSList = websiteElement.getChildNodes();
 			        System.out.println("Website : " + ((Node)textWSList.item(0)).getNodeValue().trim());
 			        */
-					grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
-							       
+			        int intPer=0;
+					int P=Integer.parseInt(((Node)textPERList.item(0)).getNodeValue().trim());
+
+					String d= ((Node)textDEPList.item(0)).getNodeValue().trim();
+					if(P==2){ intPer=1;} else if (P==1){ intPer=0;}
+					
+					if (intPer==MyUI.per ){
+						if(MyUI.degree==4){
+							
+							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
+
+						} else if(MyUI.degree==0){
+
+							if(d.equals("BIO") || d.equals("L"))
+								
+							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
+
+						} else if(MyUI.degree==1){
+							if(d.equals("NSS") || d.equals("CDS") || d.equals("ISS") || d.equals("L") || d.equals("GD"))
+							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
+
+						} else if(MyUI.degree==2){
+							if(d.equals("EC") || d.equals("L"))
+							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
+
+						} else if(MyUI.degree==3){
+							if(((Node)textORGList.item(0)).getNodeValue().trim().equals("YES"))
+							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
+
+						} 
+						
+						  
+					
 					// add the days to lectureDays arraylist
 					lectureDays.add(((Node)textSD1List.item(0)).getNodeValue().trim());
 			    	lectureDays.add(((Node)textSD2List.item(0)).getNodeValue().trim().toString());
@@ -180,14 +211,10 @@ final class Database extends Window {
 					lectureHours.add(((Node)textST1List.item(0)).getNodeValue().trim().toString());
 					lectureHours.add(((Node)textST2List.item(0)).getNodeValue().trim().toString());
 					lectureHours.add(((Node)textST3List.item(0)).getNodeValue().trim().toString());    
-				    int intPer=0;
-					int P=Integer.parseInt(((Node)textPERList.item(0)).getNodeValue().trim());
+				   	
+			         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours));
+					} 
 					
-					if(P==2){ intPer=1;} else if (P==1){ intPer=0;}
-					
-			//		if (intPer==MyUI.per){
-			             courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours));
-			//		}
 	        }
 	   }
          
