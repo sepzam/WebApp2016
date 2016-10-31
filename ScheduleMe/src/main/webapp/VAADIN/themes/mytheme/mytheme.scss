@@ -50,21 +50,21 @@
  .v-table {
     background: #fff;
     text-align: center;
-    font-size: 10px;
+    font-size: 14px;
     line-height: normal;
    
   }
   
  .v-table-row:hover, .v-table-row-odd:hover {
-    color: #fff;
     background: #eaebef;
-    
+    color: #000;
   }
   
   .v-table-cell-content .v-table-cell-break-word{
 	word-wrap: break-word; 
 	line-height: normal;
-	font-size: auto;
+    text-align: center;
+    font-size: 14px;
 }
   
 }

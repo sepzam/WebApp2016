@@ -12967,3 +12967,31 @@ div.v-layout.v-horizontal.v-widget {
 	width: 19px;
 	overflow: hidden;
 }
+
+.mytheme .v-table-header {
+	color: #fff;
+	background: #4360a9;
+	font-weight: bold;
+	text-align: center;
+	font-size: 15px;
+	line-height: normal;
+}
+
+.mytheme .v-table {
+	background: #fff;
+	text-align: center;
+	font-size: 14px;
+	line-height: normal;
+}
+
+.mytheme .v-table-row:hover, .mytheme .v-table-row-odd:hover {
+	background: #eaebef;
+	color: #000;
+}
+
+.mytheme .v-table-cell-content .v-table-cell-break-word {
+	word-wrap: break-word;
+	line-height: normal;
+	text-align: center;
+	font-size: 14px;
+}
