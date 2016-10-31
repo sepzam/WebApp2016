@@ -22,6 +22,8 @@ final class Database extends Window {
 //	final static HorizontalLayout courseTable = new HorizontalLayout();
 	final static Grid grid = new Grid();
 	public static ArrayList<Course> courses = new ArrayList<Course>();
+	static int intPer=0;
+	
 	
 	public Database() {
 
@@ -29,7 +31,8 @@ final class Database extends Window {
 		System.out.println("Degree:   "+ MyUI.degree);
 		System.out.println("Period: "+ MyUI.per);
 		
-		
+	  	grid.getContainerDataSource().removeAllItems();
+
 		try {
 
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -169,13 +172,14 @@ final class Database extends Window {
 			        NodeList textWSList = websiteElement.getChildNodes();
 			        System.out.println("Website : " + ((Node)textWSList.item(0)).getNodeValue().trim());
 			        */
-			        int intPer=0;
-					int P=Integer.parseInt(((Node)textPERList.item(0)).getNodeValue().trim());
+			       Integer P=Integer.parseInt(((Node)textPERList.item(0)).getNodeValue().trim());
 
 					String d= ((Node)textDEPList.item(0)).getNodeValue().trim();
 					if(P==2){ intPer=1;} else if (P==1){ intPer=0;}
-					
+					//System.out.println(P+"   "+intPer);
 					if (intPer==MyUI.per ){
+						System.out.println(((Node)textCNList.item(0)).getNodeValue().trim());
+						
 						if(MyUI.degree==4){
 							
 							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
@@ -297,21 +301,21 @@ t.printStackTrace ();
 				
 				System.out.println(name + lecDays + lecHours);
 				
-				int temp=0;
+				Integer tempo=0;
 				for (int i = 0; i < lecHours.size(); i++){
 					for (int j = 0; j < 6; j++) {
 						if (!lecHours.get(i).equals("Empty")) {
 							if (lecHours.get(i).equals(MyUI.hours[j])) {
 								System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
 								if (!MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
-									temp=1;   // Conflict found
+									tempo=1;   // Conflict found
 									
 								}
 								}
 						}
 					}
 				}
-				if(temp==0){
+				if(tempo==0){
 				for (int i = 0; i < lecHours.size(); i++){
 					for (int j = 0; j < 6; j++) {
 						if (!lecHours.get(i).equals("Empty")) {
@@ -320,7 +324,7 @@ t.printStackTrace ();
 								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
 									System.out.println("Cell is empty");
 									MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).setValue(name);
-						//			MyUI.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyUI.count)); 
+									MyUI.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyUI.count)); 
 									MyUI.count++;
 								
 								}
@@ -330,8 +334,9 @@ t.printStackTrace ();
 							}
 						}
 					}
-				}}
-				else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
+				}
+			}
+			else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
 					System.out.println("cell is taken!");
 					
 					// popup notification

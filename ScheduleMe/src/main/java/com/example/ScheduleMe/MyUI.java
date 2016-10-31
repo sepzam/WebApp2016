@@ -88,11 +88,12 @@ final public class MyUI extends UI {
         	periodOption.setItemCaption(j, "Period " + x);
         	
         }
-        periodOption.setValue(0);    	// pre-assigned: period 1	
+ //       periodOption.setValue(0);    	// pre-assigned: period 1	
         
         periodOption.addValueChangeListener(l -> {
           	
-    		per=(int)l.getProperty().getValue();
+    		per=(Integer)l.getProperty().getValue();
+    	
           });
         // setup the button:
         buttonNext = new Button("Next", new Button.ClickListener() {
@@ -163,6 +164,7 @@ final public class MyUI extends UI {
 				selectedCourses.setPageLength(0);
 				selectedCourses.setHeight("100%");
 				
+				selectedCourses.getContainerDataSource().removeAllItems();
 				
 				//scheduleTable.addContainerProperty("0", String.class, null,"", null, null);
 				
@@ -350,6 +352,7 @@ final public class MyUI extends UI {
 				layout.setMargin(true);
 				layout.setSpacing(true);
 				setContent(layout);
+				courseAccordion.setSelectedTab(0);
 			}
 		});
          
