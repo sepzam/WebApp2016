@@ -16,18 +16,20 @@ import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Grid.SelectionMode;
 
-@SuppressWarnings("serial")
-public class Database extends Window {
+final class Database extends Window {
 
 
-	final static HorizontalLayout courseTable = new HorizontalLayout();
+//	final static HorizontalLayout courseTable = new HorizontalLayout();
 	final static Grid grid = new Grid();
 	public static ArrayList<Course> courses = new ArrayList<Course>();
 	
 	public Database() {
 
 		CheckboxListener checkListener = new CheckboxListener();
-
+		System.out.println("Degree:   "+ MyUI.degree);
+		System.out.println("Period: "+ MyUI.per);
+		
+		
 		try {
 
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -49,12 +51,15 @@ public class Database extends Window {
 			//grid.getColumn("name").setHeaderCaption("Bean name");
 			//grid.removeColumn("count");
 			//grid.setColumnOrder("name", "amount");
-		     grid.addColumn("ID").setSortable(true);
+
+			grid.removeAllColumns();
+             
+			grid.addColumn("ID").setSortable(true);
 		     grid.addColumn("Course Name").setSortable(true);
 		     grid.addColumn("Teacher");
 		     grid.addColumn("Credits");
  
-
+		     
 		     for(int s=0; s<totalCourse ; s++) {
         
 				Node CourseNode = listOfCourses.item(s);
@@ -73,6 +78,13 @@ public class Database extends Window {
 			        NodeList textORGList = organizationElement.getChildNodes();
 			        System.out.println("Organization : " + ((Node)textORGList.item(0)).getNodeValue().trim());
 			        */
+					
+					  NodeList tucsList = CourseElement.getElementsByTagName("TUCS");
+				        Element tucsElement = (Element)tucsList.item(0);
+				        NodeList textORGList = tucsElement.getChildNodes();
+				        //System.out.println("Organization : " + ((Node)textORGList.item(0)).getNodeValue().trim());
+				        
+				 
 			        
 			        NodeList departmentList = CourseElement.getElementsByTagName("Department");
 			        Element departmentElement = (Element)departmentList.item(0);
@@ -168,13 +180,18 @@ public class Database extends Window {
 					lectureHours.add(((Node)textST1List.item(0)).getNodeValue().trim().toString());
 					lectureHours.add(((Node)textST2List.item(0)).getNodeValue().trim().toString());
 					lectureHours.add(((Node)textST3List.item(0)).getNodeValue().trim().toString());    
-				    
+				    int intPer=0;
+					int P=Integer.parseInt(((Node)textPERList.item(0)).getNodeValue().trim());
 					
-			       courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours));
+					if(P==2){ intPer=1;} else if (P==1){ intPer=0;}
+					
+			//		if (intPer==MyUI.per){
+			             courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours));
+			//		}
 	        }
 	   }
-       
-       
+         
+			
    //     courseTable.addComponent(grid);
         
 
@@ -208,7 +225,7 @@ t.printStackTrace ();
 				
 				System.out.println(name + lecDays + lecHours);
 				
-				for (int i = 0; i < lecHours.size(); i++) {
+				for (int i = 0; i < lecHours.size(); i++){
 					for (int j = 0; j < 6; j++) {
 						if (!lecHours.get(i).equals("Empty")) {
 							if (lecHours.get(i).equals(MyUI.hours[j])) {
@@ -221,7 +238,7 @@ t.printStackTrace ();
 									System.out.println("cell is taken!");
 									// popup notification
 									
-									Label label = new Label("You have another course at the same time.");
+									Label label = new Label("You have another course at the same time."+"");
 									FormLayout formL = new FormLayout();
 									
 									formL.addComponent(label);
