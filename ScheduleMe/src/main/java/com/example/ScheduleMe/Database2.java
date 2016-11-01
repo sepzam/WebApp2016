@@ -13,24 +13,28 @@ import org.xml.sax.SAXParseException;
 
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
+import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Grid.SelectionMode;
 
-final class Database extends Window {
+@SuppressWarnings("serial")
+final class Database2 extends Window {
 
 
 //	final static HorizontalLayout courseTable = new HorizontalLayout();
 	final static Grid grid = new Grid();
 	public static ArrayList<Course> courses = new ArrayList<Course>();
 	static int intPer=0;
-	static Integer tempo=1;
+	//static Integer tempo=1;
+	
+	//private Table scheduleTable;
 	
 	
-	public Database() {
+	public Database2() {
 
 		CheckboxListener checkListener = new CheckboxListener();
-		System.out.println("Degree:   "+ MyUI.degree);
-		System.out.println("Period: "+ MyUI.per);
+		System.out.println("Degree:   "+ MyInit.selectedDegree);
+		System.out.println("Period: "+ MyInit.selectedPeriod);
 		
 	  	grid.getContainerDataSource().removeAllItems();
 
@@ -170,10 +174,10 @@ final class Database extends Window {
 					String d= ((Node)textDEPList.item(0)).getNodeValue().trim();
 					if(P==2){ intPer=1;} else if (P==1){ intPer=0;}
 					//System.out.println(P+"   "+intPer);
-					if (intPer==MyUI.per ){
+					if (intPer==MyInit.selectedPeriod ){
 						System.out.println(((Node)textCNList.item(0)).getNodeValue().trim());
 						
-						if(MyUI.degree==4){
+						if(MyInit.selectedDegree==4){
 							
 							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
 							lectureDays.add(((Node)textSD1List.item(0)).getNodeValue().trim());
@@ -187,7 +191,7 @@ final class Database extends Window {
 						   	
 					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
 
-						} else if(MyUI.degree==0){
+						} else if(MyInit.selectedDegree==0){
 
 							if(d.equals("BIO") || d.equals("L")){
 								
@@ -203,7 +207,7 @@ final class Database extends Window {
 						   	
 					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
 							}
-						} else if(MyUI.degree==1){
+						} else if(MyInit.selectedDegree==1){
 							if(d.equals("NSS") || d.equals("CDS") || d.equals("ISS") || d.equals("L") || d.equals("GD"))
 							{
 							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
@@ -218,7 +222,7 @@ final class Database extends Window {
 						   	
 					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
 							}
-						} else if(MyUI.degree==2){
+						} else if(MyInit.selectedDegree==2){
 							if(d.equals("EC") || d.equals("L"))
 							{
 							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
@@ -233,7 +237,7 @@ final class Database extends Window {
 						   	
 					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
 							}
-						} else if(MyUI.degree==3){
+						} else if(MyInit.selectedDegree==3){
 							if(((Node)textORGList.item(0)).getNodeValue().trim().equals("YES"))
 							{
 							grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
@@ -284,9 +288,13 @@ t.printStackTrace ();
 			AddWindow notifWindow = new AddWindow();
 			
 			boolean empty = event.getSelected().isEmpty();
+			int tempo = 0;
+			VerticalLayout conflictedCourses = new VerticalLayout();
+			
 			if (!empty) {
 				int courseIndex = (int) grid.getSelectedRow() - 1;
 				
+				Course course = courses.get(courseIndex);
 				String name = courses.get(courseIndex).getCourseName();
 				String teacher= courses.get(courseIndex).getTeacher();
 				ArrayList<String> lecDays = courses.get(courseIndex).getLecturingDays();
@@ -294,12 +302,96 @@ t.printStackTrace ();
 				
 				System.out.println(name + lecDays + lecHours);
 				
+				///////////////////////////////////////////////////////////////////////////////////////////
+				if (!course.isAddedToTable()) {		// if the course is not in the table, check for free slots
+					System.out.println("Course not yet in the table.");
+					for (int i = 0; i < lecHours.size(); i++){		// lecHours max: 3 (now its always 3)
+						
+						for (int j = 0; j < 6; j++) {
+							if (!lecHours.get(i).equals("Empty")) {		// TODO: remove the "empty" records as a whole to avoid the checking
+								if (lecHours.get(i).equals(MyInit.hours[j])) {		// if the hours match
+									//System.out.println("debug: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
+									
+									if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
+										//System.out.println("(No Conflict found)");
+										System.out.println("Debug: (No Conflict found) Nothing scheduled for " + lecDays.get(i)+ " yet.");
+									}
+									else {
+										//System.out.println("");
+										//System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getCellValue(i, lecDays.get(i)));
+										System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue());
+										tempo++;
+										//Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(i, lecDays.get(i)));
+										Label l = new Label("On " + lecDays.get(i) + " you have \"" + MyInit.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() + "\"");
+										conflictedCourses.addComponent(l);
+									}
+								}
+							}
+						}
+					}
+					if(tempo==0){
+						for (int i = 0; i < lecHours.size(); i++){
+							for (int j = 0; j < 6; j++) {
+								if (!lecHours.get(i).equals("Empty")) {
+									if (lecHours.get(i).equals(MyInit.hours[j])) {
+										//System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
+										if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
+											System.out.println("Cell is empty");
+											MyInit.scheduleTable.addToCell(j, lecDays.get(i), name);
+											course.setInTable(true);
+										}
+										
+										//if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)))
+										
+									}
+								}
+							}
+						}
+						MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 		
+					}
+					else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
+						System.out.println("cell is taken!");
+						
+						// popup notification
+						Label label;
+						
+						if (tempo == 1) {
+							label = new Label("You have another course at the same time:");
+						} else {
+							label = new Label("You have other courses at the same time:");
+						}
+						
+						FormLayout formL = new FormLayout();
+					
+						conflictedCourses.setMargin(true);
+						
+						formL.addComponent(label);
+						formL.addComponent(conflictedCourses);	
+						
+						notifWindow.setCaption("Course conflict");
+						notifWindow.setSizeUndefined();
+						notifWindow.setContent(formL);
+						
+						
+		  				if (notifWindow.isAttached()) {
+		  					notifWindow.close();
+		  				} else {  
+		  					UI.getCurrent().addWindow(notifWindow);
+		  				}
+					}
+				} else {		// TODO: course is in the table, so we want to remove it
+					System.out.println("Course already in the table!");
+				}
+			}
 				
-				for (int i = 0; i < lecHours.size(); i++){
+				
+					/*
+				for (int i = 0; i < lecHours.size(); i++){		
 					for (int j = 0; j < 6; j++) {
-						if (!lecHours.get(i).equals("Empty")) {
-							if (lecHours.get(i).equals(MyUI.hours[j])) {
+						if (!lecHours.get(i).equals("Empty")) {		
+							if (lecHours.get(i).equals(MyUI.hours[j])) {	
 								System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
+								
 								if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals("")
 										|| MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(null) 
 										|| MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue().toString().equals(" ")) {
@@ -354,13 +446,15 @@ t.printStackTrace ();
 	  					UI.getCurrent().addWindow(notifWindow);
 	  				}
 				}
+			}*/
+				
+				
 			}
-				
-				
-		}
 			
-	}
+		}
+    }
+
     	
-}
+
 
 
