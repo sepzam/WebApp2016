@@ -29,12 +29,15 @@ public class Course {
 	private ArrayList<String> lecDays;
 	private ArrayList<String> lecHours;
 	private String teacher;
+	private boolean isInTable = false;
+	private int i;
+	private String str;
 	
 	public Course(String courseName, ArrayList lecDays, ArrayList lecHours, String teacher) {
 		this.courseName = courseName;
 		this.lecDays = lecDays;
 		this.lecHours = lecHours;
-		this.teacher =teacher;
+		this.teacher = teacher;
 	}
 	public Course(String courseName) {
 		this.courseName = courseName;
@@ -66,14 +69,25 @@ public class Course {
 		return lecHours;
 	}
 	
-	public void addCourseTime(String name, String day, String time) {
-		
-	}
 	public String getTeacher() {
 		return teacher;
 	}
 	public void setTeacher(String teacher) {
 		this.teacher = teacher;
 	}
-
+	
+	public boolean isAddedToTable() {
+		return isInTable;
+	}
+	
+	public void setInTable(boolean b) {
+		if (b)
+			isInTable = true;
+		else
+			isInTable = false;
+	}
+	
+	public void savePositionInTable(int i, String str) {
+		
+	}
 }
