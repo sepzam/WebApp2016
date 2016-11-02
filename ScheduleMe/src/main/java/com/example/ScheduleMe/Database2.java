@@ -1,6 +1,7 @@
 package com.example.ScheduleMe;
 
 
+import java.awt.List;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -279,6 +280,9 @@ final class Database2 extends Window {
 			System.out.println("I CLICKED!!");
 			boolean empty = event.getSelected().isEmpty();
 			int tempo = 0;
+			ArrayList<String> conflictList = new ArrayList<String>();
+			ArrayList<String> conflictCo = new ArrayList<String>();
+		      
 			VerticalLayout conflictedCourses = new VerticalLayout();
 
 			
@@ -315,10 +319,16 @@ final class Database2 extends Window {
 									System.out.println("Debug: (No Conflict found) Nothing scheduled for " + lecDays.get(i)+ " yet.");
 								}
 								else {
-									System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+									//System.out.println("Debug: Found a conflict: " ++ ": " +);
 									tempo++;
-									Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
-									conflictedCourses.addComponent(l);
+									conflictList.add(lecDays.get(i));
+									conflictCo.add(MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+									//;
+									System.out.println(conflictList);
+								//	Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+								//	conflictedCourses.addComponent(l);
+									
+								//cccc
 								}
 							}
 						}
@@ -349,15 +359,17 @@ final class Database2 extends Window {
 					else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
 						System.out.println("cell is taken!");
 						
-						// popup notification
-						Label label;
+						// popup notification  
+						Label label=new Label();    
 						
 						if (tempo == 1) {
-							label = new Label("You have another course at the same time:");
+							label = new Label("You have "+ conflictCo.get(0)+" at the same time on "+ conflictList.get(0));
 						} else {
-							label = new Label("You have other courses at the same time:");
-						}
-						
+							for (int i=0; i<conflictList.size(); i++){
+								Label l = new Label("You have "+ conflictCo.get(i)+" at the same time on "+ conflictList.get(i));
+								conflictedCourses.addComponent(l);
+						}}
+					
 						FormLayout formL = new FormLayout();
 					
 						conflictedCourses.setMargin(true);
