@@ -32,6 +32,8 @@ public class Course {
 	private boolean isInTable = false;
 	private int i;
 	private String str;
+	private ArrayList<Integer> hourSavedSlots = new ArrayList<Integer>();
+	private ArrayList<String> daySavedSlots = new ArrayList<String>();
 	
 	public Course(String courseName, ArrayList lecDays, ArrayList lecHours, String teacher) {
 		this.courseName = courseName;
@@ -88,6 +90,20 @@ public class Course {
 	}
 	
 	public void savePositionInTable(int i, String str) {
-		
+		hourSavedSlots.add(i);
+		daySavedSlots.add(str);
+	}
+	
+	public ArrayList<Integer> getHourSavedSlots() {
+		return hourSavedSlots;
+	}
+	public ArrayList<String> getDaySavedSlots() {
+		return daySavedSlots;
+	}
+	
+	public void resetCourseStatus() {
+		isInTable = false;
+		hourSavedSlots.removeAll(hourSavedSlots);
+		daySavedSlots.removeAll(daySavedSlots);
 	}
 }

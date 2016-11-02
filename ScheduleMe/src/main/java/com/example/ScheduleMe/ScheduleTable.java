@@ -1,5 +1,7 @@
 package com.example.ScheduleMe;
 
+import java.util.ArrayList;
+
 import com.vaadin.ui.Table;
 
 
@@ -38,11 +40,11 @@ public class ScheduleTable extends Table {
 		// TODO: mark course as added?
 	}
 	
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	public void clearFromCell(int i, int j) {
 		this.getItem(i).getItemProperty(j).setValue("");
 		// TODO: mark course as removed?
-	}
+	}*/
 	
 	public String getCellValue(int i, String str) {
 		return (String)this.getItem(i).getItemProperty(str).getValue();
@@ -65,9 +67,30 @@ public class ScheduleTable extends Table {
        
         for (int i=0; i<6; i++)
         		 this.addItem(new Object[]{ listOfHours[i], "", "", "", "", ""}, new Integer(i));
+        for (int i = 0; i < Database2.courses.size(); i++) {		// reset all course status
+        	Database2.courses.get(i).resetCourseStatus();
+        }
 	}
 	
 
+	@SuppressWarnings("unchecked")
+	public void deleteFromCell(Course c) {
+		System.out.println("Deleting: You asked to delete the course: " + c.getCourseName());
+		ArrayList<Integer> hourSlots = c.getHourSavedSlots();
+		ArrayList<String> daySlots = c.getDaySavedSlots();
+	
+		/*for (int i : hourSlots) {
+			for (String j : daySlots) {
+				System.out.println("Deleting: For course = " + c.getCourseName() + "i is " + i + " and day is " + j);
+				this.getItem(i).getItemProperty(j).setValue("");
+			}
+		}*/
+		
+		for (int i = 0; i < hourSlots.size(); i++) {
+			System.out.println("Deleting: For course = " + c.getCourseName() + "i is " + hourSlots.get(i) + " and day is " + daySlots.get(i));
+			this.getItem(hourSlots.get(i)).getItemProperty(daySlots.get(i)).setValue("");
+		}
+	}
 	
 }
 	
