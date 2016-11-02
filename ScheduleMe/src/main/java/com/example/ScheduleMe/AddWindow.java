@@ -86,8 +86,23 @@ public class AddWindow extends Window {
 		     
 			FormLayout layout = new FormLayout();
 			layout.addComponent(new Label(day));
+			for (int i = 0; i < 6; i++) {
+	        	CheckBox checkbox = new CheckBox (hours[i], false);
+	        	layout.addComponent(checkbox);
 			
-			
+	        	checkbox.addValueChangeListener(e -> {	
+		        	if (checkbox.getValue() == true) {
+		        		
+		        	}
+	        	});
+			}
+			hor.addComponent(layout);
+		}
+		form.addComponent(hor);
+		showArrayList();
+		return form;
+	}
+		/*
 			if (day=="Monday"){
 				
 				for (int i = 0; i < 6; i++) {
@@ -178,7 +193,7 @@ public class AddWindow extends Window {
 		form.addComponent(hor);
 		showArrayList();
 		return form;
-	}
+	}*/
 	
 	public void showArrayList() {
 		for (int i = 0; i < selDays.size(); i++) {

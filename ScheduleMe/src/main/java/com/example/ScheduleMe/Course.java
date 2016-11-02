@@ -46,6 +46,11 @@ public class Course {
 
 	}
 	
+	public Course(String courseName, ArrayList lecDays, ArrayList lecHours) {
+		this.courseName = courseName;
+		this.lecDays = lecDays;
+		this.lecHours = lecHours;
+	}
 ///////////////////////////////////////////////////////////////
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
@@ -55,7 +60,7 @@ public class Course {
 		return courseName;
 	}
 	
-	public void  setLecturingDays(ArrayList<String> lecDays) {
+	public void setLecturingDays(ArrayList<String> lecDays) {
 		this.lecDays = lecDays;
 	}
 	

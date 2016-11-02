@@ -347,7 +347,6 @@ final class Database2 extends Window {
 						MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 		
 					} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
 					else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
-						System.out.println("Sad debug 10");
 						System.out.println("cell is taken!");
 						
 						// popup notification
