@@ -24,34 +24,17 @@ final class Database2 extends Window {
 
 //	final static HorizontalLayout courseTable = new HorizontalLayout();
 	//final static Grid grid = new Grid();
-	final static Grid grid = new Grid();
+	//final static Grid grid = new Grid();
 	public static ArrayList<Course> courses = new ArrayList<Course>();
 	//static int intPer=0;
 	//static Integer tempo=1;
 
 	//private Table scheduleTable;
 	
-	public static Grid getSchedule() {
-		return grid;
-	}
-	
-	public void makeGrid() {
-		CheckboxListener checkListener = new CheckboxListener();
-		
-		grid.setSizeFull();
-		grid.addSelectionListener(checkListener);
-		grid.setSelectionMode(SelectionMode.SINGLE);    // Activate single selection mode
-		grid.removeAllColumns();
-		grid.setImmediate(true);
-		grid.addColumn("ID").setSortable(true);
-	    grid.addColumn("Course Name").setSortable(true);
-	    grid.addColumn("Teacher");
-	    grid.addColumn("Credits");
-	}
-	
+	static CourseGrid grid = new CourseGrid();
 	public Database2() {
 	
-	CheckboxListener checkListener = new CheckboxListener();
+	//CheckboxListener checkListener = new CheckboxListener();
 	System.out.println("Degree:   "+ MyInit.selectedDegree);
 	System.out.println("Period: "+ MyInit.selectedPeriod);
 	
@@ -66,7 +49,7 @@ final class Database2 extends Window {
 		NodeList listOfCourses = doc.getElementsByTagName("record");
 		int totalCourse = listOfCourses.getLength(); 
 		System.out.println("Total no of courses : " + totalCourse); //silebilirsin
-		
+	/*	
 		grid.setSizeFull();
 		grid.addSelectionListener(checkListener);
 		grid.setSelectionMode(SelectionMode.SINGLE);    // Activate single selection mode
@@ -76,7 +59,7 @@ final class Database2 extends Window {
 	    grid.addColumn("Course Name").setSortable(true);
 	    grid.addColumn("Teacher");
 	    grid.addColumn("Credits");
-
+*/
 	    for(int s=0; s<totalCourse ; s++) {
 	    	Node CourseNode = listOfCourses.item(s);
 			
@@ -269,7 +252,7 @@ final class Database2 extends Window {
 		}
 	}
 	
-    
+	
     class CheckboxListener implements SelectionListener {
     	
 		@Override
@@ -344,7 +327,7 @@ final class Database2 extends Window {
 						}
 						MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 		
 					} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
-					else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
+					else {	
 						System.out.println("cell is taken!");
 						
 						// popup notification
