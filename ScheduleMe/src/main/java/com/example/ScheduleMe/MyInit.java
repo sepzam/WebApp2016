@@ -10,7 +10,6 @@ import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
@@ -31,12 +30,13 @@ final public class MyInit extends UI {
 	ArrayList<String> degreeNames;
 
 	static ScheduleTable scheduleTable;
-	static Table selectedCourses = new Table();
+	static SelectedCourses selectedCourses;
+	
 	
 	static String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	static String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
 	
-	static int count;
+	static int count=0;
 	static Database2 db;
 	static CourseGrid grid;
 	static ArrayList<Course> temporaryCourses = new ArrayList<Course>();
@@ -131,39 +131,20 @@ final public class MyInit extends UI {
 	      ////////////////////////////////////////////////////////////////////////////////////////////////
 	        
 	        scheduleTable = new ScheduleTable("Weekly Schedule"); // moved it to "Next" button listener
+	       
+	        selectedCourses = new SelectedCourses("");
+	        
 	        final Accordion courseAccordion = new Accordion();
 	        Button buttonBack;
 	        
 	        // setup the accordion:
 	        courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
 	        courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
-	        
-	        
-					selectedCourses.setSelectable(true);
-					selectedCourses.setImmediate(true);
-					selectedCourses.setPageLength(0);
-					selectedCourses.setHeight("100%");					
-					selectedCourses.getContainerDataSource().removeAllItems();
-					
-					//scheduleTable.addContainerProperty("0", String.class, null,"", null, null);
-					
-					selectedCourses.addContainerProperty("Course Name", String.class, null);
-					selectedCourses.setColumnAlignment(0, Align.CENTER);
-					selectedCourses.addContainerProperty("Teacher", String.class, null);
-					selectedCourses.setColumnAlignment(1, Align.CENTER);
-					
-									
-					selectedCoursesLayout.addComponent(selectedCourses);
+			selectedCoursesLayout.addComponent(selectedCourses);
 
 	        courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
-           /* HorizontalLayout courseT = new HorizontalLayout();
-            courseT.setSizeFull();
-            //db = new Database2();
-            Grid coursesGrid = Database2.getSchedule();
-            courseT.addComponent(coursesGrid);
-            coursesLayout.addComponents(courseT);
-	         */
-	         courseAccordion.addSelectedTabChangeListener(
+
+	        courseAccordion.addSelectedTabChangeListener(
 	                 new Accordion.SelectedTabChangeListener() {
 	             private static final long serialVersionUID = -2358653511430014752L;
 
@@ -386,8 +367,10 @@ final public class MyInit extends UI {
 					setContent(layout);
 					courseAccordion.setSelectedTab(0);
 					scheduleTable.resetSchedule();					// clean up the schedule table
-					selectedCourses.removeAllItems();	
+			//		selectedCourses.removeAllItems();	
 					//Database2.grid.getContainerDataSource().removeAllItems();
+					selectedCourses.removeAllItems();	
+							
 					for (Course c : Database2.courses) {
 						c.resetCourseStatus();
 					}

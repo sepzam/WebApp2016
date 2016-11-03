@@ -279,14 +279,15 @@ final class Database2 extends Window {
 						
 					} //////////////////////////////// Add course to the table ///////////////////////////////////////////////
 					if(tempo==0){			// add the course to the table
+					//	MyInit.selectedCourses.addToCell(j, lecDays.get(i), name);
+						 MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 
+						 MyInit.count++;
+							
 						for (int i = 0; i < lecHours.size(); i++){
 							for (int j = 0; j < 6; j++) {
 								if (lecHours.get(i).equals(MyInit.hours[j])) {
-									//System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
 									if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
-										System.out.println("Cell is empty");
 										MyInit.scheduleTable.addToCell(j, lecDays.get(i), name);
-										System.out.print("Added: hour: " + j + ", day: " + lecDays.get(i) + " course: " + name +"\n");
 										course.savePositionInTable(j, lecDays.get(i));
 										course.setInTable(true);
 										
@@ -296,8 +297,9 @@ final class Database2 extends Window {
 										
 								}
 							}
+													
 						}
-						MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 		
+							
 					} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
 					else {	
 						System.out.println("cell is taken!");
