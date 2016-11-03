@@ -12995,3 +12995,9 @@ div.v-layout.v-horizontal.v-widget {
 	text-align: center;
 	font-size: 14px;
 }
+
+.mytheme .v-button-nobackground .FontAwesome {
+	background: transparent;
+	border: none;
+	color: green;
+}

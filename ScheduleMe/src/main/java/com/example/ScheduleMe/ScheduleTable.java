@@ -67,7 +67,7 @@ public class ScheduleTable extends Table {
        
         for (int i=0; i<6; i++)
         		 this.addItem(new Object[]{ listOfHours[i], "", "", "", "", ""}, new Integer(i));
-        for (int i = 0; i < Database2.courses.size(); i++) {		// reset all course status
+        for (int i = 0; i < Database2.courses.size(); i++) {		// reset 
         	Database2.courses.get(i).resetCourseStatus();
         }
 	}

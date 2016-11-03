@@ -1,24 +1,8 @@
 package com.example.ScheduleMe;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.jar.Attributes.Name;
-
-import javax.servlet.annotation.WebServlet;
-
 import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.event.ShortcutAction;
-import com.vaadin.server.ExternalResource;
-import com.vaadin.server.ThemeResource;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.Sizeable.Unit;
-import com.vaadin.ui.*;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Table.Align;
-import com.vaadin.ui.themes.ValoTheme;
+
 
 @Theme("mytheme")
 public class Course {
