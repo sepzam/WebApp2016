@@ -275,16 +275,16 @@ final public class MyInit extends UI {
 	  								for (int i = 0; i < lecHours.size(); i++){		// lecHours max: 3
 	  									for (int j = 0; j < 6; j++) {
 	  										if (lecHours.get(i).equals(MyInit.hours[j])) {		// if the hours match
-	  											if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
+	  											if (scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
 	  												//System.out.println("(No Conflict found)");
 	  												System.out.println("Debug: (No Conflict found) Nothing scheduled for " + lecDays.get(i)+ " yet.");
 	  												scheduleTable.addToCell(j, lecDays.get(i), courseName);
 	  											}
 	  											else {
 	  												showConflictPopup = true;
-	  												System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));	  			  								  			  									
-	  			  									Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));		
-	  			  									System.out.println("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+	  												System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + scheduleTable.getCellValue(j, lecDays.get(i)));	  			  								  			  									
+	  			  									Label l = new Label("On " + lecDays.get(i) + " you have " + scheduleTable.getCellValue(j, lecDays.get(i)));		
+	  			  									System.out.println("On " + lecDays.get(i) + " you have " + scheduleTable.getCellValue(j, lecDays.get(i)));
 	  			  									conflictedCourses.addComponent(l);
 	  			  									System.out.println("cell is taken!");
 	  											}	  												
@@ -542,7 +542,7 @@ final public class MyInit extends UI {
 	    		degreeNames.add("error! :(");
 	    		break;
 	    	}
-	    }*/		
+	    }*/			
 
 	    
 	    public int getDegree() {

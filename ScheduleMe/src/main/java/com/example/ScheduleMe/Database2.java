@@ -1,7 +1,6 @@
 package com.example.ScheduleMe;
 
 
-import java.awt.List;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -78,7 +77,6 @@ final class Database2 extends Window {
 	    grid.addColumn("Teacher");
 	    grid.addColumn("Credits");
 
-	    System.out.println("Sad debug 3");
 	    for(int s=0; s<totalCourse ; s++) {
 	    	Node CourseNode = listOfCourses.item(s);
 			
@@ -280,9 +278,6 @@ final class Database2 extends Window {
 			System.out.println("I CLICKED!!");
 			boolean empty = event.getSelected().isEmpty();
 			int tempo = 0;
-			ArrayList<String> conflictList = new ArrayList<String>();
-			ArrayList<String> conflictCo = new ArrayList<String>();
-		      
 			VerticalLayout conflictedCourses = new VerticalLayout();
 
 			
@@ -319,23 +314,16 @@ final class Database2 extends Window {
 									System.out.println("Debug: (No Conflict found) Nothing scheduled for " + lecDays.get(i)+ " yet.");
 								}
 								else {
-									//System.out.println("Debug: Found a conflict: " ++ ": " +);
+									System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
 									tempo++;
-									conflictList.add(lecDays.get(i));
-									conflictCo.add(MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
-									//;
-									System.out.println(conflictList);
-								//	Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
-								//	conflictedCourses.addComponent(l);
-									
-								//cccc
+									Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+									conflictedCourses.addComponent(l);
 								}
 							}
 						}
 						
 					} //////////////////////////////// Add course to the table ///////////////////////////////////////////////
 					if(tempo==0){			// add the course to the table
-						System.out.println("Sad debug 9");
 						for (int i = 0; i < lecHours.size(); i++){
 							for (int j = 0; j < 6; j++) {
 								if (lecHours.get(i).equals(MyInit.hours[j])) {
@@ -359,17 +347,15 @@ final class Database2 extends Window {
 					else {	// TODO: Bug: it needs to check all cells to be taken by the selected course, if they are empty or not. not 1 by 1
 						System.out.println("cell is taken!");
 						
-						// popup notification  
-						Label label=new Label();    
+						// popup notification
+						Label label;
 						
 						if (tempo == 1) {
-							label = new Label("You have "+ conflictCo.get(0)+" at the same time on "+ conflictList.get(0));
+							label = new Label("You have another course at the same time:");
 						} else {
-							for (int i=0; i<conflictList.size(); i++){
-								Label l = new Label("You have "+ conflictCo.get(i)+" at the same time on "+ conflictList.get(i));
-								conflictedCourses.addComponent(l);
-						}}
-					
+							label = new Label("You have other courses at the same time:");
+						}
+						
 						FormLayout formL = new FormLayout();
 					
 						conflictedCourses.setMargin(true);
