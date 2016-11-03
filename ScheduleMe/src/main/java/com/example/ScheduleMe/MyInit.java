@@ -143,10 +143,7 @@ final public class MyInit extends UI {
 					selectedCourses.setImmediate(true);
 					selectedCourses.setPageLength(0);
 					selectedCourses.setHeight("100%");					
-					selectedCourses.getContainerDataSource().removeAllItems();
-					
-					//scheduleTable.addContainerProperty("0", String.class, null,"", null, null);
-					
+					selectedCourses.getContainerDataSource().removeAllItems();		
 					selectedCourses.addContainerProperty("Course Name", String.class, null);
 					selectedCourses.setColumnAlignment(0, Align.CENTER);
 					selectedCourses.addContainerProperty("Teacher", String.class, null);
@@ -156,13 +153,6 @@ final public class MyInit extends UI {
 					selectedCoursesLayout.addComponent(selectedCourses);
 
 	        courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
-           /* HorizontalLayout courseT = new HorizontalLayout();
-            courseT.setSizeFull();
-            //db = new Database2();
-            Grid coursesGrid = Database2.getSchedule();
-            courseT.addComponent(coursesGrid);
-            coursesLayout.addComponents(courseT);
-	         */
 	         courseAccordion.addSelectedTabChangeListener(
 	                 new Accordion.SelectedTabChangeListener() {
 	             private static final long serialVersionUID = -2358653511430014752L;
@@ -180,12 +170,6 @@ final public class MyInit extends UI {
 	                 System.out.println(caption);  
 
 	                 if(caption.equals("Tap to see the list of courses")){
-	                	 //db = null;
-	                	 //Database2.grid = null;
-	                	// grid = new CourseGrid();
-		            	 //db = new Database2();
-		            	 
-			             //HorizontalLayout courseT = new HorizontalLayout();
 			             courseT.setSizeFull();
 			             
 			             // If CourseGrid (grid) already exists, delete it and make a new one with the appropriate courses
@@ -215,11 +199,7 @@ final public class MyInit extends UI {
 	        FormLayout addingACourse = new FormLayout();
 	        Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
 	        TextField addCourseNameField = new TextField("Course Name: ");
-	        
-	         
-	        // setup the back button:
-	       
-	       
+	        	       
 	        addCourseNameField.setInputPrompt("Add course name...");
 
 	      Button buttonAddNewCourse = new Button("+", new Button.ClickListener() {		// button to add a course
@@ -229,145 +209,147 @@ final public class MyInit extends UI {
 	  			  /////// ADD DAY AND HOURS OF A COURSE ////////
 	  		        FormLayout daysForm = new FormLayout(); 
 	  		        AddWindow selectDaysWind = new AddWindow();		// new window for the day of the course selection
-	  		        selectDaysWind.setCaption("Course Days");
-	  		        selectDaysWind.setSizeUndefined();
-	  		        daysForm = addDaysForm();
-	  		        // TODO: Validation checking before enabling the "Next" button
-	  		        // setup the button to open the hour selection
-	  		        
-	  		       
-	  				if (selectDaysWind.isAttached()) {
-	  					selectDaysWind.focus();
-	  				} else {
-	  					UI.getCurrent().addWindow(selectDaysWind);
-	  				}
-	  				
-	  				////
-	  				Button buttonToHourSelection = new Button("Next", new Button.ClickListener(){
-	  					
-	  					@Override
-	  					public void buttonClick(ClickEvent event) {
-	  						
-	  						
-	  						FormLayout hoursForm = new FormLayout();
-	  						AddWindow hoursWindow = new AddWindow();
-	  						hoursWindow.setCaption("Course Hours");
-	  						hoursWindow.setSizeUndefined();
-	  						//hoursForm = hoursWindow.addHoursForm();
-	  						hoursForm = addHoursForm();
-	  						
-	  						
-	  						// very very messy!! TODO: improveeeeeeeee
-	  				        Button buttonDoneSelecting = new Button("Done", new Button.ClickListener() {
-	  							
-	  							@Override
-	  							public void buttonClick(ClickEvent event) {
-	  								VerticalLayout conflictedCourses = new VerticalLayout();
-	  								
-	  								int tempo = 0;
-	  								String courseName = addCourseNameField.getValue();
-	  								Course c = new Course(courseName, lecDays, lecHours);
-	  								System.out.println("selection is: " + courseName + " " + lecDays + " " + lecHours);
-	  								temporaryCourses.add(c);
-	  								
-	  								for (int i = 0; i < lecHours.size(); i++){		// lecHours max: 3
-	  									for (int j = 0; j < 6; j++) {
-	  										if (lecHours.get(i).equals(MyInit.hours[j])) {		// if the hours match
-	  											if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
-	  												//System.out.println("(No Conflict found)");
-	  												System.out.println("Debug: (No Conflict found) Nothing scheduled for " + lecDays.get(i)+ " yet.");
-	  											}
-	  											else {
-	  												System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
-	  												tempo++;
-	  												Label l = new Label("On " + lecDays.get(i) + " at " + lecHours.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
-	  												//Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
-	  												conflictedCourses.addComponent(l);
-	  											}
-	  										}
-	  									}
-	  									
-	  								} //////////////////////////////// Add course to the table ///////////////////////////////////////////////
-	  								if(tempo==0){			// add the course to the table
-	  									for (int i = 0; i < lecHours.size(); i++){
-	  										for (int j = 0; j < 6; j++) {
-	  											if (lecHours.get(i).equals(MyInit.hours[j])) {
-	  												if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
-	  													System.out.println("Cell is empty");
-	  													MyInit.scheduleTable.addToCell(j, lecDays.get(i), courseName);
-	  													System.out.print("Added: hour: " + j + ", day: " + lecDays.get(i) + " course: " + courseName +"\n");
-
-	  													
-	  												}	
-	  											}
-	  										}
-	  									}
-	  									//MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 		
-	  								} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
-	  								else {	
-	  									System.out.println("cell is taken!");
-	  									AddWindow notifWindow = new AddWindow();
-	  									// popup notification
-	  									Label label;
-	  									
-	  									if (tempo == 1) {
-	  										label = new Label("You have another course at the same time:");
-	  									} else {
-	  										label = new Label("You have other courses at the same time:");
-	  									}
-	  									
-	  									FormLayout formL = new FormLayout();
-	  								
-	  									conflictedCourses.setMargin(true);
-	  									
-	  									formL.addComponent(label);
-	  									formL.addComponent(conflictedCourses);	
-	  									
-	  									notifWindow.setCaption("Course conflict");
-	  									notifWindow.setSizeUndefined();
-	  									notifWindow.setContent(formL);
-	  									
-	  									
-	  					  				if (notifWindow.isAttached()) {
-	  					  					notifWindow.close();
-	  					  				} else {  
-	  					  					UI.getCurrent().addWindow(notifWindow);
-	  					  				}
-
-	  								}
-	  								// resetting the fields:
-	  								hoursWindow.close();
-	  								addCourseNameField.setValue("");
-								    System.out.println(courseName);		
-								    selectedCourses.addItem(new Object[]{courseName,"---"}, new Integer(count));  
-								    selDays.removeAll(selDays);
-								    lecDays.removeAll(lecDays);
-								    lecHours.removeAll(lecHours);
-								    count++;	
-	  							}		
-	  						});
-	  				        hoursForm.addComponent(buttonDoneSelecting);
-	  						hoursWindow.setContent(hoursForm);
-	  						
-	  						if (hoursWindow.isAttached()) {
-	  							hoursWindow.focus();
-	  						} else {
-	  							if (selectDaysWind.isAttached()) {
-	  								selectDaysWind.close();
-	  							}
-	  							UI.getCurrent().addWindow(hoursWindow);
-	  						}		
-	  					}
-	  				});
-	  			  daysForm.addComponent(buttonToHourSelection);				// add the button for the hour selection
-	  	        selectDaysWind.setContent(daysForm);						// put the form to show in DAYS window
-
+		  		        if (!addCourseNameField.isEmpty()) {
+		  		        selectDaysWind.setCaption("Course Days");
+		  		        selectDaysWind.setSizeUndefined();
+		  		        daysForm = addDaysForm();
+		  				if (selectDaysWind.isAttached()) {
+		  					selectDaysWind.focus();
+		  				} else {
+		  					UI.getCurrent().addWindow(selectDaysWind);
+		  				}
+		  				
+		  				////
+		  				Button buttonToHourSelection = new Button("Next", new Button.ClickListener(){
+		  					
+		  					@Override
+		  					public void buttonClick(ClickEvent event) {
+		  						AddWindow hoursWindow = new AddWindow();
+		  						FormLayout hoursForm = new FormLayout();
+		  						if (!selDays.isEmpty()) {	
+			  						hoursWindow.setCaption("Course Hours");
+			  						hoursWindow.setSizeUndefined();
+			  						//hoursForm = hoursWindow.addHoursForm();
+			  						hoursForm = addHoursForm();
+	
+			  				        Button buttonDoneSelecting = new Button("Done", new Button.ClickListener() {
+			  							
+			  							@Override
+			  							public void buttonClick(ClickEvent event) {
+			  								VerticalLayout conflictedCourses = new VerticalLayout();
+			  								
+				  								if (!lecHours.isEmpty()) {
+				  								int tempo = 0;
+				  								String courseName = addCourseNameField.getValue();
+				  								Course c = new Course(courseName, lecDays, lecHours);
+				  								System.out.println("selection is: " + courseName + " " + lecDays + " " + lecHours);
+				  								temporaryCourses.add(c);
+				  								
+				  								for (int i = 0; i < lecHours.size(); i++){		// lecHours max: 3
+				  									for (int j = 0; j < 6; j++) {
+				  										if (lecHours.get(i).equals(MyInit.hours[j])) {		// if the hours match
+				  											if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
+				  												//System.out.println("(No Conflict found)");
+				  												System.out.println("Debug: (No Conflict found) Nothing scheduled for " + lecDays.get(i)+ " yet.");
+				  											}
+				  											else {
+				  												System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+				  												tempo++;
+				  												Label l = new Label("On " + lecDays.get(i) + " at " + lecHours.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+				  												//Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+				  												conflictedCourses.addComponent(l);
+				  											}
+				  										}
+				  									}
+				  									
+				  								} //////////////////////////////// Add course to the table ///////////////////////////////////////////////
+				  								if(tempo==0){			// add the course to the table
+				  									for (int i = 0; i < lecHours.size(); i++){
+				  										for (int j = 0; j < 6; j++) {
+				  											if (lecHours.get(i).equals(MyInit.hours[j])) {
+				  												if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
+				  													System.out.println("Cell is empty");
+				  													MyInit.scheduleTable.addToCell(j, lecDays.get(i), courseName);
+				  													System.out.print("Added: hour: " + j + ", day: " + lecDays.get(i) + " course: " + courseName +"\n");
+			
+				  													
+				  												}	
+				  											}
+				  										}
+				  									}
+				  									//MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 		
+				  								} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
+				  								else {	
+				  									System.out.println("cell is taken!");
+				  									AddWindow notifWindow = new AddWindow();
+				  									// popup notification
+				  									Label label;
+				  									
+				  									if (tempo == 1) {
+				  										label = new Label("You have another course at the same time:");
+				  									} else {
+				  										label = new Label("You have other courses at the same time:");
+				  									}
+				  									
+				  									FormLayout formL = new FormLayout();
+				  								
+				  									conflictedCourses.setMargin(true);
+				  									
+				  									formL.addComponent(label);
+				  									formL.addComponent(conflictedCourses);	
+				  									
+				  									notifWindow.setCaption("Course conflict");
+				  									notifWindow.setSizeUndefined();
+				  									notifWindow.setContent(formL);
+				  									
+				  									
+				  					  				if (notifWindow.isAttached()) {
+				  					  					notifWindow.close();
+				  					  				} else {  
+				  					  					UI.getCurrent().addWindow(notifWindow);
+				  					  				}
+			
+				  								}
+				  								// resetting the fields:
+				  								hoursWindow.close();
+				  								addCourseNameField.setValue("");
+											    System.out.println(courseName);		
+											    selectedCourses.addItem(new Object[]{courseName,"---"}, new Integer(count));  
+											    selDays.removeAll(selDays);
+											    lecDays.removeAll(lecDays);
+											    lecHours.removeAll(lecHours);
+											    count++;	
+				  							}		
+			  							}
+			  						});
+			  				        hoursForm.addComponent(buttonDoneSelecting);
+			  						hoursWindow.setContent(hoursForm);
+			  						
+			  						if (hoursWindow.isAttached()) {
+			  							hoursWindow.focus();
+			  						} else {
+			  							if (selectDaysWind.isAttached()) {
+			  								selectDaysWind.close();
+			  							}
+			  							UI.getCurrent().addWindow(hoursWindow);
+			  						}	
+		  						}
+		  					}
+		  				});
+		  				buttonToHourSelection.setImmediate(true);
+		  				/*if (dayAdded) {
+		  					buttonToHourSelection.setEnabled(true);
+		  				}
+		  				else {
+		  					buttonToHourSelection.setEnabled(false);
+		  				}*/
+		  			  daysForm.addComponent(buttonToHourSelection);				// add the button for the hour selection
+		  	        selectDaysWind.setContent(daysForm);						// put the form to show in DAYS window
+	
+		  			}
 	  			}
 	  		});
-	          
-	        
-
-	        
+       
 	              //// END OF DAYS WINDOW /////
 	        ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -381,17 +363,14 @@ final public class MyInit extends UI {
 					layout.addComponents(main, selection);
 					layout.setMargin(true);
 					layout.setSpacing(true);
-					//Database2.grid.removeAllColumns();
 					grid.removeAllColumns();
 					setContent(layout);
 					courseAccordion.setSelectedTab(0);
 					scheduleTable.resetSchedule();					// clean up the schedule table
 					selectedCourses.removeAllItems();	
-					//Database2.grid.getContainerDataSource().removeAllItems();
 					for (Course c : Database2.courses) {
 						c.resetCourseStatus();
 					}
-					//new Database2();
 				}
 			});
 	         
@@ -425,7 +404,7 @@ final public class MyInit extends UI {
 				  for (int i = 0; i < 5; i++) {	
 			        	CheckBox checkbox = new CheckBox (days[i], false);
 			        	checkbox.setValue(false);
-			        	checkbox.setImmediate(false);
+			        	checkbox.setImmediate(true);
 			        	layout.addComponent(checkbox);
 			        	
 			        	checkbox.setValue(false);
@@ -434,8 +413,7 @@ final public class MyInit extends UI {
 			        			if (!selDays.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
 			    	        		selDays.add(checkbox.getCaption());
 			    	        		System.out.println(selDays);	
-			    	        	}
-			        			System.out.println(selDays);			
+			    	        	}			
 			        		}
 			        		else {
 			        			selDays.remove(checkbox.getCaption());
