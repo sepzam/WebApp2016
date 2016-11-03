@@ -20,8 +20,6 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.themes.ValoTheme;
 
-
-@SuppressWarnings("serial")
 @Theme("mytheme")
 public class Course {
 	
@@ -30,8 +28,6 @@ public class Course {
 	private ArrayList<String> lecHours;
 	private String teacher;
 	private boolean isInTable = false;
-	private int i;
-	private String str;
 	private ArrayList<Integer> hourSavedSlots = new ArrayList<Integer>();
 	private ArrayList<String> daySavedSlots = new ArrayList<String>();
 	

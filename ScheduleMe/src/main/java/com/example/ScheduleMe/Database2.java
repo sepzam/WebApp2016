@@ -10,7 +10,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
-
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 
 @SuppressWarnings("serial")
@@ -26,7 +26,7 @@ final class Database2 extends Window {
 	  	//MyInit.grid.getContainerDataSource().removeAllItems();
 	  	
 		try {
-	
+			courses.clear();
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(new File("final.xml"));
@@ -131,12 +131,12 @@ final class Database2 extends Window {
 			        int databasePeriod = Integer.parseInt(((Node)textPERList.item(0)).getNodeValue().trim());
 			        databasePeriod--;
 			        String databaseDegree = ((Node)textDEPList.item(0)).getNodeValue().trim();
-	
-					//System.out.println(P+"   "+intPer);
+
 					if (databasePeriod == MyInit.selectedPeriod) {
 						if(MyInit.selectedDegree == 4){
 							// show all courses
 							MyInit.grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
+							
 							lectureDays.add(((Node)textSD1List.item(0)).getNodeValue().trim());
 					    	lectureDays.add(((Node)textSD2List.item(0)).getNodeValue().trim().toString());
 					    	lectureDays.add(((Node)textSD3List.item(0)).getNodeValue().trim().toString());
@@ -255,8 +255,6 @@ final class Database2 extends Window {
 						// TODO: remove classrooms too if we use those too
 					}
 				}			
-				
-				//System.out.println("New, without empty: " + name + lecDays + lecHours);
 
 				//////////////////////////////// IF COURSE NOT IN THE TABLE ///////////////////////////////////////////////
 				if (!course.isAddedToTable()) {		// if the course is not in the table, check for free slots
@@ -265,7 +263,6 @@ final class Database2 extends Window {
 						for (int j = 0; j < 6; j++) {
 							if (lecHours.get(i).equals(MyInit.hours[j])) {		// if the hours match
 								if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
-									//System.out.println("(No Conflict found)");
 									System.out.println("Debug: (No Conflict found) Nothing scheduled for " + lecDays.get(i)+ " yet.");
 								}
 								else {
@@ -282,7 +279,6 @@ final class Database2 extends Window {
 						for (int i = 0; i < lecHours.size(); i++){
 							for (int j = 0; j < 6; j++) {
 								if (lecHours.get(i).equals(MyInit.hours[j])) {
-									//System.out.println("debug: " + lecDays.get(i) + ": " + MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)).getValue() );
 									if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
 										System.out.println("Cell is empty");
 										MyInit.scheduleTable.addToCell(j, lecDays.get(i), name);
@@ -291,9 +287,6 @@ final class Database2 extends Window {
 										course.setInTable(true);
 										
 									}
-										
-										//if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)))
-										
 								}
 							}
 						}
@@ -329,7 +322,7 @@ final class Database2 extends Window {
 		  					UI.getCurrent().addWindow(notifWindow);
 		  				}
 					}
-				} else {		// TODO: course is in the table, so we want to remove it
+				} else {		// course is in the table, so we want to remove it
 					System.out.println("Course already in the table! Deleting...");
 					MyInit.scheduleTable.deleteFromCell(course);
 					course.setInTable(false);
