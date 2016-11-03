@@ -3,43 +3,28 @@ package com.example.ScheduleMe;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import org.w3c.dom.*;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
-import com.vaadin.server.Sizeable.Unit;
+
 import com.vaadin.ui.*;
-import com.vaadin.ui.Grid.SelectionMode;
 
 @SuppressWarnings("serial")
 final class Database2 extends Window {
 
-
-//	final static HorizontalLayout courseTable = new HorizontalLayout();
-	//final static Grid grid = new Grid();
-	//final static Grid grid = new Grid();
 	public static ArrayList<Course> courses = new ArrayList<Course>();
-	//static int intPer=0;
-	//static Integer tempo=1;
-
-	//private Table scheduleTable;
-	
 	static CourseGrid grid = new CourseGrid();
 	public Database2() {
 	
-	//CheckboxListener checkListener = new CheckboxListener();
 	System.out.println("Degree:   "+ MyInit.selectedDegree);
 	System.out.println("Period: "+ MyInit.selectedPeriod);
 	
   	grid.getContainerDataSource().removeAllItems();
-
+  	
 	try {
 
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -49,26 +34,13 @@ final class Database2 extends Window {
 		NodeList listOfCourses = doc.getElementsByTagName("record");
 		int totalCourse = listOfCourses.getLength(); 
 		System.out.println("Total no of courses : " + totalCourse); //silebilirsin
-	/*	
-		grid.setSizeFull();
-		grid.addSelectionListener(checkListener);
-		grid.setSelectionMode(SelectionMode.SINGLE);    // Activate single selection mode
-		grid.removeAllColumns();
-		grid.setImmediate(true);
-		grid.addColumn("ID").setSortable(true);
-	    grid.addColumn("Course Name").setSortable(true);
-	    grid.addColumn("Teacher");
-	    grid.addColumn("Credits");
-*/
+
 	    for(int s=0; s<totalCourse ; s++) {
 	    	Node CourseNode = listOfCourses.item(s);
 			
 			if(CourseNode.getNodeType() == Node.ELEMENT_NODE){
 				ArrayList<String> lectureDays = new ArrayList<String>();
 				ArrayList<String> lectureHours = new ArrayList<String>();	
-				
-				//lectureDays.removeAll(lectureDays);
-				//lectureHours.removeAll(lectureHours);
 				
 				Element CourseElement = (Element)CourseNode; 
 		    		

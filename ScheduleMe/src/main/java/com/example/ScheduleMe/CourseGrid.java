@@ -1,8 +1,6 @@
 package com.example.ScheduleMe;
 
 import java.util.ArrayList;
-
-import com.example.ScheduleMe.Database2.CheckboxListener;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.ui.FormLayout;
@@ -10,7 +8,6 @@ import com.vaadin.ui.Grid;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Grid.SelectionMode;
 
 @SuppressWarnings("serial")
 public class CourseGrid extends Grid {
@@ -62,8 +59,6 @@ public class CourseGrid extends Grid {
 						// TODO: remove classrooms too if we use those too
 					}
 				}			
-				
-				//System.out.println("New, without empty: " + name + lecDays + lecHours);
 
 				//////////////////////////////// IF COURSE NOT IN THE TABLE ///////////////////////////////////////////////
 				if (!course.isAddedToTable()) {		// if the course is not in the table, check for free slots
@@ -72,13 +67,12 @@ public class CourseGrid extends Grid {
 						for (int j = 0; j < 6; j++) {
 							if (lecHours.get(i).equals(MyInit.hours[j])) {		// if the hours match
 								if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
-									//System.out.println("(No Conflict found)");
 									System.out.println("Debug: (No Conflict found) Nothing scheduled for " + lecDays.get(i)+ " yet.");
 								}
 								else {
 									System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
 									tempo++;
-									Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+									Label l = new Label("On " + lecDays.get(i) + " at " + lecHours.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
 									conflictedCourses.addComponent(l);
 								}
 							}
@@ -95,12 +89,8 @@ public class CourseGrid extends Grid {
 										MyInit.scheduleTable.addToCell(j, lecDays.get(i), name);
 										System.out.print("Added: hour: " + j + ", day: " + lecDays.get(i) + " course: " + name +"\n");
 										course.savePositionInTable(j, lecDays.get(i));
-										course.setInTable(true);
-										
+										course.setInTable(true);						
 									}
-										
-										//if (MyUI.scheduleTable.getItem(j).getItemProperty(lecDays.get(i)))
-										
 								}
 							}
 						}
@@ -136,7 +126,7 @@ public class CourseGrid extends Grid {
 		  					UI.getCurrent().addWindow(notifWindow);
 		  				}
 					}
-				} else {		// TODO: course is in the table, so we want to remove it
+				} else { 	//course is in the table, so we want to remove it
 					System.out.println("Course already in the table! Deleting...");
 					MyInit.scheduleTable.deleteFromCell(course);
 					course.setInTable(false);

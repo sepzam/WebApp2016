@@ -12,14 +12,8 @@ public class AddWindow extends Window {
     String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
     String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
     static ArrayList<String> selDays = new ArrayList<String>();	// selected days for a course
-    static ArrayList<String> moHo = new ArrayList<String>();	// selected hours in Monday
-    static ArrayList<String> tuHo = new ArrayList<String>();	// selected hours in Tuesday
-    static ArrayList<String> weHo = new ArrayList<String>();	// selected hours in Wednesday
-    static ArrayList<String> thHo = new ArrayList<String>();	// selected hours in Thursday
-    static ArrayList<String> frHo = new ArrayList<String>();	// selected hours in Friday
 
     FormLayout daysForm = new FormLayout();
-    //HoursWindow hoursWin = new HoursWindow();
     
 	public AddWindow() {
 		this.setModal(true);
@@ -45,20 +39,15 @@ public class AddWindow extends Window {
 	        	CheckBox checkbox = new CheckBox (days[i], false);
 	        	checkbox.setValue(false);
 	        	checkbox.setImmediate(false);
-	        	layout.addComponent(checkbox);
-	        	
+	        	layout.addComponent(checkbox);    	
 	        	checkbox.setValue(false);
 	        	checkbox.addValueChangeListener(e -> {	
 	        		if (checkbox.getValue() == true) {
-
-	            				if (!selDays.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
-	    	        				selDays.add(checkbox.getCaption());
-	    	        				System.out.println(selDays);
-	    	        				//layout.addComponent(new Label("" + checkbox.getCaption()));  // code to verify if they are all added
-	    	        				//hourSelect.addComponent(new Label(selDays.toString()));			
-	    	        			}
-	            				System.out.println(selDays);
-	            				
+	            		if (!selDays.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
+	    	       			selDays.add(checkbox.getCaption());
+	    	       			System.out.println(selDays);		
+	    	        	}
+	            		System.out.println(selDays);		
 	        		}
 	        	});
 	        	checkbox.setValue(false);
@@ -71,8 +60,7 @@ public class AddWindow extends Window {
 	public FormLayout addHoursForm() {	
 		HorizontalLayout hor = new HorizontalLayout();
 		FormLayout form = new FormLayout();
-		//MyUI updateTable = new MyUI();	
-		
+
 		hor.setSizeUndefined();
 		hor.setMargin(true);
 		hor.setSpacing(true);
@@ -99,105 +87,7 @@ public class AddWindow extends Window {
 			hor.addComponent(layout);
 		}
 		form.addComponent(hor);
-		showArrayList();
 		return form;
 	}
-		/*
-			if (day=="Monday"){
-				
-				for (int i = 0; i < 6; i++) {
-		        	CheckBox checkbox = new CheckBox (hours[i], false);
-		        	
-		        	layout.addComponent(checkbox);
-		        	checkbox.addValueChangeListener(e -> {	
-		        	if (checkbox.getValue() == true) {
-	        			if (!moHo.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
-	        				moHo.add(checkbox.getCaption());
-	        				//layout.addComponent(new Label("" + checkbox.getCaption()));  // code to verify if they are all added
-	        				//hourSelect.addComponent(new Label(selDays.toString()));			
-	        			}
-	        			System.out.println(moHo);
-		        	} });
-
-				}
-			} 
-			if (day=="Tuesday"){
-				for (int i = 0; i < 6; i++) {
-		        	CheckBox checkbox = new CheckBox (hours[i], false);
-		        	
-		        	layout.addComponent(checkbox);
-		        	checkbox.addValueChangeListener(e -> {	
-		        	if (checkbox.getValue() == true) {
-	        			if (!tuHo.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
-	        				tuHo.add(checkbox.getCaption());
-	        				//layout.addComponent(new Label("" + checkbox.getCaption()));  // code to verify if they are all added
-	        				//hourSelect.addComponent(new Label(selDays.toString()));			
-	        			}
-			
-		        	} });
-		        }
-			}
-			if (day=="Wednesday"){
-				for (int i = 0; i < 6; i++) {
-		        	CheckBox checkbox = new CheckBox (hours[i], false);
-		        	
-		        	layout.addComponent(checkbox);
-		        	checkbox.addValueChangeListener(e -> {	
-		        	if (checkbox.getValue() == true) {
-	        			if (!weHo.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
-	        				weHo.add(checkbox.getCaption());
-	        				//layout.addComponent(new Label("" + checkbox.getCaption()));  // code to verify if they are all added
-	        				//hourSelect.addComponent(new Label(selDays.toString()));			
-	        			}
-			
-		        	} });
-		        }
-				
-			}
-			if (day=="Thursday"){	
-				for (int i = 0; i < 6; i++) {
-		        	CheckBox checkbox = new CheckBox (hours[i], false);
-		        	
-		        	layout.addComponent(checkbox);
-		        	checkbox.addValueChangeListener(e -> {	
-		        	if (checkbox.getValue() == true) {
-	        			if (!thHo.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
-	        				thHo.add(checkbox.getCaption());
-	        				//layout.addComponent(new Label("" + checkbox.getCaption()));  // code to verify if they are all added
-	        				//hourSelect.addComponent(new Label(selDays.toString()));			
-	        			}		 
-			
-		        	} });
-		        }
-			}
-			if (day=="Friday"){
-				for (int i = 0; i < 6; i++) {
-		        	CheckBox checkbox = new CheckBox (hours[i], false);
-		        	
-		        	layout.addComponent(checkbox);
-		        	checkbox.addValueChangeListener(e -> {	
-		        	if (checkbox.getValue() == true) {
-	        			if (!frHo.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
-	        				frHo.add(checkbox.getCaption());
-	        				//layout.addComponent(new Label("" + checkbox.getCaption()));  // code to verify if they are all added
-	        				//hourSelect.addComponent(new Label(selDays.toString()));			
-	        			}
-			
-		        	} });
-		        }
-			}
-	        
-	        hor.addComponent(layout);
-		}
-		//selDays.removeAll(selDays);
-		form.addComponent(hor);
-		showArrayList();
-		return form;
-	}*/
-	
-	public void showArrayList() {
-		for (int i = 0; i < selDays.size(); i++) {
-			System.out.println(selDays.get(i));
-		}
-	}
+		
 }
