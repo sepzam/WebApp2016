@@ -40,7 +40,7 @@ public class CourseGrid extends Grid {
 
 			
 			if (!empty) {
-				int courseIndex = (int) Database2.grid.getSelectedRow() - 1;
+				int courseIndex = (int) MyInit.grid.getSelectedRow() - 1;
 
 				
 				Course course = Database2.courses.get(courseIndex);

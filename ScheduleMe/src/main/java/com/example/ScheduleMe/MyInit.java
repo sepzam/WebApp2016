@@ -38,8 +38,9 @@ final public class MyInit extends UI {
 	
 	static int count;
 	static Database2 db;
+	static CourseGrid grid;
 	static ArrayList<Course> temporaryCourses = new ArrayList<Course>();
-	Grid coursesGrid = new Grid();
+	//Grid coursesGrid = new Grid();
 	
     ArrayList<String> selDays = new ArrayList<String>();	// selected days for a course
     ArrayList<String> lecDays = new ArrayList<String>();
@@ -78,7 +79,7 @@ final public class MyInit extends UI {
 	        	
 	        }  
 	        degreeSelection.addValueChangeListener(e -> {
-	              	selectedDegree = (int)e.getProperty().getValue();
+	              selectedDegree = (int)e.getProperty().getValue();
 	         });
 	       
 	   
@@ -86,8 +87,7 @@ final public class MyInit extends UI {
 	        for (int j = 0; j < 2; j++) {
 	        	periodOption.addItem(j);
 	        	int x=j+1;		// don't ask, lol :/
-	        	periodOption.setItemCaption(j, "Period " + x);
-	        	
+	        	periodOption.setItemCaption(j, "Period " + x);	        	
 	        }
 	        periodOption.setValue(0);    	// pre-assigned: period 1		        
 	        periodOption.addValueChangeListener(e -> {
@@ -104,11 +104,8 @@ final public class MyInit extends UI {
 					if (!degreeSelection.isEmpty()) {
 						layout.removeAllComponents();
 						layout.addComponents(main, courseSelect);
-						setContent(layout);	
-						//db = new Database2(selectedPeriod, selectedDegree);	
-						//coursesGrid = Database2.getSchedule();
-						
-					}																		
+						setContent(layout);					
+					}
 				}
 			});          
 	        buttonNext.setEnabled(false);													
@@ -129,6 +126,7 @@ final public class MyInit extends UI {
 	        VerticalLayout selectedCoursesLayout = new VerticalLayout();
 	        VerticalLayout coursesLayout = new VerticalLayout(); 
 	        FormLayout addForm = new FormLayout();
+	        HorizontalLayout courseT = new HorizontalLayout();
 	        
 	      ////////////////////////////////////////////////////////////////////////////////////////////////
 	        
@@ -184,10 +182,27 @@ final public class MyInit extends UI {
 	                 if(caption.equals("Tap to see the list of courses")){
 	                	 //db = null;
 	                	 //Database2.grid = null;
-		            	 db = new Database2();
-			             HorizontalLayout courseT = new HorizontalLayout();
+	                	// grid = new CourseGrid();
+		            	 //db = new Database2();
+		            	 
+			             //HorizontalLayout courseT = new HorizontalLayout();
 			             courseT.setSizeFull();
-			             courseT.addComponent(Database2.grid);
+			             
+			             // If CourseGrid (grid) already exists, delete it and make a new one with the appropriate courses
+			             int gridIndex = courseT.getComponentIndex(grid);
+			             if (gridIndex != -1 && courseT.getComponent(gridIndex).isAttached()) {
+			            	 CourseGrid oldGrid = grid;
+			            	 System.out.println("we already have a grid.");
+		                	 grid = new CourseGrid();
+			            	 db = new Database2();
+			            	 courseT.replaceComponent(oldGrid, grid);
+			            	 System.out.println("replaced!");
+			             } else {
+			            	 System.out.println("we don't have a grid.");
+		                	 grid = new CourseGrid();
+			            	 db = new Database2();
+			            	 courseT.addComponent(grid);
+			             }
 			             coursesLayout.addComponents(courseT);
 	               }
 	             }
@@ -366,11 +381,13 @@ final public class MyInit extends UI {
 					layout.addComponents(main, selection);
 					layout.setMargin(true);
 					layout.setSpacing(true);
-					Database2.grid.removeAllColumns();
+					//Database2.grid.removeAllColumns();
+					grid.removeAllColumns();
 					setContent(layout);
 					courseAccordion.setSelectedTab(0);
 					scheduleTable.resetSchedule();					// clean up the schedule table
 					selectedCourses.removeAllItems();	
+					//Database2.grid.getContainerDataSource().removeAllItems();
 					for (Course c : Database2.courses) {
 						c.resetCourseStatus();
 					}
@@ -416,9 +433,7 @@ final public class MyInit extends UI {
 			        		if (checkbox.getValue() == true) {
 			        			if (!selDays.contains(checkbox.getCaption()))	{	// add the day if it's not already added to the list
 			    	        		selDays.add(checkbox.getCaption());
-			    	        		System.out.println(selDays);
-			    	        		//layout.addComponent(new Label("" + checkbox.getCaption()));  // code to verify if they are all added
-			    	        		//hourSelect.addComponent(new Label(selDays.toString()));			
+			    	        		System.out.println(selDays);	
 			    	        	}
 			        			System.out.println(selDays);			
 			        		}
@@ -457,15 +472,12 @@ final public class MyInit extends UI {
 					
 			        	checkbox.addValueChangeListener(e -> {	
 				        	if (checkbox.getValue() == true) {
-				        		//ArrayList<String> selHours = new ArrayList<String>();
 				        		lecDays.add(day);
 				        		lecHours.add(checkbox.getCaption());
-				        		//System.out.println("Selected days: " + lecDays + "Selected hours: " + lecHours);
 				        	}
 				        	else {
 				        		lecDays.remove(day);
 				        		lecHours.remove(checkbox.getCaption());
-				        		//System.out.println("Unchecked. Now selected days are: " + lecDays + "Selected hours: " + lecHours);
 				        	}
 			        	});
 					}
@@ -493,7 +505,6 @@ final public class MyInit extends UI {
 	    	final ExternalResource externalResource = new ExternalResource("http://www.utu.fi/_LAYOUTS/Neoxen/UTUInternet/Styles/utu_logo.jpg");	
 	    	
 	    	headerImage.setSource(externalResource);
-	    	//headerImage.setSource(new ThemeResource("utu_logo.jpg"));
 	    	headerImage.setVisible(true);
 	    	
 	    	//header.setMargin(true);
@@ -513,55 +524,10 @@ final public class MyInit extends UI {
 	    	footer.setComponentAlignment(buttonNext, Alignment.MIDDLE_RIGHT);
 	    	
 	    	main.addComponents(header);
-	    	//header.setSpacing(true);
-	    	//header.setMargin(true);
 	    	return main;
 	    	
 
 	    }
-	    
-	    // For static implementation of faculty names
-	    private void addDegreeNames() {
-	        degreeNames.add("Master's Degree Programme in Bioinformatics");
-	        degreeNames.add("Master's Degree Programme in Information Security and Cryptography");
-	        degreeNames.add("Master's Degree Programme in Embedded Computing");
-	        degreeNames.add("Show only the TUCS courses");
-	        degreeNames.add("Show all courses");
-	     
-	    }
-
-	    /// For static implementation: degree == 0 corresponds to (some) of the degrees of Mathematics faculty, 1 is Medicine and 2 is education.
-	   /* private void addDegreeNames(int degree) {
-	    	switch (degree) {
-	    	case 0:		// math
-	    		degreeNames.add("Master's Degree Programme in Information Security and Cryptography ");
-	        	degreeNames.add("Master's Degree Program in Materials Science");
-	        	degreeNames.add(" Master's Degree Programme in Bioinformatics");
-	        	degreeNames.add("Master's Degree Programme in Embedded Computing");
-	        	break;
-	    	case 1:		// Med
-	        	degreeNames.add("Neuroscience study program");
-	        	degreeNames.add("International Career in Health Sciences");
-	        	break;
-	    	case 2:		// edu
-	        	degreeNames.add("Master's Degree Programme in Learning, Learning Environments and Educational Systems");
-	        	degreeNames.add("Doctor of Philosophy (in Education)");
-	        	break;
-	    	default:		// otherwise
-	    		degreeNames.add("error! :(");
-	    		break;
-	    	}
-	    }*/			
-
-	    
-	    public int getDegree() {
-			return selectedDegree;
-		}
-
-		public void setDegree(int selectedDegree) {
-			this.selectedDegree = selectedDegree;
-		}
-		
 
 		@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
 	    @VaadinServletConfiguration(ui = MyInit.class, productionMode = false)
