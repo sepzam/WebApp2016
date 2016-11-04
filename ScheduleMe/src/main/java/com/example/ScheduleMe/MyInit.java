@@ -32,7 +32,7 @@ final public class MyInit extends UI {
 	ArrayList<String> degreeNames;
 
 	static ScheduleTable scheduleTable;
-	static Table selectedCourses = new Table();
+	static SelectedCourses selectedCourses;
 	
 	static String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	static String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
@@ -103,6 +103,7 @@ final public class MyInit extends UI {
 				@Override
 				public void buttonClick(ClickEvent event) {	
 					if (!degreeSelection.isEmpty()) {
+						count=0;
 						layout.removeAllComponents();
 						layout.addComponents(main, courseSelect);
 						setContent(layout);					
@@ -132,6 +133,7 @@ final public class MyInit extends UI {
 	      ////////////////////////////////////////////////////////////////////////////////////////////////
 	        
 	        scheduleTable = new ScheduleTable("Weekly Schedule"); // moved it to "Next" button listener
+	        selectedCourses = new SelectedCourses("");
 	        final Accordion courseAccordion = new Accordion();
 	        Button buttonBack;
 	        
@@ -140,17 +142,7 @@ final public class MyInit extends UI {
 	        courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
 	        
 	        
-					selectedCourses.setSelectable(true);
-					selectedCourses.setImmediate(true);
-					selectedCourses.setPageLength(0);
-					selectedCourses.setHeight("100%");					
-					selectedCourses.getContainerDataSource().removeAllItems();		
-					selectedCourses.addContainerProperty("Course Name", String.class, null);
-					selectedCourses.setColumnAlignment(0, Align.CENTER);
-					selectedCourses.addContainerProperty("Teacher", String.class, null);
-					selectedCourses.setColumnAlignment(1, Align.CENTER);
-					
-									
+												
 					selectedCoursesLayout.addComponent(selectedCourses);
 
 	        courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
@@ -277,7 +269,8 @@ final public class MyInit extends UI {
 						  											}
 						  										}
 						  									}
-						  									//MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 		
+						  									 selectedCourses.addItem(new Object[]{courseName,"---"}, new Integer(count));  
+															   count++;		
 						  								} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
 						  								else {	
 						  									System.out.println("cell is taken!");
@@ -314,11 +307,10 @@ final public class MyInit extends UI {
 						  								hoursWindow.close();
 						  								addCourseNameField.setValue("");
 													    System.out.println(courseName);		
-													    selectedCourses.addItem(new Object[]{courseName,"---"}, new Integer(count));  
 													    selDays.removeAll(selDays);
 													    lecDays.removeAll(lecDays);
 													    lecHours.removeAll(lecHours);
-													    count++;	
+													    
 						  							} else {
 						  								Notification.show("You must select the hour the course takes place!", Type.WARNING_MESSAGE);
 						  							}		

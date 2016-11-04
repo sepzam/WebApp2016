@@ -101,6 +101,7 @@ public class CourseGrid extends Grid {
 							   added = 1; //Already added!
 						if(added==0){   
 							MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 
+							
 							MyInit.count++;
 							}
 					} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
@@ -138,13 +139,15 @@ public class CourseGrid extends Grid {
 					System.out.println("Course already in the table! Deleting...");
 					MyInit.scheduleTable.deleteFromCell(course);
 					course.setInTable(false);
-					
-					for(int i=0; i<MyInit.count; i++)
+				int x=0;
+				for(int i=0; i<MyInit.count; i++){
+					if(x==0)
 					  if(MyInit.selectedCourses.getItem(i).getItemProperty("Course Name").getValue()==name){
 						  MyInit.selectedCourses.removeItem(i);
-						   break;
+						  MyInit.count--;
+						   x=1;
 					  }
-						
+				}	
 					
 				}
 			}				
