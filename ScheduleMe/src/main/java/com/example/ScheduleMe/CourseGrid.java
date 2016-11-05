@@ -37,7 +37,6 @@ public class CourseGrid extends Grid {
 		public void select(SelectionEvent event) {
 
 			AddWindow notifWindow = new AddWindow();
-			System.out.println("I CLICKED!!");
 			boolean empty = event.getSelected().isEmpty();
 			int tempo = 0;
 			VerticalLayout conflictedCourses = new VerticalLayout();
@@ -75,6 +74,7 @@ public class CourseGrid extends Grid {
 								}
 								else {
 									System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
+									MyInit.grid.deselectAll();
 									tempo++;
 									Label l = new Label("On " + lecDays.get(i) + " at " + lecHours.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
 									conflictedCourses.addComponent(l);
@@ -91,6 +91,7 @@ public class CourseGrid extends Grid {
 									if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
 										System.out.println("Cell is empty");
 										MyInit.scheduleTable.addToCell(j, lecDays.get(i), name);
+										MyInit.grid.deselectAll();
 										added=1;
 										System.out.print("Added: hour: " + j + ", day: " + lecDays.get(i) + " course: " + name +"\n");
 										course.savePositionInTable(j, lecDays.get(i));
@@ -138,7 +139,7 @@ public class CourseGrid extends Grid {
 				} else { 	//course is in the table, so we want to remove it
 					System.out.println("Course already in the table! Deleting...");
 					MyInit.scheduleTable.deleteFromCell(course);
-				
+					MyInit.grid.deselectAll();
 					course.setInTable(false);
 
 								

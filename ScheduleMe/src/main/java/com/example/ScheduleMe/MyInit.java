@@ -29,6 +29,7 @@ final public class MyInit extends UI {
 	static int selectedDegree = 4;
 	static int selectedPeriod = 0; 		// the default value is Period 1 (0), therefore if no change is made, the selected period should be 0.
 	ArrayList<String> degreeNames;
+	boolean isBackBtnUsed = false;
 
 	static ScheduleTable scheduleTable;
 	static SelectedCourses selectedCourses;
@@ -44,6 +45,7 @@ final public class MyInit extends UI {
     ArrayList<String> selDays = new ArrayList<String>();	// selected days for a course
     ArrayList<String> lecDays = new ArrayList<String>();
     ArrayList<String> lecHours = new ArrayList<String>();	
+   
     
 	@Override
 	protected void init(VaadinRequest request) {
@@ -105,6 +107,7 @@ final public class MyInit extends UI {
 						layout.addComponents(main, courseSelect);
 						setContent(layout);					
 					}
+					
 				}
 			});          
 	        buttonNext.setEnabled(false);													
@@ -163,13 +166,22 @@ final public class MyInit extends UI {
 			             
 			             // If CourseGrid (grid) already exists, delete it and make a new one with the appropriate courses
 			             int gridIndex = courseT.getComponentIndex(grid);
-			             if (gridIndex != -1 && courseT.getComponent(gridIndex).isAttached()) {
-			            	// CourseGrid oldGrid = grid;
-			            	 System.out.println("we already have a grid.");
-		                	// grid = new CourseGrid();
-			            	// db = new Database2();
-			            	// courseT.replaceComponent(oldGrid, grid);
-			            	// System.out.println("replaced!");
+			             
+			             
+			             if (gridIndex != -1 && courseT.getComponent(gridIndex).isAttached()) {      
+			            	 if (isBackBtnUsed) {
+				            	 CourseGrid oldGrid = grid;
+				            	 System.out.println("we already have a grid.");
+			                	 grid = new CourseGrid();
+				            	 db = new Database2();
+				            	 courseT.replaceComponent(oldGrid, grid);
+				            	 System.out.println("replaced!");
+				            	 isBackBtnUsed = false;
+				            	 System.out.println("resetting. boolean is: " +isBackBtnUsed);	
+			            	 }
+			            	 else {
+			            		 grid.deselectAll();
+			            	 }
 			             } else {
 			            	 System.out.println("we don't have a grid.");
 		                	 grid = new CourseGrid();
@@ -369,10 +381,13 @@ final public class MyInit extends UI {
 					setContent(layout);
 					courseAccordion.setSelectedTab(0);
 					scheduleTable.resetSchedule();					// clean up the schedule table
-					selectedCourses.removeAllItems();	
+					selectedCourses.removeAllItems();
+					CourseGrid.addedCourse.clear();
 					for (Course c : Database2.courses) {
 						c.resetCourseStatus();
 					}
+					isBackBtnUsed = true;
+					System.out.println("we used back button, boolean is: " +isBackBtnUsed);	
 				}
 			});
 	        addingACourse.addComponents(addCourseIntro, addCourseNameField, buttonAddNewCourse);	        
