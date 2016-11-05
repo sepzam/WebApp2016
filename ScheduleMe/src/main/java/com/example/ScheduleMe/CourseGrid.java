@@ -13,6 +13,9 @@ import com.vaadin.ui.VerticalLayout;
 public class CourseGrid extends Grid {
 
 	
+	 
+	 public static final ArrayList<String> addedCourse= new ArrayList<String>();
+
 	public CourseGrid() {
 		CheckboxListener checkListener = new CheckboxListener();
 		this.addSelectionListener(checkListener);
@@ -25,6 +28,7 @@ public class CourseGrid extends Grid {
 	    this.addColumn("Course Name").setSortable(true);
 	    this.addColumn("Teacher");
 	    this.addColumn("Credits");
+	   
 	}
 
 	class CheckboxListener implements SelectionListener {
@@ -37,7 +41,7 @@ public class CourseGrid extends Grid {
 			boolean empty = event.getSelected().isEmpty();
 			int tempo = 0;
 			VerticalLayout conflictedCourses = new VerticalLayout();
-
+			
 			
 			if (!empty) {
 				int courseIndex = (int) MyInit.grid.getSelectedRow() - 1;
@@ -45,10 +49,10 @@ public class CourseGrid extends Grid {
 				
 				Course course = Database2.courses.get(courseIndex);
 				String name = Database2.courses.get(courseIndex).getCourseName();
-				String teacher= Database2.courses.get(courseIndex).getTeacher();
 				ArrayList<String> lecDays = Database2.courses.get(courseIndex).getLecturingDays();
 				ArrayList<String> lecHours = Database2.courses.get(courseIndex).getLecturingHours();
-				
+				int added=0;
+			
 				System.out.println(name + lecDays + lecHours);
 				
 				// remove the "Empty" slots :D
@@ -87,6 +91,7 @@ public class CourseGrid extends Grid {
 									if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
 										System.out.println("Cell is empty");
 										MyInit.scheduleTable.addToCell(j, lecDays.get(i), name);
+										added=1;
 										System.out.print("Added: hour: " + j + ", day: " + lecDays.get(i) + " course: " + name +"\n");
 										course.savePositionInTable(j, lecDays.get(i));
 										course.setInTable(true);						
@@ -95,14 +100,9 @@ public class CourseGrid extends Grid {
 							}
 							
 						}
-						int added=0;
-						for(int i=0; i<MyInit.count; i++)
-						  if(MyInit.selectedCourses.getItem(i).getItemProperty("Course Name").getValue()==name)
-							   added = 1; //Already added!
-						if(added==0){   
-							MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 
-							
-							MyInit.count++;
+						if(added==1){   
+								addedCourse.add(addedCourse.size(), name);
+			
 							}
 					} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
 					else {	
@@ -128,7 +128,7 @@ public class CourseGrid extends Grid {
 						notifWindow.setSizeUndefined();
 						notifWindow.setContent(formL);
 						
-						
+					  	
 		  				if (notifWindow.isAttached()) {
 		  					notifWindow.close();
 		  				} else {  
@@ -138,19 +138,22 @@ public class CourseGrid extends Grid {
 				} else { 	//course is in the table, so we want to remove it
 					System.out.println("Course already in the table! Deleting...");
 					MyInit.scheduleTable.deleteFromCell(course);
+				
 					course.setInTable(false);
-				int x=0;
-				for(int i=0; i<MyInit.count; i++){
-					if(x==0)
-					  if(MyInit.selectedCourses.getItem(i).getItemProperty("Course Name").getValue()==name){
-						  MyInit.selectedCourses.removeItem(i);
-						  MyInit.count--;
-						   x=1;
-					  }
-				}	
-					
+
+								
+				for (int i=0; i<addedCourse.size(); i++){
+					if(addedCourse.get(i)==name){
+						addedCourse.remove(i);
+					}
 				}
-			}				
+				
+				}
+			}		
+			MyInit.selectedCourses.removeAllItems();
+		    for(int j=0; j<CourseGrid.addedCourse.size();j++){
+ 				MyInit.selectedCourses.addItem(new Object[]{CourseGrid.addedCourse.get(j)}, new Integer(j)); 
+ 							}
 		}
     }
 }

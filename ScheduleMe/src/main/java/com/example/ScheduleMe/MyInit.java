@@ -15,7 +15,6 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
-import com.vaadin.ui.Table.Align;
 import com.vaadin.ui.themes.ValoTheme;
 
 @SuppressWarnings("serial")
@@ -36,8 +35,7 @@ final public class MyInit extends UI {
 	
 	static String[] days = new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	static String[] hours = new String[] { "8-10", "10-12", "12-14", "14-16", "16-18", "18-20"};
-	
-	static int count;
+
 	static Database2 db;
 	static CourseGrid grid;
 	static ArrayList<Course> temporaryCourses = new ArrayList<Course>();
@@ -103,8 +101,7 @@ final public class MyInit extends UI {
 				@Override
 				public void buttonClick(ClickEvent event) {	
 					if (!degreeSelection.isEmpty()) {
-						count=0;
-						layout.removeAllComponents();
+												layout.removeAllComponents();
 						layout.addComponents(main, courseSelect);
 						setContent(layout);					
 					}
@@ -141,8 +138,7 @@ final public class MyInit extends UI {
 	        courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
 	        courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
 	        
-	        
-												
+	      		
 					selectedCoursesLayout.addComponent(selectedCourses);
 
 	        courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
@@ -168,12 +164,12 @@ final public class MyInit extends UI {
 			             // If CourseGrid (grid) already exists, delete it and make a new one with the appropriate courses
 			             int gridIndex = courseT.getComponentIndex(grid);
 			             if (gridIndex != -1 && courseT.getComponent(gridIndex).isAttached()) {
-			            	 CourseGrid oldGrid = grid;
+			            	// CourseGrid oldGrid = grid;
 			            	 System.out.println("we already have a grid.");
-		                	 grid = new CourseGrid();
-			            	 db = new Database2();
-			            	 courseT.replaceComponent(oldGrid, grid);
-			            	 System.out.println("replaced!");
+		                	// grid = new CourseGrid();
+			            	// db = new Database2();
+			            	// courseT.replaceComponent(oldGrid, grid);
+			            	// System.out.println("replaced!");
 			             } else {
 			            	 System.out.println("we don't have a grid.");
 		                	 grid = new CourseGrid();
@@ -182,7 +178,11 @@ final public class MyInit extends UI {
 			             }
 			             coursesLayout.addComponents(courseT);
 	               }
+	             
+	     										
 	             }
+	             
+	             
 	         });
 	 			
 
@@ -256,6 +256,7 @@ final public class MyInit extends UI {
 						  									
 						  								} //////////////////////////////// Add course to the table ///////////////////////////////////////////////
 						  								if(tempo==0){			// add the course to the table
+						  									int added=0;
 						  									for (int i = 0; i < lecHours.size(); i++){
 						  										for (int j = 0; j < 6; j++) {
 						  											if (lecHours.get(i).equals(MyInit.hours[j])) {
@@ -263,14 +264,20 @@ final public class MyInit extends UI {
 						  													System.out.println("Cell is empty");
 						  													MyInit.scheduleTable.addToCell(j, lecDays.get(i), courseName);
 						  													System.out.print("Added: hour: " + j + ", day: " + lecDays.get(i) + " course: " + courseName +"\n");
-					
+						  														added=1;
 						  													
 						  												}	
 						  											}
 						  										}
 						  									}
-						  									 selectedCourses.addItem(new Object[]{courseName,"---"}, new Integer(count));  
-															   count++;		
+						  									if(added==1){   
+						  										CourseGrid.addedCourse.add(CourseGrid.addedCourse.size(), courseName);
+
+						  									}
+						  									MyInit.selectedCourses.removeAllItems();
+						  								    for(int j=0; j<CourseGrid.addedCourse.size();j++){
+						  						 				MyInit.selectedCourses.addItem(new Object[]{CourseGrid.addedCourse.get(j)}, new Integer(j)); 
+						  						 							}
 						  								} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
 						  								else {	
 						  									System.out.println("cell is taken!");

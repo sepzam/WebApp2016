@@ -4,7 +4,7 @@ import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
 public class SelectedCourses extends Table {
-
+	
 		public SelectedCourses(String caption) {
 			
 			this.setSelectable(true);
@@ -15,10 +15,10 @@ public class SelectedCourses extends Table {
 			
 			//scheduleTable.addContainerProperty("0", String.class, null,"", null, null);
 			
-			this.addContainerProperty("Course Name", String.class, null);
+			this.addContainerProperty("Course", String.class, null);
 			this.setColumnAlignment(0, Align.CENTER);
-			this.addContainerProperty("Teacher", String.class, null);
-			this.setColumnAlignment(1, Align.CENTER);
+		//	this.addContainerProperty("Teacher", String.class, null);
+		//	this.setColumnAlignment(1, Align.CENTER);
 			
 			
 	       	}
@@ -34,5 +34,6 @@ public class SelectedCourses extends Table {
 			return (String)this.getItem(i).getItemProperty(str).getValue();
 		}
 		
+	
 	}
 			

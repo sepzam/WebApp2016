@@ -8,9 +8,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-import com.vaadin.event.SelectionEvent;
-import com.vaadin.event.SelectionEvent.SelectionListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 
 @SuppressWarnings("serial")
@@ -91,12 +88,7 @@ final class Database2 extends Window {
 			        Element timeSlot1Element = (Element)timeSlot1List.item(0);
 			        NodeList textST1List = timeSlot1Element.getChildNodes();
 			       // System.out.println("Slot1-Time : " + ((Node)textST1List.item(0)).getNodeValue().trim());
-			
-			        NodeList classroomSlot1List = CourseElement.getElementsByTagName("ClassroomSlot1");
-			        Element classroomSlot1Element = (Element)classroomSlot1List.item(0);
-			        NodeList textSC1List = classroomSlot1Element.getChildNodes();
-			        //System.out.println("Slot1-Class : " + ((Node)textSC1List.item(0)).getNodeValue().trim());
-			        
+				        
 			        NodeList daySlot2List = CourseElement.getElementsByTagName("DaySlot2");
 			        Element daySlot2Element = (Element)daySlot2List.item(0);
 			        NodeList textSD2List = daySlot2Element.getChildNodes();
@@ -106,12 +98,7 @@ final class Database2 extends Window {
 			        Element timeSlot2Element = (Element)timeSlot2List.item(0);
 			        NodeList textST2List = timeSlot2Element.getChildNodes();
 			        //System.out.println("Slot2-Time : " + ((Node)textST2List.item(0)).getNodeValue().trim());
-			
-			        NodeList classroomSlot2List = CourseElement.getElementsByTagName("ClassroomSlot2");
-			        Element classroomSlot2Element = (Element)classroomSlot2List.item(0);
-			        NodeList textSC2List = classroomSlot2Element.getChildNodes();
-			       // System.out.println("Slot2-Class : " + ((Node)textSC2List.item(0)).getNodeValue().trim());
-			        
+						        
 			        NodeList daySlot3List = CourseElement.getElementsByTagName("DaySlot3");
 			        Element daySlot3Element = (Element)daySlot3List.item(0);
 			        NodeList textSD3List = daySlot3Element.getChildNodes();
@@ -121,12 +108,7 @@ final class Database2 extends Window {
 			        Element timeSlot3Element = (Element)timeSlot3List.item(0);
 			        NodeList textST3List = timeSlot3Element.getChildNodes();
 			        //System.out.println("Slot3-Time : " + ((Node)textST3List.item(0)).getNodeValue().trim());
-			
-			        NodeList classroomSlot3List = CourseElement.getElementsByTagName("ClassroomSlot3");
-			        Element classroomSlot3Element = (Element)classroomSlot3List.item(0);
-			        NodeList textSC3List = classroomSlot3Element.getChildNodes();
-			        //System.out.println("Slot3-Class : " + ((Node)textSC3List.item(0)).getNodeValue().trim());
-			         
+		 
 			        
 			        int databasePeriod = Integer.parseInt(((Node)textPERList.item(0)).getNodeValue().trim());
 			        databasePeriod--;
@@ -224,110 +206,4 @@ final class Database2 extends Window {
 		}
 	}
 		
-	
-    class CheckboxListener implements SelectionListener {
-    	
-		@Override
-		public void select(SelectionEvent event) {
-			AddWindow notifWindow = new AddWindow();
-			System.out.println("I CLICKED!!");
-			boolean empty = event.getSelected().isEmpty();
-			int tempo = 0;
-			VerticalLayout conflictedCourses = new VerticalLayout();
-
-			
-			if (!empty) {
-				int courseIndex = (int) MyInit.grid.getSelectedRow() - 1;
-
-				Course course = courses.get(courseIndex);
-				String name = courses.get(courseIndex).getCourseName();
-				String teacher= courses.get(courseIndex).getTeacher();
-				ArrayList<String> lecDays = courses.get(courseIndex).getLecturingDays();
-				ArrayList<String> lecHours = courses.get(courseIndex).getLecturingHours();
-				
-				System.out.println(name + lecDays + lecHours);
-				
-				// remove the "Empty" slots :D
-				for (int i = lecHours.size()-1; i >= 0; i--) {
-					if (lecHours.get(i).equals("Empty")) {
-						lecHours.remove(i);
-						lecDays.remove(i);
-						// TODO: remove classrooms too if we use those too
-					}
-				}			
-
-				//////////////////////////////// IF COURSE NOT IN THE TABLE ///////////////////////////////////////////////
-				if (!course.isAddedToTable()) {		// if the course is not in the table, check for free slots
-					System.out.println("Course not yet in the table.");
-					for (int i = 0; i < lecHours.size(); i++){		// lecHours max: 3
-						for (int j = 0; j < 6; j++) {
-							if (lecHours.get(i).equals(MyInit.hours[j])) {		// if the hours match
-								if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
-									System.out.println("Debug: (No Conflict found) Nothing scheduled for " + lecDays.get(i)+ " yet.");
-								}
-								else {
-									System.out.println("Debug: Found a conflict: " + lecDays.get(i) + ": " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
-									tempo++;
-									Label l = new Label("On " + lecDays.get(i) + " you have " + MyInit.scheduleTable.getCellValue(j, lecDays.get(i)));
-									conflictedCourses.addComponent(l);
-								}
-							}
-						}
-						
-					} //////////////////////////////// Add course to the table ///////////////////////////////////////////////
-					if(tempo==0){			// add the course to the table
-						for (int i = 0; i < lecHours.size(); i++){
-							for (int j = 0; j < 6; j++) {
-								if (lecHours.get(i).equals(MyInit.hours[j])) {
-									if (MyInit.scheduleTable.cellIsEmpty(j, lecDays.get(i))) {
-										System.out.println("Cell is empty");
-										MyInit.scheduleTable.addToCell(j, lecDays.get(i), name);
-										System.out.print("Added: hour: " + j + ", day: " + lecDays.get(i) + " course: " + name +"\n");
-										course.savePositionInTable(j, lecDays.get(i));
-										course.setInTable(true);
-										
-									}
-								}
-							}
-						}
-						MyInit.selectedCourses.addItem(new Object[]{name,teacher}, new Integer(MyInit.count)); 		
-					} //////////////////////////////// cell is full, give popup ///////////////////////////////////////////////
-					else {	
-						System.out.println("cell is taken!");
-						
-						// popup notification
-						Label label;
-						
-						if (tempo == 1) {
-							label = new Label("You have another course at the same time:");
-						} else {
-							label = new Label("You have other courses at the same time:");
-						}
-						
-						FormLayout formL = new FormLayout();
-					
-						conflictedCourses.setMargin(true);
-						
-						formL.addComponent(label);
-						formL.addComponent(conflictedCourses);	
-						
-						notifWindow.setCaption("Course conflict");
-						notifWindow.setSizeUndefined();
-						notifWindow.setContent(formL);
-						
-						
-		  				if (notifWindow.isAttached()) {
-		  					notifWindow.close();
-		  				} else {  
-		  					UI.getCurrent().addWindow(notifWindow);
-		  				}
-					}
-				} else {		// course is in the table, so we want to remove it
-					System.out.println("Course already in the table! Deleting...");
-					MyInit.scheduleTable.deleteFromCell(course);
-					course.setInTable(false);
-				}
-			}				
-		}
-    }
 }
