@@ -2,6 +2,8 @@ package com.example.ScheduleMe;
 
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout.Alignment;
+
 import com.vaadin.ui.Table;
 
 
@@ -14,8 +16,9 @@ public class ScheduleTable extends Table {
 
 	public ScheduleTable(String caption) {
 
+		this.addStyleName("break-word");
 		this.setCaption(caption);
-        this.addStyleName("Schedule");
+        //this.addStyleName("Schedule");
         this.setSizeFull();
         this.setPageLength(0);
      //   scheduleTable.setColumnHeaders();
@@ -30,8 +33,9 @@ public class ScheduleTable extends Table {
         	this.setColumnAlignment(i, Align.CENTER);
         }
        
-        for (int i=0; i<6; i++)
-        		 this.addItem(new Object[]{ listOfHours[i], "", "", "", "", ""}, new Integer(i));
+        for (int i=0; i<6; i++) {
+        	this.addItem(new Object[]{ listOfHours[i], "", "", "", "", ""}, new Integer(i));
+        }
 	}
 	
 	@SuppressWarnings("unchecked")

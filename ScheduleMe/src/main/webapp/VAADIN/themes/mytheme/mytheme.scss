@@ -43,8 +43,6 @@
     text-align: center;
     font-size: 15px;
     line-height: normal;
- 
-   
   }
   
  .v-table {
@@ -60,17 +58,35 @@
     color: #000;
   }
   
-  .v-table-cell-content .v-table-cell-break-word{
+  .v-table-cell-content .v-table-cell-break-word {
 	word-wrap: break-word; 
 	line-height: normal;
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
 }
-
-	.v-button-nobackground .FontAwesome {
+	.v-table-cell-wrapper {
+		white-space: normal;
+		text-align: center;
+	}
+	
+	.v-button-nobackground {
 		background: transparent; 
 		border: none;
 		color: green;
 	}
-	    
+	
+	.fa {
+		font-family: FontAwesome;
+	 	color: #7b99af;
+	 	text-decoration: none;
+	}  
+	
+	.v-table-header-courses {
+		color: #ffffff;
+	    background: #6588a1;
+	    font-weight: bold;
+	    text-align: center;
+	    font-size: 15px;
+	    line-height: normal;
+	}  
 }

@@ -12993,11 +12993,31 @@ div.v-layout.v-horizontal.v-widget {
 	word-wrap: break-word;
 	line-height: normal;
 	text-align: center;
-	font-size: 14px;
+	font-size: 12px;
 }
 
-.mytheme .v-button-nobackground .FontAwesome {
+.mytheme .v-table-cell-wrapper {
+	white-space: normal;
+	text-align: center;
+}
+
+.mytheme .v-button-nobackground {
 	background: transparent;
 	border: none;
 	color: green;
+}
+
+.mytheme .fa {
+	font-family: FontAwesome;
+	color: #7b99af;
+	text-decoration: none;
+}
+
+.mytheme .v-table-header-courses {
+	color: #fff;
+	background: #6588a1;
+	font-weight: bold;
+	text-align: center;
+	font-size: 15px;
+	line-height: normal;
 }

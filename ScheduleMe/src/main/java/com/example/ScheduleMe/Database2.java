@@ -19,8 +19,6 @@ final class Database2 extends Window {
 	public Database2() {	
 		System.out.println("Degree:   "+ MyInit.selectedDegree);
 		System.out.println("Period: "+ MyInit.selectedPeriod);
-		
-	  	//MyInit.grid.getContainerDataSource().removeAllItems();
 	  	
 		try {
 			courses.clear();
@@ -30,7 +28,7 @@ final class Database2 extends Window {
 					    
 			NodeList listOfCourses = doc.getElementsByTagName("record");
 			int totalCourse = listOfCourses.getLength(); 
-			System.out.println("Total no of courses : " + totalCourse); //silebilirsin
+			System.out.println("Total no of courses : " + totalCourse);
 	
 		    for(int s=0; s<totalCourse ; s++) {
 		    	Node CourseNode = listOfCourses.item(s);
@@ -118,7 +116,6 @@ final class Database2 extends Window {
 						if(MyInit.selectedDegree == 4){
 							// show all courses
 							MyInit.grid.addRow(((Node)textCCList.item(0)).getNodeValue().trim(),((Node)textCNList.item(0)).getNodeValue().trim(),((Node)textLECList.item(0)).getNodeValue().trim(), ((Node)textCREList.item(0)).getNodeValue().trim()); // Just to test the apperance in Grid!
-							
 							lectureDays.add(((Node)textSD1List.item(0)).getNodeValue().trim());
 					    	lectureDays.add(((Node)textSD2List.item(0)).getNodeValue().trim().toString());
 					    	lectureDays.add(((Node)textSD3List.item(0)).getNodeValue().trim().toString());
@@ -129,7 +126,7 @@ final class Database2 extends Window {
 							lectureHours.add(((Node)textST3List.item(0)).getNodeValue().trim().toString());    
 						   	
 					         courses.add(new Course(((Node)textCNList.item(0)).getNodeValue().trim(), lectureDays, lectureHours,((Node)textLECList.item(0)).getNodeValue().trim()));
-	
+					         
 						} else if(MyInit.selectedDegree == 0) {
 							if(databaseDegree.equals("BIO") || databaseDegree.equals("L")) {
 								

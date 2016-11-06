@@ -7,6 +7,7 @@ public class SelectedCourses extends Table {
 	
 		public SelectedCourses(String caption) {
 			
+			this.addStyleName("courses");
 			this.setSelectable(true);
 			this.setImmediate(true);
 			this.setPageLength(0);

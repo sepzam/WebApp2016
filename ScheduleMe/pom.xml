@@ -91,7 +91,7 @@
 							<goal>update-widgetset</goal>
 							<goal>compile</goal>
 							<!-- Comment out compile-theme goal to use on-the-fly theme compilation -->
-							<goal>compile-theme</goal>
+							<!-- <goal>compile-theme</goal> -->
 						</goals>
 					</execution>
 				</executions>
@@ -113,7 +113,6 @@
 					</filesets>
 				</configuration>
 			</plugin>
-
 			<!-- The Jetty plugin allows us to easily test the development build by
 				running jetty:run on the command line. -->
 			<plugin>

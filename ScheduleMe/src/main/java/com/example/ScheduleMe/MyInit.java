@@ -138,69 +138,56 @@ final public class MyInit extends UI {
 	        Button buttonBack;
 	        
 	        // setup the accordion:
+
 	        courseAccordion.setHeight(100.0f, Unit.PERCENTAGE);
-	        courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!");
+	        courseAccordion.addTab(selectedCoursesLayout, "Tap to see your selected courses!", FontAwesome.CHEVRON_RIGHT);
 	        
 	      		
-					selectedCoursesLayout.addComponent(selectedCourses);
+			selectedCoursesLayout.addComponent(selectedCourses);
 
-	        courseAccordion.addTab(coursesLayout, "Tap to see the list of courses");
-	         courseAccordion.addSelectedTabChangeListener(
-	                 new Accordion.SelectedTabChangeListener() {
-	             private static final long serialVersionUID = -2358653511430014752L;
+	        courseAccordion.addTab(coursesLayout, "Tap to see the list of courses", FontAwesome.BOOK);
+	        courseAccordion.addSelectedTabChangeListener(
+	        	new Accordion.SelectedTabChangeListener() {
+	        		private static final long serialVersionUID = -2358653511430014752L;
+	        		public void selectedTabChange(SelectedTabChangeEvent event) {
+		                 // Find the accordion (as a TabSheet)
+		                 TabSheet accordion = event.getTabSheet();
+		                 
+		                 // Find the tab (here we know it's a layout)
+		                 Layout tab = (Layout) accordion.getSelectedTab();
+	
+		                 // Get the tab caption from the tab object
+		                 String caption = accordion.getTab(tab).getCaption();
+	                
+		                 System.out.println(caption);  
 
-	             public void selectedTabChange(SelectedTabChangeEvent event){
-	                 // Find the accordion (as a TabSheet)
-	                 TabSheet accordion = event.getTabSheet();
-	                 
-	                 // Find the tab (here we know it's a layout)
-	                 Layout tab = (Layout) accordion.getSelectedTab();
-
-	                 // Get the tab caption from the tab object
-	                 String caption = accordion.getTab(tab).getCaption();
-                
-	                 System.out.println(caption);  
-
-	                 if(caption.equals("Tap to see the list of courses")){
-			             courseT.setSizeFull();
-			             
-			             // If CourseGrid (grid) already exists, delete it and make a new one with the appropriate courses
-			             int gridIndex = courseT.getComponentIndex(grid);
-			             
-			             
-			             if (gridIndex != -1 && courseT.getComponent(gridIndex).isAttached()) {      
-			            	 if (isBackBtnUsed) {
-				            	 CourseGrid oldGrid = grid;
-				            	 System.out.println("we already have a grid.");
+		                 if(caption.equals("Tap to see the list of courses")){
+				             courseT.setSizeFull();
+				             // If CourseGrid (grid) already exists, delete it and make a new one with the appropriate courses
+				             int gridIndex = courseT.getComponentIndex(grid);  
+				             if (gridIndex != -1 && courseT.getComponent(gridIndex).isAttached()) {      
+				            	 if (isBackBtnUsed) {
+					            	 CourseGrid oldGrid = grid;
+				                	 grid = new CourseGrid();
+					            	 db = new Database2();
+					            	 courseT.replaceComponent(oldGrid, grid);
+					            	 isBackBtnUsed = false;
+				            	 }
+				            	 else {
+				            		 grid.deselectAll();
+				            	 }
+				             } else {
 			                	 grid = new CourseGrid();
 				            	 db = new Database2();
-				            	 courseT.replaceComponent(oldGrid, grid);
-				            	 System.out.println("replaced!");
-				            	 isBackBtnUsed = false;
-				            	 System.out.println("resetting. boolean is: " +isBackBtnUsed);	
-			            	 }
-			            	 else {
-			            		 grid.deselectAll();
-			            	 }
-			             } else {
-			            	 System.out.println("we don't have a grid.");
-		                	 grid = new CourseGrid();
-			            	 db = new Database2();
-			            	 courseT.addComponent(grid);
-			             }
-			             coursesLayout.addComponents(courseT);
-	               }
-	             
-	     										
-	             }
-	             
-	             
+				            	 courseT.addComponent(grid);
+				             }
+				             coursesLayout.addComponents(courseT);
+		               }								
+	        	  }  
 	         });
 	 			
 
-	        courseAccordion.addTab(addForm, "Add another course!");
-	        
-	       
+	        courseAccordion.addTab(addForm, "Add another course!", FontAwesome.PLUS);
 	        FormLayout addingACourse = new FormLayout();
 	        Label addCourseIntro = new Label("Didn't find a course in the list above? You can add it yourself!");
 	        TextField addCourseNameField = new TextField("Course Name: ");      
@@ -331,7 +318,9 @@ final public class MyInit extends UI {
 													    lecHours.removeAll(lecHours);
 													    
 						  							} else {
-						  								Notification.show("You must select the hour the course takes place!", Type.WARNING_MESSAGE);
+						  								Notification notif = new Notification("You must select the hour the course takes place!", Type.WARNING_MESSAGE);
+						  								notif.setIcon(FontAwesome.EXCLAMATION);
+						  								notif.show(getPage());
 						  							}		
 					  							}
 					  						});
@@ -347,7 +336,9 @@ final public class MyInit extends UI {
 					  							UI.getCurrent().addWindow(hoursWindow);
 					  						}	
 				  						} else {
-				  							Notification.show("You must select at least one day!", Type.WARNING_MESSAGE);
+			  								Notification notif = new Notification("You must select at least one day!", Type.WARNING_MESSAGE);
+			  								notif.setIcon(FontAwesome.EXCLAMATION);
+			  								notif.show(getPage());
 				  						}
 				  					}
 				  				});
@@ -356,7 +347,9 @@ final public class MyInit extends UI {
 				  			  selectDaysWind.setContent(daysForm);						// put the form to show in DAYS window	
 			  		        }
 			  		        else {
-			  		        	Notification.show("You must add a name for the course", Type.WARNING_MESSAGE);
+  								Notification notif = new Notification("Please add a name for the course", Type.WARNING_MESSAGE);
+  								notif.setIcon(FontAwesome.EXCLAMATION);
+  								notif.show(getPage());
 			  		        }
 		  			}
 		  	});
@@ -387,7 +380,6 @@ final public class MyInit extends UI {
 						c.resetCourseStatus();
 					}
 					isBackBtnUsed = true;
-					System.out.println("we used back button, boolean is: " +isBackBtnUsed);	
 				}
 			});
 	        addingACourse.addComponents(addCourseIntro, addCourseNameField, buttonAddNewCourse);	        
@@ -491,7 +483,6 @@ final public class MyInit extends UI {
 	    	Label label = new Label("Schedule Me!");
 	    	label.addStyleName(ValoTheme.LABEL_LARGE);
 	    	label.addStyleName(ValoTheme.LABEL_BOLD);
-	    	label.addStyleName(ValoTheme.LABEL_H1);
 	    	label.addStyleName(ValoTheme.LABEL_HUGE);
 	    	Image headerImage = new Image();
 	    	final ExternalResource externalResource = new ExternalResource("http://www.utu.fi/_LAYOUTS/Neoxen/UTUInternet/Styles/utu_logo.jpg");	
@@ -522,7 +513,7 @@ final public class MyInit extends UI {
 	    }
 
 		@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-	    @VaadinServletConfiguration(ui = MyInit.class, productionMode = false)
+	    @VaadinServletConfiguration(ui = MyInit.class, productionMode = true)
 	    public static class MyUIServlet extends VaadinServlet {
 	    }
 
